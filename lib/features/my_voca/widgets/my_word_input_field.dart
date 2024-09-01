@@ -37,14 +37,14 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                 isManual = true;
                 setState(() {});
               },
-              child: DDDD(text: '데이터 직접 입력', isActive: isManual),
+              child: DDDD(text: '直接に入力', isActive: isManual),
             ),
             InkWell(
               onTap: () {
                 isManual = false;
                 setState(() {});
               },
-              child: DDDD(text: '엑셀 데이터 저장', isActive: !isManual),
+              child: DDDD(text: 'Excelのデータを保存', isActive: !isManual),
             ),
           ],
         ),
@@ -70,7 +70,7 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                               controller: controller.wordController,
                               decoration: InputDecoration(
                                 label: Text(
-                                  '일본어',
+                                  '英語',
                                   style: TextStyle(
                                     fontSize: Responsive.height10 * 1.4,
                                     color: AppColors.scaffoldBackground,
@@ -91,7 +91,7 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                               controller: controller.yomikataController,
                               decoration: InputDecoration(
                                 label: Text(
-                                  '읽는 법',
+                                  '意味',
                                   style: TextStyle(
                                     fontSize: Responsive.height10 * 1.4,
                                     color: AppColors.scaffoldBackground,
@@ -101,27 +101,27 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: Responsive.height10 * 6,
-                            child: TextFormField(
-                              style: const TextStyle(
-                                  color: AppColors.scaffoldBackground),
-                              focusNode: controller.meanFocusNode,
-                              onFieldSubmitted: (value) =>
-                                  controller.manualSaveMyWord(),
-                              controller: controller.meanController,
-                              decoration: InputDecoration(
-                                label: Text(
-                                  '의미',
-                                  style: TextStyle(
-                                    fontSize: Responsive.height10 * 1.4,
-                                    color: AppColors.scaffoldBackground,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: Responsive.height10 * 6,
+                          //   child: TextFormField(
+                          //     style: const TextStyle(
+                          //         color: AppColors.scaffoldBackground),
+                          //     focusNode: controller.meanFocusNode,
+                          //     onFieldSubmitted: (value) =>
+                          //         controller.manualSaveMyWord(),
+                          //     controller: controller.meanController,
+                          //     decoration: InputDecoration(
+                          //       label: Text(
+                          //         '의미',
+                          //         style: TextStyle(
+                          //           fontSize: Responsive.height10 * 1.4,
+                          //           color: AppColors.scaffoldBackground,
+                          //           fontWeight: FontWeight.w700,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -134,7 +134,7 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                           controller.manualSaveMyWord();
                         },
                         child: Text(
-                          '저장',
+                          '保存する',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: Responsive.height10 * 1.6,
@@ -151,7 +151,7 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'EXCEL 데이터 형식',
+                          'EXCELデータのフォーマット',
                           style: TextStyle(
                             color: AppColors.scaffoldBackground,
                             fontSize: Responsive.height10 * 1.8,
@@ -178,8 +178,8 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                             Get.back();
                             Get.back();
                             Get.snackbar(
-                              '성공',
-                              '$savedWordNumber개의 단어가 저장되었습니다. ($savedWordNumber 단어가 이미 저장되어 있습니다.)',
+                              '成功',
+                              '$savedWordNumber個の単語が保存されました。 （$savedWordNumberの単語は既に保存されております。）',
                               snackPosition: SnackPosition.BOTTOM,
                               backgroundColor: Colors.white.withOpacity(0.5),
                               duration: const Duration(seconds: 4),
@@ -194,7 +194,7 @@ class _MyWordInputFieldState extends State<MyWordInputField> {
                           }
                         },
                         child: Text(
-                          '저장',
+                          '保存',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.mainBordColor,

@@ -21,23 +21,19 @@ class KangiRepositroy {
   static Future<List<Kangi>> searchkangis(String query) async {
     final kangiBox = Hive.box<Kangi>(Kangi.boxKey);
     List<Kangi> relatedKangis = kangiBox.values.where((element) {
-      if (element.korea.contains(query) || element.japan.contains(query)) {
+      if (element.mean.contains(query) || element.word.contains(query)) {
         return true;
       }
       return false;
     }).toList();
 
     List<Kangi> kangis = kangiBox.values.where((element) {
-      if (element.korea == (query) || element.japan == (query)) {
+      if (element.mean == (query) || element.word == (query)) {
         return true;
       }
       return false;
     }).toList();
-    if (kangis.isEmpty || kangis.isEmpty) {
-      return relatedKangis;
-    } else {
-      return kangis;
-    }
+    return kangis.length < relatedKangis.length ? relatedKangis : kangis;
   }
 }
 
@@ -77,7 +73,7 @@ class KangiStepRepositroy {
   static void saveKangi(Kangi kangi) {
     final box = Hive.box<Kangi>(Kangi.boxKey);
 
-    box.put(kangi.japan, kangi);
+    box.put(kangi.word, kangi);
   }
 
   static Future<int> init(String nLevel) async {
@@ -93,7 +89,7 @@ class KangiStepRepositroy {
     box.put('$nLevel-step-count', kangis.length); // 2-step-count
 
     for (int headIndex = 0; headIndex < kangis.length; headIndex++) {
-      String headTitle = kangis[headIndex][0].headTitle;
+      String headTitle = headIndex.toString();
 
       int headTitleLength = kangis[headIndex].length;
       int stepCount = 0;
@@ -134,6 +130,7 @@ class KangiStepRepositroy {
     }
     LocalReposotiry.putCurrentProgressing(
         '${CategoryEnum.Kangis.name}-$nLevel', 0);
+
     return totalCount;
   }
 

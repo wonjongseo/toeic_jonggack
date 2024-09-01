@@ -56,8 +56,8 @@ class MyWord {
   }
   static MyWord kangiToMyWord(Kangi kangi) {
     MyWord newMyWord = MyWord(
-        word: kangi.japan,
-        mean: kangi.korea,
+        word: kangi.word,
+        mean: kangi.mean,
         yomikata: '${kangi.undoc} / ${kangi.hundoc}');
 
     newMyWord.createdAt = DateTime.now();

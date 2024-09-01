@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/features/home/widgets/home_screen_body.dart';
 import 'package:jonggack_toeic_japanese/features/search/widgets/search_widget.dart';
 import 'package:jonggack_toeic_japanese/common/controller/tts_controller.dart';
@@ -17,18 +18,24 @@ extension CategoryEnumExtension on CategoryEnum {
   String get id {
     switch (this) {
       case CategoryEnum.Japaneses:
-        return '3000語';
+        return '単語';
       case CategoryEnum.Kangis:
-        return 'よく出る単語';
-      case CategoryEnum.Grammars:
         return '慣用句';
+      case CategoryEnum.Grammars:
+        return '';
     }
   }
 }
 
 class JlptHomeScreen extends StatefulWidget {
-  const JlptHomeScreen({super.key, required this.index});
+  const JlptHomeScreen(
+      {super.key,
+      required this.level,
+      required this.index,
+      required this.title});
+  final String level;
   final int index;
+  final String title;
   @override
   State<JlptHomeScreen> createState() => _JlptHomeScreenState();
 }
@@ -37,8 +44,9 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
   late PageController pageController;
   HomeController homeController = Get.find<HomeController>();
   TtsController ttsController = Get.find<TtsController>();
-  String name = '';
+  String title = '';
   int selectedCategoryIndex = 0;
+
   onPageChanged(int newPage) {
     selectedCategoryIndex = newPage;
     setState(() {});
@@ -48,8 +56,8 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
   void initState() {
     super.initState();
     LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.JLPT, widget.index);
-    selectedCategoryIndex =
-        LocalReposotiry.getJlptOrKangiOrGrammar('${widget.index + 1}');
+    selectedCategoryIndex = 0;
+    LocalReposotiry.getJlptOrKangiOrGrammar('${widget.index + 1}');
     pageController = PageController(initialPage: selectedCategoryIndex);
   }
 
@@ -60,24 +68,20 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
   }
 
   Widget getBodys(CategoryEnum categoryEnum) {
-    String level = (widget.index + 1).toString();
-
     switch (categoryEnum) {
       case CategoryEnum.Japaneses:
-        print('level : ${level}');
-
         return BookStepScreen(
-          level: level,
+          level: widget.level,
           categoryEnum: CategoryEnum.Japaneses,
         );
       case CategoryEnum.Grammars:
         return BookStepScreen(
-          level: level,
+          level: widget.level,
           categoryEnum: CategoryEnum.Grammars,
         );
       case CategoryEnum.Kangis:
         return BookStepScreen(
-          level: level,
+          level: widget.level,
           categoryEnum: CategoryEnum.Kangis,
         );
     }
@@ -89,10 +93,11 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
         title: Text(
-          'JLPT N${widget.index + 1}',
+          '${widget.title}',
           style: TextStyle(
             fontWeight: FontWeight.w900,
             fontSize: Responsive.height10 * 2,
+            fontFamily: AppFonts.japaneseFont,
           ),
         ),
       ),
@@ -104,51 +109,53 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
               children: [
                 SizedBox(height: Responsive.height10 * 2),
                 const NewSearchWidget(),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: Responsive.height10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      CategoryEnum.values.length,
-                      (index) => TextButton(
-                        onPressed: () {
-                          LocalReposotiry.putJlptOrKangiOrGrammar(
-                              '${widget.index + 1}', index);
-                          pageController.animateToPage(
-                            index,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: selectedCategoryIndex == index
-                                ? Border(
-                                    bottom: BorderSide(
-                                      width: Responsive.width10 * 0.3,
+                if (widget.index != 3)
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: Responsive.height10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        CategoryEnum.values.length - 1,
+                        (index) => TextButton(
+                          onPressed: () {
+                            LocalReposotiry.putJlptOrKangiOrGrammar(
+                                '${widget.index + 1}', index);
+                            pageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.ease,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: selectedCategoryIndex == index
+                                  ? Border(
+                                      bottom: BorderSide(
+                                        width: Responsive.width10 * 0.3,
+                                        color: Colors.cyan.shade600,
+                                      ),
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              CategoryEnum.values[index].id,
+                              style: index == selectedCategoryIndex
+                                  ? TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.cyan.shade600,
+                                      fontSize: Responsive.height17,
+                                    )
+                                  : TextStyle(
+                                      color: Colors.grey.shade600,
+                                      fontSize: Responsive.height15,
                                     ),
-                                  )
-                                : null,
-                          ),
-                          child: Text(
-                            '${CategoryEnum.values[index].id}',
-                            style: index == selectedCategoryIndex
-                                ? TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.cyan.shade600,
-                                    fontSize: Responsive.height17,
-                                  )
-                                : TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: Responsive.height15,
-                                  ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
                 Flexible(
                   flex: 6,
                   child: PageView.builder(

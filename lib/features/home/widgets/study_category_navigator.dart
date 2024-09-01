@@ -38,7 +38,7 @@ class StudyCategoryNavigator extends StatelessWidget {
                     : null,
               ),
               child: Text(
-                '${KindOfStudy.values[index].value} 단어장',
+                '${KindOfStudy.values[index].value}単語帳',
                 style: index == currentPageIndex
                     ? TextStyle(
                         fontWeight: FontWeight.bold,

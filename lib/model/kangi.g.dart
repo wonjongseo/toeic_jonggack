@@ -17,8 +17,8 @@ class KangiAdapter extends TypeAdapter<Kangi> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Kangi(
-      japan: fields[0] as String,
-      korea: fields[1] as String,
+      word: fields[0] as String,
+      mean: fields[1] as String,
       headTitle: fields[2] as String,
       undoc: fields[3] as String,
       hundoc: fields[4] as String,
@@ -31,9 +31,9 @@ class KangiAdapter extends TypeAdapter<Kangi> {
     writer
       ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.japan)
+      ..write(obj.word)
       ..writeByte(1)
-      ..write(obj.korea)
+      ..write(obj.mean)
       ..writeByte(2)
       ..write(obj.headTitle)
       ..writeByte(3)

@@ -14,3 +14,6 @@ const int NewVocaExampleId = 21;
 const int NewKangiId = 22;
 const int NewJapaneseId = 23;
 const int NewJapaneseListId = 24;
+
+const int toeicChater5TypeId = 25;
+const int toeicChater5StepTypeId = 26;

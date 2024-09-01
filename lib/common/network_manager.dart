@@ -1,7 +1,3 @@
-import 'package:jonggack_toeic_japanese/data/grammar_datas.dart';
-import 'package:jonggack_toeic_japanese/data/kangi_datas.dart';
-import 'package:jonggack_toeic_japanese/data/word_datas.dart';
-
 class NetWorkManager {
   // static Future<List<Word>> searchWrod(String word, String category) async {
   //   for (int i = 0; i < word.length; i++) {}
@@ -33,49 +29,49 @@ class NetWorkManager {
   //     result.add(word);
   //   }
 
-  //   return result;
+  //   return [];
   // }
 
   static List getDataToServer(String params) {
     switch (params) {
       case "N1-voca":
-        return jsonN1Words;
+        return [];
 
       case "N2-voca":
-        return jsonN2Words;
+        return [];
 
       case "N3-voca":
-        return jsonN3Words;
+        return [];
 
       case "N4-voca":
-        return jsonN4Words;
+        return [];
 
       case "N5-voca":
-        return jsonN5Words;
+        return [];
 
       case "N1-kangi":
-        return jsonN1Kangis;
+        return [];
 
       case "N2-kangi":
-        return jsonN2Kangis;
+        return [];
       case "N3-kangi":
-        return jsonN3Kangis;
+        return [];
       case "N4-kangi":
-        return jsonN4Kangis;
+        return [];
       case "N5-kangi":
-        return jsonN5Kangis;
+        return [];
       case "N6-kangi":
-        return jsonN6Kangis;
+        return [];
       case "N1-grammar":
-        return jsonN1Grammars;
+        return [];
       case "N2-grammar":
-        return jsonN2Grammars;
+        return [];
       case "N3-grammar":
-        return jsonN3Grammars;
+        return [];
       case "N4-grammar":
-        return jsonN4Grammars;
+        return [];
       case "N5-grammar":
-        return jsonN5Grammars;
+        return [];
     }
     return [];
 
@@ -100,7 +96,7 @@ class NetWorkManager {
     // );
     // var json = await response.data['data'];
 
-    // return json;
+    // return [];
   }
 }
 

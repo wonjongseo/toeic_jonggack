@@ -3,9 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
-import 'package:jonggack_toeic_japanese/data/grammar_datas.dart';
-import 'package:jonggack_toeic_japanese/data/kangi_datas.dart';
-import 'package:jonggack_toeic_japanese/data/word_datas.dart';
 import 'package:jonggack_toeic_japanese/features/home/screens/home_screen.dart';
 import 'package:jonggack_toeic_japanese/features/my_voca/screens/my_voca_sceen.dart';
 import 'package:jonggack_toeic_japanese/features/my_voca/services/my_voca_controller.dart';
@@ -152,122 +149,123 @@ class UserController extends GetxController {
   }
 
   void initializeProgress(TotalProgressType totalProgressType) {
-    switch (totalProgressType) {
-      case TotalProgressType.JLPT:
-        for (int i = 0; i < user.currentJlptWordScroes.length; i++) {
-          switch (i) {
-            case 0:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN1Words.length; ii++) {
-                totalCount += (jsonN1Words[ii] as List).length;
-              }
-              user.jlptWordScroes[i] = totalCount;
-              break;
-            case 1:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN2Words.length; ii++) {
-                totalCount += (jsonN2Words[ii] as List).length;
-              }
-              user.jlptWordScroes[i] = totalCount;
-              break;
-            case 2:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN3Words.length; ii++) {
-                totalCount += (jsonN3Words[ii] as List).length;
-              }
-              user.jlptWordScroes[i] = totalCount;
-              break;
-            case 3:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN4Words.length; ii++) {
-                totalCount += (jsonN4Words[ii] as List).length;
-              }
-              user.jlptWordScroes[i] = totalCount;
-              break;
-            case 4:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN5Words.length; ii++) {
-                totalCount += (jsonN5Words[ii] as List).length;
-              }
-              user.jlptWordScroes[i] = totalCount;
-              break;
-          }
-          user.currentJlptWordScroes[i] = 0;
-        }
-        break;
-      case TotalProgressType.GRAMMAR:
-        for (int i = 0; i < user.currentGrammarScores.length; i++) {
-          switch (i) {
-            case 0:
-              user.grammarScores[i] = jsonN1Grammars.length;
-              break;
-            case 1:
-              user.grammarScores[i] = jsonN2Grammars.length;
-              break;
-            case 2:
-              user.grammarScores[i] = jsonN3Grammars.length;
-              break;
-            case 3:
-              user.grammarScores[i] = jsonN4Grammars.length;
-              break;
-            case 4:
-              user.grammarScores[i] = jsonN5Grammars.length;
-              break;
-          }
+    // switch (totalProgressType) {
+    //   case TotalProgressType.JLPT:
+    //     for (int i = 0; i < user.currentJlptWordScroes.length; i++) {
+    //       switch (i) {
+    //         case 0:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN1Words.length; ii++) {
+    //             totalCount += (jsonN1Words[ii] as List).length;
+    //           }
+    //           user.jlptWordScroes[i] = totalCount;
+    //           break;
+    //         case 1:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN2Words.length; ii++) {
+    //             totalCount += (jsonN2Words[ii] as List).length;
+    //           }
+    //           user.jlptWordScroes[i] = totalCount;
+    //           break;
+    //         case 2:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN3Words.length; ii++) {
+    //             totalCount += (jsonN3Words[ii] as List).length;
+    //           }
+    //           user.jlptWordScroes[i] = totalCount;
+    //           break;
+    //         case 3:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN4Words.length; ii++) {
+    //             totalCount += (jsonN4Words[ii] as List).length;
+    //           }
+    //           user.jlptWordScroes[i] = totalCount;
+    //           break;
+    //         case 4:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN5Words.length; ii++) {
+    //             totalCount += (jsonN5Words[ii] as List).length;
+    //           }
+    //           user.jlptWordScroes[i] = totalCount;
+    //           break;
+    //       }
+    //       user.currentJlptWordScroes[i] = 0;
+    //     }
+    //     break;
+    //   case TotalProgressType.GRAMMAR:
+    //     for (int i = 0; i < user.currentGrammarScores.length; i++) {
+    //       switch (i) {
+    //         case 0:
+    //           user.grammarScores[i] = jsonN1Grammars.length;
+    //           break;
+    //         case 1:
+    //           user.grammarScores[i] = jsonN2Grammars.length;
+    //           break;
+    //         case 2:
+    //           user.grammarScores[i] = jsonN3Grammars.length;
+    //           break;
+    //         case 3:
+    //           user.grammarScores[i] = jsonN4Grammars.length;
+    //           break;
+    //         case 4:
+    //           user.grammarScores[i] = jsonN5Grammars.length;
+    //           break;
+    //       }
 
-          user.currentGrammarScores[i] = 0;
-        }
-        break;
-      case TotalProgressType.KANGI:
-        for (int i = 0; i < user.currentKangiScores.length; i++) {
-          switch (i) {
-            case 0:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN1Kangis.length; ii++) {
-                totalCount += (jsonN1Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-            case 1:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN2Kangis.length; ii++) {
-                totalCount += (jsonN2Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-            case 2:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN3Kangis.length; ii++) {
-                totalCount += (jsonN3Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-            case 3:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN4Kangis.length; ii++) {
-                totalCount += (jsonN4Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-            case 4:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN5Kangis.length; ii++) {
-                totalCount += (jsonN5Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-            case 5:
-              int totalCount = 0;
-              for (int ii = 0; ii < jsonN6Kangis.length; ii++) {
-                totalCount += (jsonN6Kangis[ii] as List).length;
-              }
-              user.kangiScores[i] = totalCount;
-              break;
-          }
-          user.currentKangiScores[i] = 0;
-        }
-        break;
-    }
+    //       user.currentGrammarScores[i] = 0;
+    //     }
+    //     break;
+    //   case TotalProgressType.KANGI:
+    //     for (int i = 0; i < user.currentKangiScores.length; i++) {
+    //       switch (i) {
+    //         case 0:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN1Kangis.length; ii++) {
+    //             totalCount += (jsonN1Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //         case 1:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN2Kangis.length; ii++) {
+    //             totalCount += (jsonN2Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //         case 2:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN3Kangis.length; ii++) {
+    //             totalCount += (jsonN3Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //         case 3:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN4Kangis.length; ii++) {
+    //             totalCount += (jsonN4Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //         case 4:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN5Kangis.length; ii++) {
+    //             totalCount += (jsonN5Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //         case 5:
+    //           int totalCount = 0;
+    //           for (int ii = 0; ii < jsonN6Kangis.length; ii++) {
+    //             totalCount += (jsonN6Kangis[ii] as List).length;
+    //           }
+    //           user.kangiScores[i] = totalCount;
+    //           break;
+    //       }
+    //       user.currentKangiScores[i] = 0;
+    //     }
+    //     break;
+    // }
+
     userRepository.updateUser(user);
   }
 
@@ -419,8 +417,8 @@ class UserController extends GetxController {
   void addN4N5GrammarScore() {
     log('V2.3.0 addN4N5GrammarScore');
 
-    user.grammarScores.add(jsonN4Grammars.length);
-    user.grammarScores.add(jsonN5Grammars.length);
+    // user.grammarScores.add(jsonN4Grammars.length);
+    // user.grammarScores.add(jsonN5Grammars.length);
 
     user.currentGrammarScores.addAll([0, 0]);
 

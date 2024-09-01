@@ -146,10 +146,10 @@ class GrammarRepositroy {
       }
       return false;
     }).toList();
-    if (grammars.isEmpty || grammars.isEmpty) {
-      return relatedGrammars;
-    } else {
-      return grammars;
-    }
+
+    // return [...grammars, ...relatedGrammars];
+    return grammars.length < relatedGrammars.length
+        ? relatedGrammars
+        : grammars;
   }
 }

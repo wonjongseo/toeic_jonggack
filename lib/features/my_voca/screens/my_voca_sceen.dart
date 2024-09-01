@@ -37,16 +37,16 @@ class _MyVocaPageState extends State<MyVocaPage> {
   UserController userController = Get.find<UserController>();
 
   List<String> filters1 = [
-    '모든 단어',
-    '암기 단어',
-    '미암기 단어',
+    '全部',
+    '暗記',
+    '未暗記',
   ];
   List<String> filters2 = [
-    '뜻',
-    '의미',
+    '単語',
+    '意味',
   ];
-  String selectedFilter1 = '모든 단어';
-  String selectedFilter2 = '뜻';
+  String selectedFilter1 = '全部';
+  String selectedFilter2 = '単語';
   late MyVocaController myVocaController;
   @override
   void initState() {
@@ -69,7 +69,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
           scrolledUnderElevation: 0.0,
           centerTitle: true,
           title: Text(
-            controller.isManualSavedWordPage ? '나만의 단어장 2' : '나만의 단어장 1',
+            controller.isManualSavedWordPage ? '自分の単語帳②' : '自分の単語帳①',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: Responsive.height10 * 1.8,
@@ -121,7 +121,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
                               alignment: Alignment.bottomCenter,
                               child: OutlinedButton(
                                 child: Text(
-                                  '단어 추가',
+                                  '単語を追加する',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
@@ -179,10 +179,10 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: Responsive.width15,
                                         ),
-                                        text: '선택된 단어: ',
+                                        text: '選んだ単語：',
                                         children: [
                                           TextSpan(
-                                            text: ' ${value.length}개',
+                                            text: ' ${value.length}個',
                                           )
                                         ],
                                       ),
@@ -190,7 +190,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                     Row(
                                       children: [
                                         Text(
-                                          '필터: ',
+                                          'フィルター：',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: Responsive.width15,
@@ -221,14 +221,14 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                           onChanged: (v) {
                                             selectedFilter1 = v!;
 
-                                            if (selectedFilter1 == '모든 단어') {
+                                            if (selectedFilter1 == '全部') {
                                               //암기단어
                                               controller.isAll();
                                             } else if (selectedFilter1 ==
-                                                '암기 단어') {
+                                                '暗記') {
                                               controller.isKnow();
                                             } else if (selectedFilter1 ==
-                                                '미암기 단어') {
+                                                '未暗記の単語') {
                                               controller.isDontKnow();
                                             }
 
@@ -260,7 +260,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                                     ),
                                                   )),
                                           onChanged: (v) {
-                                            if (v == '의미') {
+                                            if (v == '意味') {
                                               controller.isWordFlip = true;
                                             } else {
                                               controller.isWordFlip = false;
@@ -424,7 +424,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                                         alignment: Alignment
                                                             .bottomRight,
                                                         child: Text(
-                                                          '${controller.selectedWord[index].createdAtString()} 에 저장됨',
+                                                          '${controller.selectedWord[index].createdAtString()}に保存済み',
                                                           style: TextStyle(
                                                             fontSize: Responsive
                                                                 .height14,
@@ -495,7 +495,7 @@ class PPPPPP extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          '미암기 단어',
+                          '未暗記',
                           style: TextStyle(
                             color: AppColors.scaffoldBackground,
                             fontSize: 16,

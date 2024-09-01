@@ -96,8 +96,9 @@ class _KangiStudySceenState extends State<KangiStudySceen> {
           );
         }
         return KangiCard(
-            controller: controller,
-            kangi: controller.getKangiStep().kangis[index]);
+          controller: controller,
+          kangi: controller.getKangiStep().kangis[index],
+        );
       },
     );
   }

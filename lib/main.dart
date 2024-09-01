@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:jonggack_toeic_japanese/common/common.dart';
+import 'package:jonggack_toeic_japanese/repository/kangis_step_repository.dart';
+import 'package:jonggack_toeic_japanese/repository/toeic_chatper5_step_repository.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -89,24 +91,25 @@ class _AppState extends State<App> {
   }
 
   Future<bool> loadData() async {
-    List<int> jlptWordScroes = [1, 1, 1, 1, 1];
+    List<int> jlptWordScroes = [];
     List<int> grammarScores = [1, 1, 1, 1, 1];
-    List<int> kangiScores = [1, 1, 1, 1, 1];
+    List<int> kangiScores = [];
     try {
       await LocalReposotiry.init();
 
+      // if (true) {
       if (await JlptStepRepositroy.isExistData() == false) {
         jlptWordScroes.add(await JlptStepRepositroy.init('500'));
         jlptWordScroes.add(await JlptStepRepositroy.init('700'));
         jlptWordScroes.add(await JlptStepRepositroy.init('900'));
         // 熟語
-        jlptWordScroes.add(await JlptStepRepositroy.init('5000'));
-        jlptWordScroes.add(await JlptStepRepositroy.init('7000'));
-        jlptWordScroes.add(await JlptStepRepositroy.init('9000'));
+        jlptWordScroes.add(await JlptStepRepositroy.init(oneTo3000List[0]));
+        kangiScores.add(await KangiStepRepositroy.init('500'));
+        kangiScores.add(await KangiStepRepositroy.init('700'));
+        kangiScores.add(await KangiStepRepositroy.init('900'));
 
-        for (int i = 0; i < oneTo3000List.length; i++) {
-          jlptWordScroes.add(await JlptStepRepositroy.init(oneTo3000List[i]));
-        }
+        ToeicChapter5StepRepositroy.init('1');
+
         //
       } else {
         //　よく出る3000個単語
@@ -122,146 +125,10 @@ class _AppState extends State<App> {
         jlptWordScroes.addAll(yokuderuWord);
       }
 
-      // if (await JlptStepRepositroy.isExistData(1) == false) {
-      //   jlptWordScroes.add(await JlptStepRepositroy.init('1'));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN1Words.length; ii++) {
-      //     totalCount += (jsonN1Words[ii] as List).length;
-      //   }
-      //   jlptWordScroes.add(totalCount);
-      // }
-
-      // if (await JlptStepRepositroy.isExistData(2) == false) {
-      //   jlptWordScroes.add(await JlptStepRepositroy.init('2'));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN2Words.length; ii++) {
-      //     totalCount += (jsonN2Words[ii] as List).length;
-      //   }
-      //   jlptWordScroes.add(totalCount);
-      // }
-
-      // if (await JlptStepRepositroy.isExistData(3) == false) {
-      //   jlptWordScroes.add(await JlptStepRepositroy.init('3'));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN3Words.length; ii++) {
-      //     totalCount += (jsonN3Words[ii] as List).length;
-      //   }
-      //   jlptWordScroes.add(totalCount);
-      // }
-
-      // if (await JlptStepRepositroy.isExistData(4) == false) {
-      //   jlptWordScroes.add(await JlptStepRepositroy.init('4'));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN4Words.length; ii++) {
-      //     totalCount += (jsonN4Words[ii] as List).length;
-      //   }
-      //   jlptWordScroes.add(totalCount);
-      // }
-
-      // if (await JlptStepRepositroy.isExistData(5) == false) {
-      //   jlptWordScroes.add(await JlptStepRepositroy.init('5'));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN5Words.length; ii++) {
-      //     totalCount += (jsonN5Words[ii] as List).length;
-      //   }
-      //   jlptWordScroes.add(totalCount);
-      // }
-
-      // if (await GrammarRepositroy.isExistData(1) == false) {
-      //   grammarScores.add(await GrammarRepositroy.init('1'));
-      // } else {
-      //   grammarScores.add(jsonN1Grammars.length);
-      // }
-
-      // if (await GrammarRepositroy.isExistData(2) == false) {
-      //   grammarScores.add(await GrammarRepositroy.init('2'));
-      // } else {
-      //   grammarScores.add(jsonN2Grammars.length);
-      // }
-
-      // if (await GrammarRepositroy.isExistData(3) == false) {
-      //   grammarScores.add(await GrammarRepositroy.init('3'));
-      // } else {
-      //   grammarScores.add(jsonN3Grammars.length);
-      // }
-      // if (await GrammarRepositroy.isExistData(4) == false) {
-      //   grammarScores.add(await GrammarRepositroy.init('4'));
-      // } else {
-      //   grammarScores.add(jsonN4Grammars.length);
-      // }
-      // if (await GrammarRepositroy.isExistData(5) == false) {
-      //   grammarScores.add(await GrammarRepositroy.init('5'));
-      // } else {
-      //   grammarScores.add(jsonN5Grammars.length);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(1) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("1"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN1Kangis.length; ii++) {
-      //     totalCount += (jsonN1Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(2) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("2"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN2Kangis.length; ii++) {
-      //     totalCount += (jsonN2Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(3) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("3"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN3Kangis.length; ii++) {
-      //     totalCount += (jsonN3Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(4) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("4"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN4Kangis.length; ii++) {
-      //     totalCount += (jsonN4Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(5) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("5"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN5Kangis.length; ii++) {
-      //     totalCount += (jsonN5Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
-      // if (await KangiStepRepositroy.isExistData(6) == false) {
-      //   kangiScores.add(await KangiStepRepositroy.init("6"));
-      // } else {
-      //   int totalCount = 0;
-      //   for (int ii = 0; ii < jsonN6Kangis.length; ii++) {
-      //     totalCount += (jsonN6Kangis[ii] as List).length;
-      //   }
-      //   kangiScores.add(totalCount);
-      // }
-
       late User user;
+
       if (await UserRepository.isExistData() == false) {
+        // if (true) {
         List<int> currentJlptWordScroes =
             List.generate(jlptWordScroes.length, (index) => 0);
         List<int> currentGrammarScores =
@@ -404,4 +271,16 @@ List<String> oneTo3000List = [
   '2101~2400',
   '2401~2700',
   '2701~3000',
+];
+
+List<String> fiveToNineHundredList = [
+  '500',
+  '700',
+  '900',
+];
+
+List<String> fiveToNineHhousandList = [
+  '5000',
+  '7000',
+  '9000',
 ];

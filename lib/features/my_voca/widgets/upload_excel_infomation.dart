@@ -15,37 +15,37 @@ class UploadExcelInfomation extends StatelessWidget {
         Text.rich(
           style: TextStyle(fontSize: Responsive.height16),
           TextSpan(
-            text: '1. ',
+            text: '１. ',
             style: TextStyle(
               color: AppColors.scaffoldBackground,
               fontSize: Responsive.height14,
             ),
             children: const [
-              TextSpan(text: '확장자', style: TextStyle(color: Colors.red)),
-              TextSpan(text: '를 '),
+              TextSpan(text: '拡張子', style: TextStyle(color: Colors.red)),
+              TextSpan(text: 'を'),
               TextSpan(text: '.xlsx', style: TextStyle(color: Colors.red)),
-              TextSpan(text: '로 준비해주세요.'),
+              TextSpan(text: 'に準備しておいてください。'),
             ],
           ),
         ),
         SizedBox(height: Responsive.height10 / 2),
         const ExcelInfoText(
-          number: '2. ',
-          text1: '첫번째 열',
-          text2: '일본어',
+          number: '２. ',
+          text1: '一番目の行',
+          text2: '英語',
         ),
         SizedBox(height: Responsive.height10 / 2),
         const ExcelInfoText(
           number: '3. ',
-          text1: '두번째 열',
-          text2: '읽는 법',
+          text1: '二番目の行',
+          text2: '意味',
         ),
-        SizedBox(height: Responsive.height10 / 2),
-        const ExcelInfoText(
-          number: '4. ',
-          text1: '세번째 열',
-          text2: '뜻',
-        ),
+        // SizedBox(height: Responsive.height10 / 2),
+        // const ExcelInfoText(
+        //   number: '4. ',
+        //   text1: '세번째 열',
+        //   text2: '뜻',
+        // ),
         SizedBox(height: Responsive.height10 / 2),
         Text.rich(
           style: TextStyle(fontSize: Responsive.height16),
@@ -56,10 +56,10 @@ class UploadExcelInfomation extends StatelessWidget {
               fontSize: Responsive.height14,
             ),
             children: const [
-              TextSpan(text: '빈 행', style: TextStyle(color: Colors.red)),
-              TextSpan(text: '이 '),
-              TextSpan(text: '없도록', style: TextStyle(color: Colors.red)),
-              TextSpan(text: ' 입력 해 주세요.'),
+              TextSpan(text: '空く行', style: TextStyle(color: Colors.red)),
+              TextSpan(text: 'が'),
+              TextSpan(text: 'ないように', style: TextStyle(color: Colors.red)),
+              TextSpan(text: '入力してください。'),
             ],
           ),
         )
@@ -90,9 +90,9 @@ class ExcelInfoText extends StatelessWidget {
         ),
         children: [
           TextSpan(text: text1, style: const TextStyle(color: Colors.red)),
-          const TextSpan(text: '에 '),
+          const TextSpan(text: 'に'),
           TextSpan(text: text2, style: const TextStyle(color: Colors.red)),
-          const TextSpan(text: '를 입력해주세요.'),
+          const TextSpan(text: 'を入力してください。'),
         ],
       ),
     );

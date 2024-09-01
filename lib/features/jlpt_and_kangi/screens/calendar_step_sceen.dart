@@ -193,31 +193,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                 ),
                               ),
                               Text(
-                                '뜻 가리기',
-                                style: TextStyle(
-                                  fontSize: Responsive.width12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.mainColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              Transform.scale(
-                                scale: userController.user.isPad ? 2 : 1,
-                                child: Checkbox(
-                                  value: !controller.isSeeYomikata,
-                                  onChanged: (v) =>
-                                      controller.toggleSeeYomikata(v),
-                                  checkColor: Colors.cyan.shade600,
-                                  fillColor: MaterialStateProperty.resolveWith(
-                                      (states) => Colors.white),
-                                ),
-                              ),
-                              Text(
-                                '읽는 법 가리기',
+                                '意味を隠す',
                                 style: TextStyle(
                                   fontSize: Responsive.width12,
                                   fontWeight: FontWeight.w600,
@@ -235,7 +211,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                 child: Padding(
                                   padding: EdgeInsets.all(Responsive.width10),
                                   child: Text(
-                                    '퀴즈!',
+                                    'テスト',
                                     style: TextStyle(
                                       fontSize: Responsive.width12,
                                       fontWeight: FontWeight.w600,
@@ -260,7 +236,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                             ),
                           ),
                           Text(
-                            '전체 선택',
+                            '全部選択',
                             style: TextStyle(
                               fontSize: Responsive.width12,
                               fontWeight: FontWeight.w600,
@@ -390,7 +366,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                 ),
                               ),
                               Text(
-                                '뜻 가리기',
+                                '意味を隠す',
                                 style: TextStyle(
                                   fontSize: Responsive.width12,
                                   fontWeight: FontWeight.w600,
@@ -399,74 +375,26 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                               ),
                             ],
                           ),
-                          SizedBox(width: Responsive.width20),
-                          Column(
-                            children: [
-                              Transform.scale(
-                                scale: userController.user.isPad ? 2 : 1,
-                                child: Checkbox(
-                                  value: controller.isHidenUndoc,
-                                  onChanged: (v) =>
-                                      controller.toggleSeeUndoc(v),
-                                  checkColor: Colors.cyan.shade600,
-                                  fillColor: MaterialStateProperty.resolveWith(
-                                      (states) => Colors.white),
-                                ),
-                              ),
-                              Text(
-                                '음독 가리기',
-                                style: TextStyle(
-                                  fontSize: Responsive.width12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.mainColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: Responsive.width20),
-                          Column(
-                            children: [
-                              Transform.scale(
-                                scale: userController.user.isPad ? 2 : 1,
-                                child: Checkbox(
-                                  value: controller.isHidenHundoc,
-                                  onChanged: (v) =>
-                                      controller.toggleSeeHundoc(v),
-                                  checkColor: Colors.cyan.shade600,
-                                  fillColor: MaterialStateProperty.resolveWith(
-                                      (states) => Colors.white),
-                                ),
-                              ),
-                              Text(
-                                '훈독 가리기',
-                                style: TextStyle(
-                                  fontSize: Responsive.width12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.mainColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      if (controller.getKangiStep().kangis.length >= 4)
-                        Card(
-                          shape: const CircleBorder(),
-                          child: InkWell(
-                            onTap: () => kangiController.goToTest(),
-                            child: Padding(
-                              padding: EdgeInsets.all(Responsive.width10),
-                              child: Text(
-                                '퀴즈!',
-                                style: TextStyle(
-                                  fontSize: Responsive.width12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.cyan.shade600,
+                          if (controller.getKangiStep().kangis.length >= 4)
+                            Card(
+                              shape: const CircleBorder(),
+                              child: InkWell(
+                                onTap: () => kangiController.goToTest(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(Responsive.width10),
+                                  child: Text(
+                                    'テスト！',
+                                    style: TextStyle(
+                                      fontSize: Responsive.width12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.cyan.shade600,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
+                        ],
+                      ),
                       Column(
                         children: [
                           Transform.scale(
@@ -480,7 +408,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                             ),
                           ),
                           Text(
-                            '전체 선택',
+                            '全部選択',
                             style: TextStyle(
                               fontSize: Responsive.width12,
                               fontWeight: FontWeight.w600,
@@ -790,98 +718,17 @@ class _CCCCState extends State<CCCC> {
       child: Container(
         decoration: BoxDecoration(border: Border.all(width: 0.3)),
         child: ListTile(
+          subtitle: Text(''),
           dense: true,
-          minLeadingWidth: Responsive.height10 * 5,
+          minLeadingWidth: Responsive.height10 * 15,
           isThreeLine: true,
-          subtitle: Column(
-            children: [
-              SizedBox(
-                height: Responsive.height10 * 2,
-                child: Row(
-                  children: [
-                    Text(
-                      '옴독: ',
-                      style: TextStyle(
-                        fontSize: Responsive.height14,
-                        fontFamily: AppFonts.japaneseFont,
-                      ),
-                    ),
-                    if (isWantToSeeUndoc || !controller.isHidenUndoc)
-                      Flexible(
-                        child: Text(
-                          widget.kangi.undoc,
-                          style: TextStyle(
-                            fontSize: Responsive.height16,
-                            overflow: TextOverflow.ellipsis,
-                            fontFamily: AppFonts.japaneseFont,
-                          ),
-                        ),
-                      )
-                    else
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            isWantToSeeUndoc = true;
-                            setState(() {});
-                          },
-                          child: Container(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  height: Responsive.height10 * 2,
-                  child: Row(
-                    children: [
-                      Text(
-                        '훈독: ',
-                        style: TextStyle(
-                          fontSize: Responsive.height14,
-                          fontFamily: AppFonts.japaneseFont,
-                        ),
-                      ),
-                      if (isWantToSeeHundoc || !controller.isHidenHundoc)
-                        Flexible(
-                          child: Text(
-                            widget.kangi.hundoc,
-                            style: TextStyle(
-                              fontSize: Responsive.height16,
-                              overflow: TextOverflow.ellipsis,
-                              fontFamily: AppFonts.japaneseFont,
-                            ),
-                          ),
-                        )
-                      else
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              isWantToSeeHundoc = true;
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 20,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
           title: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: SizedBox(
-              height: Responsive.height10 * 2,
+              height: Responsive.height10 * 5,
               child: isWantToSeeMean || !controller.isHidenMean
                   ? Text(
-                      widget.kangi.korea,
+                      widget.kangi.mean,
                       style: TextStyle(
                         fontSize: Responsive.height16,
                         fontWeight: FontWeight.w600,
@@ -903,9 +750,9 @@ class _CCCCState extends State<CCCC> {
             ),
           ),
           leading: Text(
-            widget.kangi.japan,
+            widget.kangi.word,
             style: TextStyle(
-              fontSize: Responsive.height10 * 3,
+              fontSize: Responsive.height10 * 2,
               color: Colors.black,
               fontFamily: AppFonts.japaneseFont,
             ),

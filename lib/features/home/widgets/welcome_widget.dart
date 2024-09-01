@@ -38,7 +38,7 @@ class WelcomeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'JLPT종각',
+                '一番TOEIC',
                 style: TextStyle(
                   fontSize: Responsive.height25,
                   fontWeight: FontWeight.w900,

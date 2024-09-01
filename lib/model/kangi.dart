@@ -2,6 +2,7 @@
 
 import 'package:hive/hive.dart';
 import 'package:jonggack_toeic_japanese/common/network_manager.dart';
+import 'package:jonggack_toeic_japanese/data/toeic.dart';
 import 'package:jonggack_toeic_japanese/model/word.dart';
 
 import 'hive_type.dart';
@@ -12,9 +13,9 @@ part 'kangi.g.dart';
 class Kangi extends HiveObject {
   static String boxKey = 'kangi_key';
   @HiveField(0)
-  late String japan;
+  late String word;
   @HiveField(1)
-  late String korea;
+  late String mean;
   @HiveField(2)
   late String headTitle;
   @HiveField(3)
@@ -25,26 +26,25 @@ class Kangi extends HiveObject {
   late List<Word> relatedVoca;
 
   Kangi(
-      {required this.japan,
-      required this.korea,
+      {required this.word,
+      required this.mean,
       required this.headTitle,
       required this.undoc,
       required this.hundoc,
       required this.relatedVoca});
 
   Kangi.fromMap(Map<String, dynamic> map) {
-    japan = map['japan'] ?? '';
-    korea = map['korea'] ?? '';
+    word = map['word'] ?? '';
+    mean = map['mean'] ?? '';
     headTitle = map['headTitle'] ?? '';
     undoc = map['undoc'] ?? '';
     hundoc = map['hundoc'] ?? '';
-    relatedVoca = List.generate(map['relatedVoca'].length,
-        (index) => Word.fromMap(map['relatedVoca'][index]));
+    relatedVoca = [];
   }
 
   @override
   String toString() {
-    return "Kangi( Japan: $japan, korea: $korea, undoc: $undoc, headTitle: $headTitle, relatedVoca: $relatedVoca)";
+    return "Kangi( mean: $word, mean: $mean, undoc: $undoc, headTitle: $headTitle, relatedVoca: $relatedVoca)";
   }
 
   static Future<List<List<Kangi>>> jsonToObject(String nLevel) async {
@@ -52,7 +52,13 @@ class Kangi extends HiveObject {
 
     var selectedKangiLevelJson = [];
 
-    if (nLevel == '1') {
+    if (nLevel == '500') {
+      selectedKangiLevelJson = toeicWordFor500Idiom;
+    } else if (nLevel == '700') {
+      selectedKangiLevelJson = toeicWordFor700Idiom;
+    } else if (nLevel == '900') {
+      selectedKangiLevelJson = toeicWordFor900Idiom;
+    } else if (nLevel == '1') {
       selectedKangiLevelJson = NetWorkManager.getDataToServer('N1-kangi');
     } else if (nLevel == '2') {
       selectedKangiLevelJson = NetWorkManager.getDataToServer('N2-kangi');
@@ -81,8 +87,8 @@ class Kangi extends HiveObject {
 // @ 으로 음독 , 훈독 구별
   Word kangiToWord() {
     return Word(
-        word: japan,
-        mean: korea,
+        word: word,
+        mean: mean,
         yomikata: '${undoc}@${hundoc}',
         headTitle: headTitle);
   }

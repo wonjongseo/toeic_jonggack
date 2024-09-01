@@ -79,7 +79,7 @@ class SearchedKangiCard extends StatelessWidget {
               vertical: Responsive.height16 / 4,
             ),
             child: Text(
-              searchedKangis[index].korea,
+              searchedKangis[index].mean,
               style: TextStyle(
                 fontSize: Responsive.height18,
                 fontWeight: FontWeight.w600,

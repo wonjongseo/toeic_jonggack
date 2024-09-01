@@ -38,7 +38,7 @@ class JlptRepositry {
       }
       return false;
     }).toList();
-    if (words.isEmpty || words.length == 0) {
+    if (words.length < relatedWords.length) {
       return relatedWords;
     } else {
       return words;
@@ -78,8 +78,10 @@ class JlptStepRepositroy {
     log('JlptStepRepositroy ${nLevel}N init');
 
     final box = Hive.box(JlptStep.boxKey);
+    final wordBox = Hive.box<Word>(Word.boxKey);
 
     List<List<Word>> words = Word.jsonToObject(nLevel);
+
     int totalCount = 0;
     for (int i = 0; i < words.length; i++) {
       totalCount += words[i].length;
@@ -107,6 +109,11 @@ class JlptStepRepositroy {
           currentWords = words[dayIndex]
               .sublist(step, step + AppConstant.MINIMUM_STEP_COUNT);
         }
+        for (Word word in currentWords) {
+          KangiStepRepositroy kangiStepRepositroy = KangiStepRepositroy();
+          getKangiIndex(word.word, kangiStepRepositroy);
+          await wordBox.put(word.word, word);
+        }
 
         JlptStep tempJlptStep = JlptStep(
             headTitle: day, step: stepCount, words: currentWords, scores: 0);
@@ -116,7 +123,6 @@ class JlptStepRepositroy {
         stepCount++;
       }
       String stepCountKey = '$nLevel-$day';
-      print('stepCountKey : ${stepCountKey}');
 
       await box.put(stepCountKey, stepCount);
     }

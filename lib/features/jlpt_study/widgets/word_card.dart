@@ -93,9 +93,8 @@ class WordCard extends StatelessWidget {
                   GetBuilder<TtsController>(
                     builder: (ttsController) {
                       return IconButton(
-                        onPressed: () => ttsController.speak(
-                          word.yomikata == '-' ? word.word : word.yomikata,
-                        ),
+                        onPressed: () =>
+                            ttsController.speak(word.word, language: 'en-US'),
                         icon: FaIcon(
                           ttsController.isPlaying
                               ? FontAwesomeIcons.volumeLow
@@ -118,18 +117,13 @@ class WordCard extends StatelessWidget {
               ),
               const Divider(),
               SizedBox(height: Responsive.height10 * 1.5),
-              RelatedWords(
-                japanese: japanese,
-                kangiStepRepositroy: kangiStepRepositroy,
-                temp: temp,
-              ),
               SizedBox(height: Responsive.height10 * 2),
               if (word.examples != null && word.examples!.isNotEmpty) ...[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '예제',
+                      '例文',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: Responsive.height10 * 1.8,
@@ -196,10 +190,11 @@ class WordCard extends StatelessWidget {
                                 InkWell(
                                   onTap: controller!.onTapMoreExample,
                                   child: Text(
-                                    '예제 더보기...',
+                                    '例文をもっと見る...',
                                     style: TextStyle(
-                                        fontSize: Responsive.height15,
-                                        color: AppColors.mainBordColor),
+                                      fontSize: Responsive.height15,
+                                      color: AppColors.mainBordColor,
+                                    ),
                                   ),
                                 )
                               ] else ...[

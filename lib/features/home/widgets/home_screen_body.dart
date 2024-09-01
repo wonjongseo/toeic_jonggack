@@ -1,16 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/features/home/widgets/learn_toeic_grammar_screen.dart';
+import 'package:jonggack_toeic_japanese/features/home/widgets/toeic_question_step_screen.dart';
+import 'package:jonggack_toeic_japanese/toeic_question_test_screen.dart';
 import 'package:jonggack_toeic_japanese/common/widget/animated_circular_progressIndicator.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/features/basic/hiragana/screens/hiragana_screen.dart';
+import 'package:jonggack_toeic_japanese/features/home/widgets/study_category_and_progress.dart';
 import 'package:jonggack_toeic_japanese/features/jlpt_home/screens/jlpt_home_screen.dart';
 import 'package:jonggack_toeic_japanese/repository/local_repository.dart';
 
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/features/home/widgets/level_category_card.dart';
-import 'package:jonggack_toeic_japanese/features/home/widgets/study_category_and_progress.dart';
 import 'package:jonggack_toeic_japanese/features/my_voca/screens/my_voca_sceen.dart';
 import 'package:jonggack_toeic_japanese/features/my_voca/services/my_voca_controller.dart';
 import 'package:jonggack_toeic_japanese/user/controller/user_controller.dart';
@@ -21,11 +24,11 @@ extension KindOfStudyExtension on KindOfStudy {
   String get value {
     switch (this) {
       case KindOfStudy.BASIC:
-        return '왕초보';
+        return '素人';
       case KindOfStudy.JLPT:
-        return 'JLPT';
+        return '試験用';
       case KindOfStudy.MY:
-        return '나만의';
+        return '自分の';
     }
   }
 }
@@ -103,18 +106,87 @@ class _JLPTCardsState extends State<JLPTCards> {
           items: [
             LevelCategoryCard(
               titleSize: Responsive.width10 * 3,
-              title: 'Toeic',
+              title: '500点向け',
               onTap: () {
-                Get.to(() => JlptHomeScreen(index: 0));
+                Get.to(
+                  () => JlptHomeScreen(title: '500点向け', index: 0, level: '500'),
+                );
               },
-              body: Text(''),
+              body: Column(
+                children: [
+                  StudyCategoryAndProgress(
+                    caregory: '単語',
+                    curCnt: userController.user.currentJlptWordScroes[0],
+                    totalCnt: userController.user.jlptWordScroes[0],
+                  ),
+                  StudyCategoryAndProgress(
+                    caregory: '慣用句',
+                    curCnt: userController.user.currentKangiScores[0],
+                    totalCnt: userController.user.kangiScores[0],
+                  )
+                ],
+              ),
+              foot: const Text('500点を目指している方向けの単語帳'),
             ),
             LevelCategoryCard(
               titleSize: Responsive.width10 * 3,
-              title: '慣用句',
-              onTap: () {},
-              body: Text('aa'),
-            )
+              title: '700点向け',
+              onTap: () {
+                Get.to(() =>
+                    JlptHomeScreen(title: '700点向け', index: 1, level: '700'));
+              },
+              body: Column(
+                children: [
+                  StudyCategoryAndProgress(
+                    caregory: '単語',
+                    curCnt: userController.user.currentJlptWordScroes[1],
+                    totalCnt: userController.user.jlptWordScroes[1],
+                  ),
+                  StudyCategoryAndProgress(
+                    caregory: '慣用句',
+                    curCnt: userController.user.currentKangiScores[1],
+                    totalCnt: userController.user.kangiScores[1],
+                  ),
+                ],
+              ),
+              foot: const Text('700点を目指している方向けの単語帳'),
+            ),
+            LevelCategoryCard(
+              titleSize: Responsive.width10 * 3,
+              title: '900点向け',
+              onTap: () {
+                Get.to(() =>
+                    JlptHomeScreen(title: '900点向け', index: 2, level: '900'));
+              },
+              body: Column(
+                children: [
+                  StudyCategoryAndProgress(
+                    caregory: '進捗',
+                    curCnt: userController.user.currentJlptWordScroes[2],
+                    totalCnt: userController.user.jlptWordScroes[2],
+                  ),
+                  StudyCategoryAndProgress(
+                    caregory: '慣用句',
+                    curCnt: userController.user.currentKangiScores[2],
+                    totalCnt: userController.user.kangiScores[2],
+                  ),
+                ],
+              ),
+              foot: const Text('900点を目指している方向けの単語帳'),
+            ),
+            LevelCategoryCard(
+              titleSize: Responsive.width10 * 3,
+              title: '単語3000個',
+              onTap: () {
+                Get.to(() =>
+                    JlptHomeScreen(title: '単語3000個', index: 3, level: '1~300'));
+              },
+              body: StudyCategoryAndProgress(
+                caregory: '進捗',
+                curCnt: userController.user.currentJlptWordScroes[3],
+                totalCnt: userController.user.jlptWordScroes[3],
+              ),
+            ),
           ]
           //  List.generate(1, (index) {
           //   return LevelCategoryCard(
@@ -134,7 +206,7 @@ class _JLPTCardsState extends State<JLPTCards> {
           //       mainAxisAlignment: MainAxisAlignment.start,
           //       children: [
           //         StudyCategoryAndProgress(
-          //           caregory: '단어',
+          //           caregory: '進捗',
           //           curCnt: userController.user.currentJlptWordScroes[index],
           //           totalCnt: userController.user.jlptWordScroes[index],
           //         ),
@@ -228,10 +300,10 @@ class _MyCardsState extends State<MyCards> {
                   },
                 );
               },
-              title: '나만의 단어장 1',
+              title: '自分の単語帳①',
               extraInfo: RichText(
                 text: TextSpan(
-                  text: '저장된 단어: ',
+                  text: '保存した単語：',
                   children: [
                     TextSpan(
                       text: "${userController.user.yokumatigaeruMyWords}",
@@ -239,66 +311,67 @@ class _MyCardsState extends State<MyCards> {
                         color: AppColors.mainBordColor,
                       ),
                     ),
-                    const TextSpan(text: "개")
+                    const TextSpan(text: "個")
                   ],
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: Responsive.width10 * 1.4,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: AppFonts.gMaretFont),
+                    color: Colors.black,
+                    fontSize: Responsive.width10 * 1.4,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: AppFonts.japaneseFont,
+                  ),
                 ),
               ),
               titleSize: Responsive.width10 * 2.3,
               foot: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  '종각 앱에서 저장한 단어들을\n학습하는 단어장',
+                  '一番アプリに保存した単語を\n学習する単語帳',
                   style: TextStyle(
-                    fontFamily: AppFonts.gMaretFont,
                     fontSize: Responsive.height15,
                   ),
                 ),
               ),
             ),
             LevelCategoryCard(
-                onTap: () {
-                  LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 1);
-                  Get.toNamed(
-                    MY_VOCA_PATH,
-                    arguments: {MY_VOCA_TYPE: MyVocaEnum.MANUAL_SAVED_WORD},
-                  );
-                },
-                title: '나만의 단어장 2',
-                titleSize: Responsive.width10 * 2.3,
-                extraInfo: RichText(
-                  text: TextSpan(
-                    text: '저장된 단어: ',
-                    children: [
-                      TextSpan(
-                        text: "${userController.user.manualSavedMyWords}",
-                        style: TextStyle(
-                          color: AppColors.mainBordColor,
-                        ),
+              onTap: () {
+                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 1);
+                Get.toNamed(
+                  MY_VOCA_PATH,
+                  arguments: {MY_VOCA_TYPE: MyVocaEnum.MANUAL_SAVED_WORD},
+                );
+              },
+              title: '自分の単語帳②',
+              titleSize: Responsive.width10 * 2.3,
+              extraInfo: RichText(
+                text: TextSpan(
+                  text: '保存した単語：',
+                  children: [
+                    TextSpan(
+                      text: "${userController.user.manualSavedMyWords}",
+                      style: TextStyle(
+                        color: AppColors.mainBordColor,
                       ),
-                      const TextSpan(text: "개")
-                    ],
-                    style: TextStyle(
-                        fontSize: Responsive.width10 * 1.4,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: AppFonts.gMaretFont),
+                    ),
+                    const TextSpan(text: "個")
+                  ],
+                  style: TextStyle(
+                    fontSize: Responsive.width10 * 1.4,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: AppFonts.japaneseFont,
                   ),
                 ),
-                foot: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '사용자가 직접 저장한 단어들을\n학습하는 단어장',
-                    style: TextStyle(
-                      fontFamily: AppFonts.gMaretFont,
-                      fontSize: Responsive.height15,
-                    ),
+              ),
+              foot: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'ユーザーが保存して単語を\n学習する単語帳',
+                  style: TextStyle(
+                    fontSize: Responsive.height15,
                   ),
-                )),
+                ),
+              ),
+            ),
           ]);
     });
   }
@@ -342,21 +415,24 @@ class _BasicCardState extends State<BasicCard> {
     LevelCategoryCard(
       onTap: () {
         LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 0);
-        Get.to(() => const HiraganaScreen(category: 'hiragana'));
+
+        // Get.to(() => const HiraganaScreen(category: 'hiragana'));
+        Get.to(() => LearnToeicGrammarScreen());
       },
-      title: '히라가나 단어장',
+      title: '文法学習',
       titleSize: Responsive.width10 * 2.3,
       foot: Text(
-        '왕초보를 위한 히라가나 단어장',
+        '英語の文法',
         style: TextStyle(fontSize: Responsive.height15),
       ),
     ),
     LevelCategoryCard(
       onTap: () {
         LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 1);
-        Get.to(() => const HiraganaScreen(category: 'katakana'));
+        Get.to(() =>
+            const ToeicQuestionStepScreen()); // Get.to(() => ToeicQuestionTestScreen());
       },
-      title: '카타카나 단어장',
+      title: 'Chapter５問題帳',
       titleSize: Responsive.width10 * 2.3,
       foot: Text(
         '왕초보를 위한 카타카나 단어장',

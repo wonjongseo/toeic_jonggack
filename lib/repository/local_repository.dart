@@ -11,6 +11,8 @@ import 'package:jonggack_toeic_japanese/model/hive_type.dart';
 import 'package:jonggack_toeic_japanese/model/my_word.dart';
 import 'package:jonggack_toeic_japanese/model/jlpt_step.dart';
 import 'package:jonggack_toeic_japanese/model/kangi.dart';
+import 'package:jonggack_toeic_japanese/model/toeic_question.dart';
+import 'package:jonggack_toeic_japanese/model/toeic_question_step.dart';
 import 'package:jonggack_toeic_japanese/model/word.dart';
 import 'package:jonggack_toeic_japanese/model/kangi_step.dart';
 
@@ -24,6 +26,14 @@ class LocalReposotiry {
       Hive.init("C:/jlpt_app/assets/hive");
     }
 
+    if (!Hive.isAdapterRegistered(toeicChater5TypeId)) {
+      Hive.registerAdapter(ToeicQuestionAdapter());
+    }
+
+    if (!Hive.isAdapterRegistered(toeicChater5StepTypeId)) {
+      Hive.registerAdapter(ToeicChapter5StepAdapter());
+    }
+//
     if (!Hive.isAdapterRegistered(UserTypeId)) {
       Hive.registerAdapter(UserAdapter());
     }
@@ -181,6 +191,11 @@ class LocalReposotiry {
     if (!Hive.isBoxOpen(Grammar.boxKey)) {
       log("await Hive.openBox(Grammar.boxKey)");
       await Hive.openBox(Grammar.boxKey);
+    }
+
+    if (!Hive.isBoxOpen(ToeicQuestionStep.boxKey)) {
+      log("await Hive.openBox(ToeicChapter5Step.boxKey)");
+      await Hive.openBox(ToeicQuestionStep.boxKey);
     }
 
     if (!Hive.isBoxOpen(GrammarStep.boxKey)) {

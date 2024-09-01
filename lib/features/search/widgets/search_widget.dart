@@ -40,7 +40,7 @@ class _NewSearchWidgetState extends State<NewSearchWidget> {
                     },
                     decoration: InputDecoration(
                       fillColor: Colors.white,
-                      hintText: ' 일본어/한자/문법 검색...',
+                      hintText: ' 単語を入力する...',
                       hintStyle: TextStyle(
                         fontSize: Responsive.height14,
                       ),
@@ -138,7 +138,7 @@ class _NewSearchWidgetState extends State<NewSearchWidget> {
                               ),
                             ),
                             Text(
-                              '의 검색 결과: ${userController.searchedWords!.length + userController.searchedKangis!.length + userController.searchedGrammar!.length}',
+                              'の検索結果：${userController.searchedWords!.length + userController.searchedKangis!.length + userController.searchedGrammar!.length}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: Responsive.height14,

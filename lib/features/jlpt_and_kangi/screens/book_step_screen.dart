@@ -32,7 +32,7 @@ class BookStepScreen extends StatefulWidget {
       print('categoryEnum : ${categoryEnum}');
 
       jlptWordController = Get.put(
-        JlptStepController(level: oneTo3000List[int.parse(level) - 1]),
+        JlptStepController(level: level),
       );
     } else if (categoryEnum == CategoryEnum.Kangis) {
       kangiController = Get.put(KangiStepController(level: level));

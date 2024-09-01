@@ -13,7 +13,8 @@ class AppFonts {
 class AppThemings {
   static TextStyle darkTextStyle = const TextStyle(
     color: AppColors.whiteGrey,
-    fontFamily: AppFonts.nanumGothic,
+    fontFamily: AppFonts.japaneseFont,
+    fontSize: 16,
   );
 
   static final dartTheme = ThemeData.light(useMaterial3: true).copyWith(
@@ -69,7 +70,7 @@ class AppThemings {
 
   static TextStyle lightTextStyle = const TextStyle(
     color: AppColors.darkGrey,
-    fontFamily: AppFonts.gMaretFont,
+    fontFamily: AppFonts.japaneseFont,
   );
 
   static final lightTheme = ThemeData.light(

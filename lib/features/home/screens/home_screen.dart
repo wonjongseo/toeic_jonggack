@@ -284,3 +284,65 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 }
+
+class ToeicGrammarText extends StatelessWidget {
+  const ToeicGrammarText({
+    super.key,
+    required this.title,
+    required this.cosi,
+    required this.accentContent,
+    required this.content,
+  });
+  final String title;
+  final String cosi;
+  final String accentContent;
+  final Widget content;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Responsive.width10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Responsive.height25,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: Responsive.height10 * 2),
+            Text(
+              cosi,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Responsive.height20,
+                color: Colors.black,
+              ),
+            ),
+            Divider(
+              thickness: Responsive.height10 * 0.2,
+              height: Responsive.height10 * 3,
+              color: AppColors.mainBordColor,
+            ),
+            Text(
+              accentContent,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Responsive.height18,
+                color: Colors.red,
+              ),
+            ),
+            SizedBox(height: Responsive.height10),
+            content,
+            SizedBox(height: Responsive.height10),
+          ],
+        ),
+      ),
+    );
+  }
+}
