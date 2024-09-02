@@ -61,7 +61,7 @@ class _GrammarStudyScreenState extends State<GrammarStudyScreen> {
                       widget.grammars[widget.index].means,
                       style: TextStyle(
                         fontSize: Responsive.height14,
-                        fontFamily: AppFonts.descriptionFont,
+                        fontFamily: AppFonts.japaneseFont,
                       ),
                     )
                   : InkWell(

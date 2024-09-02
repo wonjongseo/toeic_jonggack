@@ -161,7 +161,7 @@ class _HomeTutorialScreenState extends State<HomeTutorialScreen> {
                 child: Text(
                   '앱 설명 보기',
                   style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
+                    fontFamily: AppFonts.japaneseFont,
                     fontWeight: FontWeight.bold,
                     fontSize: Responsive.width14,
                     color: AppColors.scaffoldBackground,
@@ -181,7 +181,7 @@ class _HomeTutorialScreenState extends State<HomeTutorialScreen> {
                 child: Text(
                   '설정 페이지',
                   style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
+                    fontFamily: AppFonts.japaneseFont,
                     fontWeight: FontWeight.bold,
                     fontSize: Responsive.width14,
                     color: AppColors.scaffoldBackground,
@@ -201,7 +201,7 @@ class _HomeTutorialScreenState extends State<HomeTutorialScreen> {
                 child: Text(
                   '데이터 초기화',
                   style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
+                    fontFamily: AppFonts.japaneseFont,
                     fontWeight: FontWeight.bold,
                     fontSize: Responsive.width14,
                     color: AppColors.scaffoldBackground,
@@ -246,7 +246,6 @@ class _HomeTutorialScreenState extends State<HomeTutorialScreen> {
               children: [
                 const WelcomeWidget(),
                 const Spacer(flex: 1),
-                // const NewSearchWidget()
                 Stack(
                   children: [
                     Card(

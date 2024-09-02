@@ -155,7 +155,7 @@ class _BookStepScreenState extends State<BookStepScreen> {
                                   )
                                 ],
                                 style: TextStyle(
-                                  fontFamily: AppFonts.gMaretFont,
+                                  fontFamily: AppFonts.japaneseFont,
                                   fontWeight: FontWeight.bold,
                                   fontSize: Responsive.height10 * 2.3,
                                   color: isAllAccessable

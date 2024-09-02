@@ -61,39 +61,7 @@ class JlptTestBody extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            const Text('주관식 문제'),
-                            Transform.scale(
-                              scale: 1,
-                              child: Checkbox(
-                                value:
-                                    controller.settingController.isTestKeyBoard,
-                                onChanged: (v) {
-                                  if (controller
-                                      .settingController.isTestKeyBoard) {
-                                    controller
-                                            .settingController.isTestKeyBoard =
-                                        LocalReposotiry.testKeyBoardOnfOFF();
-                                    controller.textEditingController = null;
-                                  } else {
-                                    controller
-                                            .settingController.isTestKeyBoard =
-                                        LocalReposotiry.testKeyBoardOnfOFF();
-                                    controller.textEditingController =
-                                        TextEditingController(
-                                      text: controller.inputValue,
-                                    );
-                                  }
-                                },
-                                checkColor: Colors.cyan.shade600,
-                                fillColor: MaterialStateProperty.resolveWith(
-                                  (states) => Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        //
                       ],
                     ),
                   ),

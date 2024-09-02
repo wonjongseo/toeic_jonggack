@@ -54,7 +54,7 @@ List<List<Map<String, dynamic>>> chaterFiveQuestions = [
     {
       "id": "#q004",
       "question":
-          "Employees must park in the ——- parking lot until the renovation of the company building is completed.",
+          "Employees must park in the ——– parking lot until the renovation of the company building is completed.",
       "answers": [
         "(A) frequent",
         "(B) generous",

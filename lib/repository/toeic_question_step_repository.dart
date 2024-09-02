@@ -6,7 +6,7 @@ import 'package:jonggack_toeic_japanese/model/toeic_question_step.dart';
 
 import '../common/app_constant.dart';
 
-class ToeicChapter5StepRepositroy {
+class ToeicQuestionStepRepositroy {
   static Future<bool> isExistData() async {
     final box = Hive.box(ToeicQuestionStep.boxKey);
     return box.isNotEmpty;
@@ -57,15 +57,15 @@ class ToeicChapter5StepRepositroy {
         }
 
         ToeicQuestionStep tempJlptStep = ToeicQuestionStep(
-            headTitle: day,
-            step: stepCount,
-            toeicQuestions: currentWords,
-            scores: 0);
+          headTitle: day,
+          step: stepCount,
+          toeicQuestions: currentWords,
+          scores: 0,
+        );
 
         String boxKey = '$nLevel-$day-$stepCount';
         await box.put(boxKey, tempJlptStep);
         print('boxKey : ${boxKey}');
-
         stepCount++;
       }
       String stepCountKey = '$nLevel-$day';
@@ -88,7 +88,8 @@ class ToeicChapter5StepRepositroy {
       ToeicQuestionStep jlptStep = box.get(key);
       jlptStepList.add(jlptStep);
     }
-    print('jlptStepList : ${jlptStepList[0].toeicQuestions[0].id}');
+
+    print('jlptStepList[0]. : ${jlptStepList[0].toeicQuestions[0].id}');
 
     return jlptStepList;
   }
@@ -101,71 +102,14 @@ class ToeicChapter5StepRepositroy {
     return jlptHeadTieleCount;
   }
 
-  void updateJlptStep(String nLevel, ToeicQuestionStep newJlptStep) {
+  static void updateToeicQuestionStep(
+      String nLevel, ToeicQuestionStep updateToeciQuestion) {
     final box = Hive.box(ToeicQuestionStep.boxKey);
 
-    String key = '$nLevel-${newJlptStep.headTitle}-${newJlptStep.step}';
-    box.put(key, newJlptStep);
+    String key =
+        '$nLevel-${updateToeciQuestion.headTitle}-${updateToeciQuestion.step}';
+    print('key : ${key}');
+
+    box.put(key, updateToeciQuestion);
   }
-
-  // static Future<int> updateJlptStepData(String nLevel) async {
-  //   log('JlptStepRepositroy ${nLevel}N Update');
-
-  //   final box = Hive.box(ToeicChapter5Step.boxKey);
-  //   final wordBox = Hive.box<Word>(Word.boxKey);
-
-  //   List<List<ToeicChapter5>> words = await ToeicChapter5.jsonToObject(nLevel);
-  //   int totalCount = 0;
-
-  //   for (int i = 0; i < words.length; i++) {
-  //     totalCount += words[i].length;
-  //   }
-  //   log('totalCount: $totalCount');
-
-  //   box.put('$nLevel-step-count', words.length);
-
-  //   for (int hiraganaIndex = 0; hiraganaIndex < words.length; hiraganaIndex++) {
-  //     String hiragana = words[hiraganaIndex][0].headTitle;
-
-  //     int wordsLengthByHiragana = words[hiraganaIndex].length;
-  //     int stepCount = 0;
-
-  //     for (int step = 0;
-  //         step < wordsLengthByHiragana;
-  //         step += 10) {
-  //       List<Word> currentWords = [];
-
-  //       if (step + 10 > wordsLengthByHiragana) {
-  //         currentWords = words[hiraganaIndex].sublist(step);
-  //       } else {
-  //         currentWords = words[hiraganaIndex]
-  //             .sublist(step, step + 10);
-  //       }
-
-  //       for (Word word in currentWords) {
-  //         KangiStepRepositroy kangiStepRepositroy = KangiStepRepositroy();
-  //         getKangiIndex(word.word, kangiStepRepositroy);
-  //         await wordBox.put(word.word, word);
-  //       }
-  //       String key = '$nLevel-$hiragana-$stepCount';
-
-  //       JlptStep? beforeJlptStep = await box.get(key);
-  //       if (beforeJlptStep == null) return 0;
-  //       beforeJlptStep.words = currentWords;
-
-  //       LocalReposotiry.putCurrentProgressing(
-  //         '${CategoryEnum.Japaneses.name}-$nLevel-$hiragana',
-  //         0,
-  //       );
-  //       await box.put(key, beforeJlptStep);
-  //       stepCount++;
-  //     }
-
-  //     await box.put('$nLevel-$hiragana', stepCount);
-  //   }
-  //   LocalReposotiry.putCurrentProgressing(
-  //       '${CategoryEnum.Japaneses.name}-$nLevel', 0);
-
-  //   return totalCount;
-  // }
 }

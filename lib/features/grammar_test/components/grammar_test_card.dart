@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:jonggack_toeic_japanese/common/common.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
@@ -75,27 +75,36 @@ class _GrammarTestCardState extends State<GrammarTestCard> {
                 questionNumberText(),
               // 문법 문제
               Expanded(
-                child: HtmlWidget(
-                  question,
-                  textStyle: TextStyle(
-                    // margin: Margins.zero,
-                    fontFamily: AppFonts.japaneseFont,
-                    fontSize: Responsive.height17,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  customStylesBuilder: (element) {
-                    if (element.toString().contains('rt')) {
-                      return {
-                        // 'color': 'red',
-                        'font-size': 'x-small',
-                        'font-weight': 'bold',
-                      };
-                    }
-                    return null;
-                  },
-                ),
-              ),
+                  child: Html(
+                data: question,
+                style: {
+                  "*": Style(
+                    margin: Margins.zero,
+                  )
+                },
+              ))
+              // Expanded(
+              //   child: HtmlWidget(
+              //     question,
+              //     textStyle: TextStyle(
+              //       // margin: Margins.zero,
+              //       fontFamily: AppFonts.japaneseFont,
+              //       fontSize: Responsive.height17,
+              //       color: Colors.black,
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //     customStylesBuilder: (element) {
+              //       if (element.toString().contains('rt')) {
+              //         return {
+              //           // 'color': 'red',
+              //           'font-size': 'x-small',
+              //           'font-weight': 'bold',
+              //         };
+              //       }
+              //       return null;
+              //     },
+              //   ),
+              // ),
               // Expanded(
               //   child: InkWell(
               //     onTap: () => copyWord(question),

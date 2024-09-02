@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           key: homeController.scaffoldKey,
-          endDrawer: _endDrawer(),
+          // endDrawer: _endDrawer(),
           body: _body(context, homeController),
           bottomNavigationBar: const GlobalBannerAdmob(),
         );
@@ -161,24 +161,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ListTile(
-              leading: const Icon(Icons.message),
-              title: TextButton(
-                onPressed: () {
-                  Get.back();
-                  Get.to(() => const HowToUseScreen());
-                },
-                child: Text(
-                  '앱 설명 보기',
-                  style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Responsive.width14,
-                    color: AppColors.scaffoldBackground,
-                  ),
-                ),
-              ),
-            ),
+            // ListTile(
+            //   leading: const Icon(Icons.message),
+            //   title: TextButton(
+            //     onPressed: () {
+            //       Get.back();
+            //       Get.to(() => const HowToUseScreen());
+            //     },
+            //     child: Text(
+            //       '앱 설명 보기',
+            //       style: TextStyle(
+            //         fontFamily: AppFonts.japaneseFont,
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: Responsive.width14,
+            //         color: AppColors.scaffoldBackground,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: TextButton(
@@ -189,9 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
                 child: Text(
-                  '설정 페이지',
+                  '設定',
                   style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
+                    fontFamily: AppFonts.japaneseFont,
                     fontWeight: FontWeight.bold,
                     fontSize: Responsive.width14,
                     color: AppColors.scaffoldBackground,
@@ -199,27 +199,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // if (!kReleaseMode)
-            ListTile(
-              leading: const Icon(Icons.remove),
-              title: TextButton(
-                onPressed: () {
-                  Get.back();
-                  Get.toNamed(SETTING_PATH, arguments: {
-                    'isSettingPage': false,
-                  });
-                },
-                child: Text(
-                  '데이터 초기화',
-                  style: TextStyle(
-                    fontFamily: AppFonts.nanumGothic,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Responsive.width14,
-                    color: AppColors.scaffoldBackground,
-                  ),
-                ),
-              ),
-            ),
+            // // if (!kReleaseMode)
+            // ListTile(
+            //   leading: const Icon(Icons.remove),
+            //   title: TextButton(
+            //     onPressed: () {
+            //       Get.back();
+            //       Get.toNamed(SETTING_PATH, arguments: {
+            //         'isSettingPage': false,
+            //       });
+            //     },
+            //     child: Text(
+            //       '데이터 초기화',
+            //       style: TextStyle(
+            //         fontFamily: AppFonts.japaneseFont,
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: Responsive.width14,
+            //         color: AppColors.scaffoldBackground,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -238,7 +238,11 @@ class _HomeScreenState extends State<HomeScreen> {
         Align(
           alignment: Alignment.centerRight,
           child: IconButton(
-            onPressed: () => homeController.openDrawer(),
+            onPressed: () {
+              Get.toNamed(SETTING_PATH, arguments: {
+                'isSettingPage': true,
+              });
+            },
             icon: Icon(Icons.settings, size: Responsive.height10 * 2.2),
           ),
         ),
@@ -300,47 +304,59 @@ class ToeicGrammarText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Responsive.width10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Responsive.height25,
-                color: Colors.black,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.width10,
+      ),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: Responsive.height15,
+            horizontal: Responsive.width10,
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: Responsive.width10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Responsive.width20,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: Responsive.height10),
+                  Text(
+                    cosi,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Responsive.width18,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Divider(
+                    thickness: Responsive.height10 * 0.2,
+                    height: Responsive.height10 * 3,
+                    color: AppColors.mainBordColor,
+                  ),
+                  Text(
+                    accentContent,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Responsive.width16,
+                      color: Colors.red,
+                    ),
+                  ),
+                  content,
+                  SizedBox(height: Responsive.height20),
+                ],
               ),
             ),
-            SizedBox(height: Responsive.height10 * 2),
-            Text(
-              cosi,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Responsive.height20,
-                color: Colors.black,
-              ),
-            ),
-            Divider(
-              thickness: Responsive.height10 * 0.2,
-              height: Responsive.height10 * 3,
-              color: AppColors.mainBordColor,
-            ),
-            Text(
-              accentContent,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Responsive.height18,
-                color: Colors.red,
-              ),
-            ),
-            SizedBox(height: Responsive.height10),
-            content,
-            SizedBox(height: Responsive.height10),
-          ],
+          ),
         ),
       ),
     );

@@ -136,7 +136,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                           }
                           // For Development
                           if (!kReleaseMode) {
-                            isEnabled = true;
+                            // isEnabled = true;
                           }
                           return Padding(
                             key: gKeys[index],
@@ -383,7 +383,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                 child: Padding(
                                   padding: EdgeInsets.all(Responsive.width10),
                                   child: Text(
-                                    'テスト！',
+                                    'テスト',
                                     style: TextStyle(
                                       fontSize: Responsive.width12,
                                       fontWeight: FontWeight.w600,
@@ -561,7 +561,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
         child: AppBar(
           scrolledUnderElevation: 0.0,
           title: Text(
-            'JLPT N$level $category - $chapter',
+            '$level点 - Chapter${int.parse(chapter) + 1}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: Responsive.height16,
@@ -625,7 +625,7 @@ class _BBBBState extends State<BBBB> {
                         style: TextStyle(
                           fontSize: Responsive.height16,
                           fontWeight: FontWeight.w600,
-                          fontFamily: AppFonts.descriptionFont,
+                          fontFamily: AppFonts.japaneseFont,
                         ),
                       )
                     : InkWell(
@@ -648,7 +648,7 @@ class _BBBBState extends State<BBBB> {
                       mean,
                       style: TextStyle(
                         fontSize: Responsive.height16,
-                        fontFamily: AppFonts.descriptionFont,
+                        fontFamily: AppFonts.japaneseFont,
                         overflow: TextOverflow.ellipsis,
                       ),
                     )

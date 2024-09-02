@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:jonggack_toeic_japanese/common/common.dart';
 import 'package:jonggack_toeic_japanese/repository/kangis_step_repository.dart';
-import 'package:jonggack_toeic_japanese/repository/toeic_chatper5_step_repository.dart';
+import 'package:jonggack_toeic_japanese/repository/toeic_question_step_repository.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -20,7 +20,7 @@ import 'package:jonggack_toeic_japanese/user/repository/user_repository.dart';
 
 import 'features/setting/services/setting_controller.dart';
 
-/*
+/*o
  유료버전과 무료버전 업로드 시 .
 
 STEP 1. 프로젝트 명 반드시 바꾸기!!
@@ -104,11 +104,12 @@ class _AppState extends State<App> {
         jlptWordScroes.add(await JlptStepRepositroy.init('900'));
         // 熟語
         jlptWordScroes.add(await JlptStepRepositroy.init(oneTo3000List[0]));
+
         kangiScores.add(await KangiStepRepositroy.init('500'));
         kangiScores.add(await KangiStepRepositroy.init('700'));
         kangiScores.add(await KangiStepRepositroy.init('900'));
 
-        ToeicChapter5StepRepositroy.init('1');
+        ToeicQuestionStepRepositroy.init('1');
 
         //
       } else {
@@ -178,7 +179,7 @@ class _AppState extends State<App> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '데이터를 불러오는 중입니다.',
+                'データを読み取り中です。',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 12),

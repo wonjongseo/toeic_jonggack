@@ -6,7 +6,7 @@ import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/config/size.dart';
 import 'package:jonggack_toeic_japanese/features/jlpt_and_kangi/jlpt/controller/toeic_chater5_step_controller.dart';
 import 'package:jonggack_toeic_japanese/features/search/widgets/search_widget.dart';
-import 'package:jonggack_toeic_japanese/toeic_question_test_screen.dart';
+import 'package:jonggack_toeic_japanese/features/toeic_chap5/screen/toeic_question_test_screen.dart';
 
 class ToeicQuestionStepScreen extends StatefulWidget {
   const ToeicQuestionStepScreen({super.key});
@@ -18,7 +18,7 @@ class ToeicQuestionStepScreen extends StatefulWidget {
 
 class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
   int progrssingIndex = 0;
-  int stepIndex = 0;
+  // int stepIndex = 0;
   late PageController pageController;
   ToeicQuestionStepController toeicQSController =
       Get.put(ToeicQuestionStepController(level: '1'));
@@ -27,16 +27,14 @@ class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
   void initState() {
     //TODO
     // get last Step Index
-    toeicQSController.setSteps(stepIndex.toString());
+    // toeicQSController.setSteps(stepIndex.toString());
 
-    pageController = PageController(initialPage: stepIndex);
+    pageController = PageController(initialPage: toeicQSController.outStep);
     super.initState();
   }
 
   onPageChanged(int newPage) {
-    stepIndex = newPage;
-    toeicQSController.setSteps(stepIndex.toString());
-    print('toeicQSController.step : ${toeicQSController.step}');
+    toeicQSController.setOutStep(newPage.toString());
 
     setState(() {});
   }
@@ -50,150 +48,148 @@ class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
           title: const Text('Chapter5問題帳'),
         ),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Responsive.width20),
-            child: Column(
-              children: [
-                SizedBox(height: Responsive.height10 * 2),
-                const NewSearchWidget(),
-                Padding(
-                  padding: EdgeInsets.all(Responsive.height10),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(
-                          toeicQSController.totalStepCount,
-                          (index) => TextButton(
-                                onPressed: () {
-                                  stepIndex = index;
-                                  toeicQSController.setSteps(index.toString());
+      body: GetBuilder<ToeicQuestionStepController>(builder: (controller) {
+        return SafeArea(
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: Responsive.width20),
+              child: Column(
+                children: [
+                  SizedBox(height: Responsive.height10 * 2),
+                  const NewSearchWidget(),
+                  Padding(
+                    padding: EdgeInsets.all(Responsive.height10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                            controller.totalStepCount,
+                            (index) => TextButton(
+                                  onPressed: () {
+                                    controller.setOutStep(index.toString());
 
-                                  pageController.animateToPage(
-                                    stepIndex,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: stepIndex == index
-                                        ? Border(
-                                            bottom: BorderSide(
-                                              width: Responsive.width10 * 0.3,
+                                    pageController.animateToPage(
+                                      controller.outStep,
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: controller.outStep == index
+                                          ? Border(
+                                              bottom: BorderSide(
+                                                width: Responsive.width10 * 0.3,
+                                                color: Colors.cyan.shade600,
+                                              ),
+                                            )
+                                          : null,
+                                    ),
+                                    child: Text(
+                                      'Step${index + 1}',
+                                      style: index == controller.outStep
+                                          ? TextStyle(
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.cyan.shade600,
+                                              fontSize: Responsive.height17,
+                                            )
+                                          : TextStyle(
+                                              color: Colors.grey.shade600,
+                                              fontSize: Responsive.height15,
                                             ),
-                                          )
-                                        : null,
+                                    ),
                                   ),
-                                  child: Text(
-                                    'Step${index + 1}',
-                                    style: index == stepIndex
-                                        ? TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.cyan.shade600,
-                                            fontSize: Responsive.height17,
-                                          )
-                                        : TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: Responsive.height15,
-                                          ),
-                                  ),
-                                ),
-                              )),
+                                )),
+                      ),
                     ),
                   ),
-                ),
-                Flexible(
-                  flex: 6,
-                  child: PageView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: toeicQSController.totalStepCount,
-                    controller: pageController,
-                    onPageChanged: onPageChanged,
-                    itemBuilder: (context, index) {
-                      // print(
-                      //     'toeicQSController.jlptSteps : ${toeicQSController.jlptSteps.length}');
-
-                      return CarouselSlider(
-                        options: CarouselOptions(
-                          enableInfiniteScroll: false,
-                          disableCenter: true,
-                          initialPage: progrssingIndex,
-                          enlargeCenterPage: true,
-                          onPageChanged: (index, reason) {
-                            progrssingIndex = index;
-                            print('asdasd');
-                          },
-                          scrollDirection: Axis.horizontal,
-                        ),
-                        items: List.generate(
-                          toeicQSController.jlptSteps.length,
-                          (indexOfStep) {
-                            return InkWell(
-                              onTap: () {
-                                Get.to(() => const ToeicQuestionTestScreen());
-                              },
-                              child: Card(
-                                child: Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.all(Responsive.height10),
-                                        child: Text(
-                                          toeicQSController
-                                              .getTestProgress(indexOfStep),
-                                          style: TextStyle(
+                  Flexible(
+                    flex: 6,
+                    child: PageView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.totalStepCount,
+                      controller: pageController,
+                      onPageChanged: onPageChanged,
+                      itemBuilder: (context, index) {
+                        return CarouselSlider(
+                          options: CarouselOptions(
+                            enableInfiniteScroll: false,
+                            disableCenter: true,
+                            initialPage: controller.inStep,
+                            enlargeCenterPage: true,
+                            onPageChanged: (index, reason) {
+                              controller.setInStep(index);
+                            },
+                            scrollDirection: Axis.horizontal,
+                          ),
+                          items: List.generate(
+                            controller.jlptSteps.length,
+                            (inStep) {
+                              return InkWell(
+                                onTap: () => controller.getToTestScreen(inStep),
+                                child: Card(
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                              Responsive.height10),
+                                          child: Text(
+                                            '${controller.getJlptStep().scores} / ${controller.getJlptStep().toeicQuestions.length}\n${controller.getTestProgress(inStep)}',
+                                            style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: Responsive.width18,
-                                              color: toeicQSController
-                                                  .getTestColor(indexOfStep)),
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text.rich(
-                                        TextSpan(
-                                          text: 'Step${stepIndex + 1}\n',
-                                          children: [
-                                            TextSpan(
-                                              text: '${indexOfStep + 1}番のテスト\n',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    Responsive.width10 * 2.8,
-                                                color: AppColors.mainBordColor,
-                                              ),
+                                              color: controller
+                                                  .getTestColor(inStep),
                                             ),
-                                          ],
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: Responsive.width22,
-                                            color: AppColors.mainBordColor,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Center(
+                                        child: Text.rich(
+                                          TextSpan(
+                                            text:
+                                                'Step${controller.outStep + 1}\n',
+                                            children: [
+                                              TextSpan(
+                                                text: '${inStep + 1}番のテスト\n',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      Responsive.width10 * 2.8,
+                                                  color:
+                                                      AppColors.mainBordColor,
+                                                ),
+                                              ),
+                                            ],
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Responsive.width22,
+                                              color: AppColors.mainBordColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                const Spacer(flex: 1),
-              ],
+                  const Spacer(flex: 1),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

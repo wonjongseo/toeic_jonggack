@@ -142,7 +142,7 @@ class _MyVocaPageState extends State<MyVocaPage> {
                               alignment: Alignment.bottomRight,
                               child: OutlinedButton(
                                 child: Text(
-                                  '퀴즈',
+                                  'テスト',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
@@ -473,12 +473,14 @@ class PPPPPP extends StatelessWidget {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
-                title: const Text('테스트 종류를 선택 해주세요.',
-                    style: TextStyle(
-                      color: AppColors.scaffoldBackground,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    )),
+                title: Text(
+                  'テストの種類を選択してください。',
+                  style: TextStyle(
+                    color: AppColors.scaffoldBackground,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Responsive.width16,
+                  ),
+                ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -495,7 +497,7 @@ class PPPPPP extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          '未暗記',
+                          '未暗記の単語',
                           style: TextStyle(
                             color: AppColors.scaffoldBackground,
                             fontSize: 16,
@@ -514,7 +516,7 @@ class PPPPPP extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          '암기한 단어',
+                          '暗記の単語',
                           style: TextStyle(
                             color: AppColors.scaffoldBackground,
                             fontSize: 16,
@@ -553,14 +555,14 @@ class PPPPPP extends StatelessWidget {
                               }
                             } else {
                               setState(() {
-                                errorMessage = '테스트 종류를 선택 해주세요.';
+                                errorMessage = 'テストの種類を選択してください。';
                               });
                               return;
                             }
 
                             if (tempMyWord.length < 4) {
                               setState(() {
-                                errorMessage = '테스트 단어 개수가 4개 이상 이어야 합니다.';
+                                errorMessage = 'テストする単語の数が４個以上になる必要があります。';
                               });
                               return;
                             }
@@ -569,7 +571,7 @@ class PPPPPP extends StatelessWidget {
                               arguments: {MY_VOCA_TEST: tempMyWord},
                             );
                           },
-                          child: const Text('테스트 하기')),
+                          child: const Text('挑戦する！')),
                     )
                   ],
                 ),

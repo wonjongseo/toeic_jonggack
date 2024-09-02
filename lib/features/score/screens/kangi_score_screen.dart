@@ -68,7 +68,7 @@ class KangiScoreScreen extends StatelessWidget {
         child: AppBar(
           scrolledUnderElevation: 0.0,
           title: Text(
-            "점수 ${kangiQuestionController.scoreResult}",
+            "点数：${kangiQuestionController.scoreResult}",
             style: TextStyle(fontSize: appBarTextSize),
           ),
         ),
@@ -88,7 +88,7 @@ class KangiScoreScreen extends StatelessWidget {
             vertical: Responsive.height8,
           ),
           child: Text(
-            '오답',
+            '間違い',
             style: TextStyle(
                 color: AppColors.mainBordColor,
                 fontWeight: FontWeight.bold,
@@ -105,12 +105,6 @@ class KangiScoreScreen extends StatelessWidget {
                   (index) {
                     String word = qnController.wrongWord(index); //  한자
                     String meanAndYomikata = qnController.wrongMean(index);
-
-                    String hundocAndUndoc = meanAndYomikata.split('\n')[1]; //
-                    String undoc = hundocAndUndoc.split('@')[0];
-                    String hundoc = hundocAndUndoc.split('@')[1];
-                    String yomikata = '음독: $undoc\n훈독: $hundoc';
-                    // yomikata = yomikata.replaceAll('@', ' / ');
                     String mean = meanAndYomikata.split('\n')[0]; //한자 읽는 법
 
                     return InkWell(
@@ -133,7 +127,7 @@ class KangiScoreScreen extends StatelessWidget {
                             ),
                           ),
                           title: Text(mean),
-                          subtitle: Text(yomikata),
+                          subtitle: Text(''),
                         ),
                       ),
                     );
@@ -150,7 +144,7 @@ class KangiScoreScreen extends StatelessWidget {
   AppBar _appBar(KangiTestController qnController) {
     return AppBar(
       title: Text(
-        "점수 ${qnController.scoreResult}",
+        "点数${qnController.scoreResult}",
         style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/widget/custom_appbar.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
+import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/config/size.dart';
 import 'package:jonggack_toeic_japanese/data/grammar_text_datas.dart';
 import 'package:jonggack_toeic_japanese/features/home/screens/home_screen.dart';
@@ -33,16 +34,10 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('toeciGrammarTexts.length : ${toeciGrammarTexts.length}');
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
-        child: AppBar(
-            title: CustomAppBarTitle(
-          curIndex: currentPageIndex + 1,
-          totalIndex: toeciGrammarTexts.length,
-        )),
+        child: AppBar(title: Text('文法')),
       ),
       body: SafeArea(
         child: Padding(
@@ -51,20 +46,15 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
             children: [
               const Spacer(flex: 1),
               const NewSearchWidget(),
-              const Spacer(flex: 1),
+              const Spacer(flex: 2),
               CarouselSlider(
                 carouselController: carouselController,
                 options: CarouselOptions(
-                  disableCenter: true,
-                  aspectRatio: 0.8,
-                  // viewportFraction: userController.user.isPad ? 0.55 : 0.75,
                   enableInfiniteScroll: false,
                   initialPage: currentPageIndex,
-                  enlargeCenterPage: true,
                   onPageChanged: (index, reason) {
                     onPageChanged(index);
                   },
-                  scrollDirection: Axis.horizontal,
                 ),
                 items: List.generate(
                   toeciGrammarTexts.length,
@@ -77,19 +67,40 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
                       );
                     },
                     child: Card(
-                      child: Center(
-                          child: Text(
-                        toeciGrammarTexts[index]['title'],
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: Responsive.height20,
-                        ),
-                      )),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Responsive.width10),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '文法${index + 1}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: Responsive.width24,
+                                color: AppColors.mainBordColor,
+                              ),
+                            ),
+                            SizedBox(
+                              height: Responsive.height10,
+                            ),
+                            Text(
+                              '${toeciGrammarTexts[index]['title']}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: Responsive.width20,
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
                     ),
                   ),
                 ),
               ),
-              const Spacer(flex: 3),
+              const Spacer(flex: 5),
             ],
           ),
         ),
@@ -108,7 +119,10 @@ class LearnToeicGrammarDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(appBarHeight),
+        child: AppBar(title: const Text('')),
+      ),
       body: SafeArea(
         child: Center(
           child: ToeicGrammarText(

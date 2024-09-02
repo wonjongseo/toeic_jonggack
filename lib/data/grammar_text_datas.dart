@@ -427,9 +427,9 @@ I play tennis　_____________ .
     ),
   },
   {
-    "title": '：「不足」を見極める',
+    "title": '「不足」を見極める',
     "cosi": '',
-    "accentContent": '★：「不足」を見極める',
+    "accentContent": '★「不足」を見極める',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -462,9 +462,9 @@ TOEIC文法問題の基本的な考え方は、
     ),
   },
   {
-    "title": '：物か人か、選ぶ',
+    "title": '物か人か、選ぶ',
     "cosi": '',
-    "accentContent": '★：物か人か、選ぶ',
+    "accentContent": '★物か人か、選ぶ',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -491,9 +491,9 @@ She gave me .
     ),
   },
   {
-    "title": '：イコールの関係',
+    "title": 'イコールの関係',
     "cosi": '■「＝（イコール）」の意味の動詞',
-    "accentContent": '★：イコールの関係',
+    "accentContent": '★イコールの関係',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -541,9 +541,9 @@ It smells good.（それはいいにおいがする。）
     ),
   },
   {
-    "title": '：意味を取る',
+    "title": '意味を取る',
     "cosi": '',
-    "accentContent": '★：意味を取る',
+    "accentContent": '★意味を取る',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -606,9 +606,9 @@ TOEICには動詞の用法・選択肢の品詞を判断するだけで解ける
     ),
   },
   {
-    "title": '：目的語と補語のイコール',
+    "title": '目的語と補語のイコール',
     "cosi": '目的語と補語を同時にとり、その2つをイコールの関係で結ぶことができる動詞',
-    "accentContent": '★：目的語と補語のイコール',
+    "accentContent": '★目的語と補語のイコール',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -663,9 +663,9 @@ He _______ the wall blue.
     ),
   },
   {
-    "title": '：動詞が動詞を連れてくる',
+    "title": '動詞が動詞を連れてくる',
     "cosi": '動詞＋目的語＋動詞の原形（または現在分詞・過去分詞）',
-    "accentContent": '★：動詞が動詞を連れてくる',
+    "accentContent": '★動詞が動詞を連れてくる',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -721,9 +721,9 @@ His children were made to clean the room（by him）.
     ),
   },
   {
-    "title": '：動詞の主語を見極める',
+    "title": '動詞の主語を見極める',
     "cosi": '',
-    "accentContent": '★：動詞の主語を見極める',
+    "accentContent": '★動詞の主語を見極める',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -775,9 +775,9 @@ TOEICでは現在形→過去形→過去分詞の変化が特殊な動詞を、
     ),
   },
   {
-    "title": '：「する」のか、「される」のか',
+    "title": '「する」のか、「される」のか',
     "cosi": '',
-    "accentContent": '★：「する」のか、「される」のか',
+    "accentContent": '★「する」のか、「される」のか',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -848,7 +848,7 @@ TOEIC対策としては、目的語との関係（する・される）を意識
     ),
   },
   {
-    "title": '：助動詞の後の動詞は原形',
+    "title": '助動詞の後の動詞は原形',
     "cosi": '助動詞',
     "accentContent": '',
     "content": Text.rich(
@@ -910,7 +910,7 @@ You must not smoke here.（あなたはここでタバコを吸ってはなら�
     ),
   },
   {
-    "title": '：助動詞は１つの文に１つ',
+    "title": '助動詞は１つの文に１つ',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -971,9 +971,9 @@ You will have to take an examination next month.
     ),
   },
   {
-    "title": '：逆にする',
+    "title": '逆にする',
     "cosi": '疑問文',
-    "accentContent": '★：逆にする',
+    "accentContent": '★逆にする',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1017,9 +1017,9 @@ Will you have to take an examination next month?
     ),
   },
   {
-    "title": '：疑問詞は代用品',
+    "title": '疑問詞は代用品',
     "cosi": '',
-    "accentContent": '★：疑問詞は代用品',
+    "accentContent": '★疑問詞は代用品',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1129,7 +1129,7 @@ What do you _______ ?
     ),
   },
   {
-    "title": '：命令文では主語を省略',
+    "title": '命令文では主語を省略',
     "cosi": '命令文',
     "accentContent": '',
     "content": Text.rich(
@@ -1149,7 +1149,7 @@ Please open the door.（ドアを開けてください。）""",
     ),
   },
   {
-    "title": '：進行形は形容詞',
+    "title": '進行形は形容詞',
     "cosi": '進行形',
     "accentContent": '',
     "content": Text.rich(
@@ -1228,7 +1228,7 @@ He is _______ the goat.
     ),
   },
   {
-    "title": '：目的語を取れないなら受動態にできない',
+    "title": '目的語を取れないなら受動態にできない',
     "cosi": '受動態',
     "accentContent": '',
     "content": Text.rich(
@@ -1325,7 +1325,7 @@ Someone stole me my credit card.（×）
     ),
   },
   {
-    "title": '：補語は受動態の主語にはできない',
+    "title": '補語は受動態の主語にはできない',
     "cosi": '',
     "accentContent": '：補語は受動態の主語にはできない',
     "content": Text.rich(
@@ -1366,9 +1366,9 @@ My credit card _______ by someone.
     ),
   },
   {
-    "title": '：時制は6種類',
+    "title": '時制は6種類',
     "cosi": '',
-    "accentContent": '★：時制は6種類',
+    "accentContent": '★時制は6種類',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1402,9 +1402,9 @@ He will have gone to the school library.
     ),
   },
   {
-    "title": '：ある時点を境に考える',
+    "title": 'ある時点を境に考える',
     "cosi": '',
-    "accentContent": '★：ある時点を境に考える',
+    "accentContent": '★ある時点を境に考える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1488,7 +1488,7 @@ I had never played lacrosse.（私はラクロスを1度もやったことがあ
     ),
   },
   {
-    "title": '：語句で時制を見極める',
+    "title": '語句で時制を見極める',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -1551,9 +1551,9 @@ already、yet、ever、never、beforeなどは完了形以外の時制でも使�
     ),
   },
   {
-    "title": '：動名詞が主語なら、動詞は単数形',
+    "title": '動名詞が主語なら、動詞は単数形',
     "cosi": '動名詞',
-    "accentContent": '★：動名詞が主語なら、動詞は単数形',
+    "accentContent": '★動名詞が主語なら、動詞は単数形',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1579,9 +1579,9 @@ Playing tennis good for the health.
     ),
   },
   {
-    "title": '：動名詞を目的語にする動詞を覚える',
+    "title": '動名詞を目的語にする動詞を覚える',
     "cosi": '',
-    "accentContent": '★：動名詞を目的語にする動詞を覚える',
+    "accentContent": '★動名詞を目的語にする動詞を覚える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1632,9 +1632,9 @@ He is considering _______ a house.
     ),
   },
   {
-    "title": '：不定詞を目的語にする動詞を覚える',
+    "title": '不定詞を目的語にする動詞を覚える',
     "cosi": '不定詞',
-    "accentContent": '★：不定詞を目的語にする動詞を覚える',
+    "accentContent": '★不定詞を目的語にする動詞を覚える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -1694,7 +1694,7 @@ Wish・・・あまり実現できなそうなことを望む
     ),
   },
   {
-    "title": '：不定詞には意味上の主語がある',
+    "title": '不定詞には意味上の主語がある',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -1752,7 +1752,7 @@ I’d like something for me to drink.
     ),
   },
   {
-    "title": '：不定詞が副詞の役割をするときは、目的語をとる形になる',
+    "title": '不定詞が副詞の役割をするときは、目的語をとる形になる',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -1820,7 +1820,7 @@ solveは他動詞です。不定詞が副詞の役割をするときは、形容
     ),
   },
   {
-    "title": '：カタマリとして捉える',
+    "title": 'カタマリとして捉える',
     "cosi": '分詞',
     "accentContent": '',
     "content": Text.rich(
@@ -1880,7 +1880,7 @@ The girl _______ the piano is Jane.
     ),
   },
   {
-    "title": '：条件を表すif節の中では未来のことでも動詞は現在形',
+    "title": '条件を表すif節の中では未来のことでも動詞は現在形',
     "cosi": '接続詞',
     "accentContent": '',
     "content": Text.rich(
@@ -1971,9 +1971,9 @@ _______ he made a mistake , anyone didn’t blame him for it.
     ),
   },
   {
-    "title": '：文と文がピリオドで区切られていたら接続副詞',
+    "title": '文と文がピリオドで区切られていたら接続副詞',
     "cosi": '接続副詞',
-    "accentContent": '★：文と文がピリオドで区切られてたら接続副詞',
+    "accentContent": '★文と文がピリオドで区切られてたら接続副詞',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2030,9 +2030,9 @@ He was tired. _______ He stayed up late.
     ),
   },
   {
-    "title": '：長い説明は後ろ',
+    "title": '長い説明は後ろ',
     "cosi": '関係代名詞',
-    "accentContent": '★：長い説明は後ろ',
+    "accentContent": '★長い説明は後ろ',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2073,9 +2073,9 @@ This is the novel （which she wrote）.（これは彼女が書いた小説で�
     ),
   },
   {
-    "title": '：意味上の主語になっているとき、関係代名詞は省略できない',
+    "title": '意味上の主語になっているとき、関係代名詞は省略できない',
     "cosi": '',
-    "accentContent": '★：意味上の主語になっているとき、関係代名詞は省略できない',
+    "accentContent": '★意味上の主語になっているとき、関係代名詞は省略できない',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2105,7 +2105,7 @@ The novel which is in the top drawer is hers.
     ),
   },
   {
-    "title": '：関係代名詞thatはカンマでつなげない',
+    "title": '関係代名詞thatはカンマでつなげない',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -2189,9 +2189,9 @@ This is the house in which I lived.
     ),
   },
   {
-    "title": '：関係代名詞whatは名詞',
+    "title": '関係代名詞whatは名詞',
     "cosi": '',
-    "accentContent": '★：関係代名詞whatは名詞',
+    "accentContent": '★関係代名詞whatは名詞',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2239,9 +2239,9 @@ The house ________ wall is painted green is mine.
     ),
   },
   {
-    "title": '：関係副詞は省略できない',
+    "title": '関係副詞は省略できない',
     "cosi": '関係副詞',
-    "accentContent": '★：関係副詞は省略できない',
+    "accentContent": '★関係副詞は省略できない',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2298,9 +2298,9 @@ It was the day he returned from the U.S.
     ),
   },
   {
-    "title": '：関係副詞howは省略できない、カンマで区切れない',
+    "title": '関係副詞howは省略できない、カンマで区切れない',
     "cosi": '',
-    "accentContent": '★：関係副詞howは省略できない、カンマで区切れない',
+    "accentContent": '★関係副詞howは省略できない、カンマで区切れない',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2350,9 +2350,9 @@ This is _______ he succeeded in the examination.
     ),
   },
   {
-    "title": '：仮定法ではwasではなくwereを使う',
+    "title": '仮定法ではwasではなくwereを使う',
     "cosi": '仮定法',
-    "accentContent": '★：仮定法ではwasではなくwereを使う',
+    "accentContent": '★仮定法ではwasではなくwereを使う',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2392,9 +2392,9 @@ I wish I were a bird.（私が鳥ならいいのに。）
     ),
   },
   {
-    "title": '：仮定法過去完了は過去の事実に反する仮定',
+    "title": '仮定法過去完了は過去の事実に反する仮定',
     "cosi": '',
-    "accentContent": '★：仮定法過去完了は過去の事実に反する仮定',
+    "accentContent": '★仮定法過去完了は過去の事実に反する仮定',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2425,9 +2425,9 @@ I wish I could met her .（彼女に会えたらよかったのに。）
     ),
   },
   {
-    "title": '：仮定法の倒置はifが消える',
+    "title": '仮定法の倒置はifが消える',
     "cosi": '■仮定法現在',
-    "accentContent": '★：仮定法の倒置はifが消える',
+    "accentContent": '★仮定法の倒置はifが消える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2474,7 +2474,7 @@ Had I had 30 million yen , I would have bought a house.
     ),
   },
   {
-    "title": '：仮定法はセットで導く',
+    "title": '仮定法はセットで導く',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -2537,9 +2537,9 @@ _______ I had 30 million yen , I would have bought a house.
     ),
   },
   {
-    "title": '：分詞構文は意味で判断する',
+    "title": '分詞構文は意味で判断する',
     "cosi": '分詞構文',
-    "accentContent": '★：分詞構文は意味で判断する',
+    "accentContent": '★分詞構文は意味で判断する',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2598,9 +2598,9 @@ _______ the document , he couldn’t understand it.
     ),
   },
   {
-    "title": '：比較級は後回し',
+    "title": '比較級は後回し',
     "cosi": '比較',
-    "accentContent": '★：比較級は後回し',
+    "accentContent": '★比較級は後回し',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2754,9 +2754,9 @@ He knows better than to hit her.（彼は彼女をぶつほど愚かではない
     ),
   },
   {
-    "title": '：特殊構文はパターンで覚える',
+    "title": '特殊構文はパターンで覚える',
     "cosi": '特殊構文',
-    "accentContent": '★：特殊構文はパターンで覚える',
+    "accentContent": '★特殊構文はパターンで覚える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2815,9 +2815,9 @@ howをつかったときは「How＋形容詞＋主語＋動詞」の語順で�
     ),
   },
   {
-    "title": '：主語と動詞の数を揃える',
+    "title": '主語と動詞の数を揃える',
     "cosi": '数',
-    "accentContent": '★：主語と動詞の数を揃える',
+    "accentContent": '★主語と動詞の数を揃える',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2901,9 +2901,9 @@ menが複数形なので、動詞がwereなんじゃないか？と思いがち�
     ),
   },
   {
-    "title": '：不可算名詞は最後にｓがつかない',
+    "title": '不可算名詞は最後にｓがつかない',
     "cosi": '',
-    "accentContent": '★：不可算名詞は最後にｓがつかない',
+    "accentContent": '★不可算名詞は最後にｓがつかない',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -2959,7 +2959,7 @@ This is my furniture.（これは私の家具です。）
     ),
   },
   {
-    "title": '：almostは副詞なので名詞を修飾できない',
+    "title": 'almostは副詞なので名詞を修飾できない',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(
@@ -3069,9 +3069,9 @@ most of ～となっている場合、～のところに単数形や不可算が
     ),
   },
   {
-    "title": '：despiteはよく出る',
+    "title": 'despiteはよく出る',
     "cosi": '前置詞',
-    "accentContent": '★：despiteはよく出る',
+    "accentContent": '★despiteはよく出る',
     "content": Text.rich(
       TextSpan(
         text: """
@@ -3117,7 +3117,7 @@ I waited until three o’clock.（私は3時まで待っていた）
     ),
   },
   {
-    "title": '：意思表示動詞＋thatは動詞の原型を伴う',
+    "title": '意思表示動詞＋thatは動詞の原型を伴う',
     "cosi": '',
     "accentContent": '',
     "content": Text.rich(

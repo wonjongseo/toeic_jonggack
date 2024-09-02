@@ -5,9 +5,7 @@ import 'package:flutter/foundation.dart';
 class AdUnitId {
   Map<String, String> appOpen = {};
   Map<String, String> banner = {};
-  Map<String, String> jlptInterstitial = {};
-  Map<String, String> grammarInterstitial = {};
-  Map<String, String> kangiInterstitial = {};
+  Map<String, String> interstitial = {};
   Map<String, String> interstitialVideo = {};
   Map<String, String> rewarded = {};
   Map<String, String> rewardedInterstitial = {};
@@ -19,47 +17,44 @@ class AdUnitId {
       log('kReleaseMode == true');
       appOpen = {
         'ios': 'ca-app-pub-9712392194582442/9190689539',
-        'android': 'ca-app-pub-9712392194582442/3372538020'
-      };
-      banner = {
-        'ios': 'ca-app-pub-9712392194582442/3839140563',
-        'android': 'ca-app-pub-9712392194582442/7058112149'
-      };
-      jlptInterstitial = {
-        'ios': 'ca-app-pub-9712392194582442/9082878326',
-        'android': 'ca-app-pub-9712392194582442/1593160337'
-      };
-      grammarInterstitial = {
-        'ios': 'ca-app-pub-9712392194582442/3215216153',
-        'android': 'ca-app-pub-9712392194582442/4318175148',
-      };
-      kangiInterstitial = {
-        'ios': 'ca-app-pub-9712392194582442/2960614022',
-        'android': 'ca-app-pub-9712392194582442/2564479465',
+        'android': ''
       };
 
-      interstitialVideo = {
-        'ios': 'ca-app-pub-3940256099942544/5135589807',
-        'android': 'ca-app-pub-9712392194582442/1593160337'
+      banner = {
+        'ios': 'ca-app-pub-9712392194582442/2938021192', //ok
+        'android': 'ca-app-pub-9712392194582442/5993830882' //ok
+      };
+
+      interstitial = {
+        'ios': 'ca-app-pub-9712392194582442/8458258414', //ok
+        'android': 'ca-app-pub-9712392194582442/3295515356', //ok
+        //ok
+      };
+
+      // interstitialVideo = {
+      //   'ios': 'ca-app-pub-9712392194582442/8458258414',
+      //   'android': '' //ok
+      // };
+
+      nativeAdvanced = {
+        'ios': 'ca-app-pub-9712392194582442/9112864537', // ok
+        'android': 'ca-app-pub-9712392194582442/1269215293' // ok
       };
       rewarded = {
-        'ios': 'ca-app-pub-9712392194582442/4129934546',
-        'android': 'ca-app-pub-9712392194582442/2875324550'
+        'ios': 'ca-app-pub-9712392194582442/2739027877',
+        'android': 'ca-app-pub-9712392194582442/5248822902',
       };
 
       rewardedInterstitial = {
-        'ios': 'ca-app-pub-9712392194582442/7298151222',
-        'android': 'ca-app-pub-9712392194582442/5374044122'
+        'ios': 'ca-app-pub-9712392194582442/1551683683',
+        'android': 'ca-app-pub-9712392194582442/8887904765',
       };
-      nativeAdvanced = {
-        'ios': 'ca-app-pub-9712392194582442/2816852873',
-        'android': 'ca-app-pub-9712392194582442/8519082211'
-      };
-      nativeAdvancedVideo = {
-        'ios': 'ca-app-pub-9712392194582442/2816852873',
-        'android': 'ca-app-pub-9712392194582442/8519082211'
-      };
-      // 전면
+
+      // nativeAdvancedVideo = {
+      //   'ios': 'ca-app-pub-9712392194582442/4569531593'
+      //   'android': '',
+
+      // };
     } else {
       log('kReleaseMode == false');
       appOpen = {
@@ -70,19 +65,10 @@ class AdUnitId {
         'ios': 'ca-app-pub-3940256099942544/2934735716',
         'android': 'ca-app-pub-3940256099942544/6300978111'
       };
-      jlptInterstitial = {
+      interstitial = {
         'ios': 'ca-app-pub-3940256099942544/4411468910',
         'android': 'ca-app-pub-3940256099942544/1033173712'
       };
-      grammarInterstitial = {
-        'ios': 'ca-app-pub-3940256099942544/4411468910',
-        'android': 'ca-app-pub-3940256099942544/1033173712'
-      };
-      kangiInterstitial = {
-        'ios': 'ca-app-pub-3940256099942544/4411468910',
-        'android': 'ca-app-pub-3940256099942544/1033173712'
-      };
-
       interstitialVideo = {
         'ios': 'ca-app-pub-3940256099942544/5135589807',
         'android': 'ca-app-pub-3940256099942544/8691691433'

@@ -108,7 +108,7 @@ class _NewSearchWidgetState extends State<NewSearchWidget> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  '"${userController.query}"를 찾을 수 없습니다.',
+                  '"${userController.query}"を見つかりませんでした。',
                   style: TextStyle(
                     color: AppColors.mainBordColor,
                     fontWeight: FontWeight.bold,

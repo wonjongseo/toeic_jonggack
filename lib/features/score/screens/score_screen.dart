@@ -70,7 +70,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
         preferredSize: const Size.fromHeight(appBarHeight),
         child: AppBar(
           title: Text(
-            "점수 ${jlptController.scoreResult}",
+            "点数：${jlptController.scoreResult}",
             style: TextStyle(fontSize: appBarTextSize),
           ),
         ),
@@ -90,7 +90,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
             vertical: Responsive.height8,
           ),
           child: Text(
-            '오답',
+            '間違い',
             style: TextStyle(
                 color: AppColors.mainBordColor,
                 fontWeight: FontWeight.bold,

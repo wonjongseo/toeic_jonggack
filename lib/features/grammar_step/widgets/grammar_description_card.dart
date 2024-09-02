@@ -51,7 +51,7 @@ class _GrammarDescriptionCardState extends State<GrammarDescriptionCard> {
           Text(
             widget.content,
             style: TextStyle(
-              fontFamily: AppFonts.descriptionFont,
+              fontFamily: AppFonts.japaneseFont,
               fontSize: widget.fontSize - 2,
             ),
           ),

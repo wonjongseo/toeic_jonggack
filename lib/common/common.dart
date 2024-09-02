@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:jonggack_toeic_japanese/common/app_constant.dart';
-import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/repository/kangis_step_repository.dart';

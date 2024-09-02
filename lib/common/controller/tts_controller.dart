@@ -104,7 +104,7 @@ class TtsController extends GetxController {
     }
   }
 
-  Future<void> speak(String word, {String language = 'ja-JP'}) async {
+  Future<void> speak(String word, {String language = 'en-US'}) async {
     if (isPlaying) return;
     await flutterTts.setVolume(userController.volumn);
     await flutterTts.setSpeechRate(userController.rate);
@@ -119,7 +119,7 @@ class TtsController extends GetxController {
     await flutterTts.setSpeechRate(userController.rate);
     await flutterTts.setPitch(userController.pitch);
 
-    flutterTts.setLanguage('ja-JP');
+    flutterTts.setLanguage('en-US');
 
     await flutterTts.speak(newWord.yomikata);
     await Future.delayed(const Duration(milliseconds: 150));

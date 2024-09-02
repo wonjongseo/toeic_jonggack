@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/common.dart';
@@ -53,34 +53,44 @@ class _GrammarExampleCardState extends State<GrammarExampleCard> {
                         String temp = widget.examples[widget.index].word;
                         temp = temp.replaceAll('<span class="bold">', '');
                         temp = temp.replaceAll('</span>', '');
-
                         copyWord(temp);
                       },
-                      child: HtmlWidget(
-                        '${widget.index + 1}. $grammarWrod',
-                        textStyle: TextStyle(
-                          fontFamily: AppFonts.japaneseFont,
-                          fontSize: Responsive.height17,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        customStylesBuilder: (element) {
-                          if (element.classes.contains('bold')) {
-                            return {
-                              'color': 'red',
-                              'font-weight': 'bold',
-                            };
-                          }
-                          if (element.toString().contains('rt')) {
-                            return {
-                              // 'color': 'red',
-                              'font-size': 'x-small',
-                              'font-weight': 'bold',
-                            };
-                          }
-                          return null;
+                      child: Html(
+                        data: '${widget.index + 1}. $grammarWrod',
+                        style: {
+                          "*": Style(
+                            margin: Margins.zero,
+                            fontFamily: AppFonts.japaneseFont,
+                            fontWeight: FontWeight.w600,
+                            fontSize: FontSize(Responsive.height17),
+                          )
                         },
                       ),
+                      // child: HtmlWidget(
+                      //   '${widget.index + 1}. $grammarWrod',
+                      //   textStyle: TextStyle(
+                      //     fontFamily: AppFonts.japaneseFont,
+                      //     fontSize: Responsive.height17,
+                      //     color: Colors.black,
+                      //     fontWeight: FontWeight.w600,
+                      //   ),
+                      //   customStylesBuilder: (element) {
+                      //     if (element.classes.contains('bold')) {
+                      //       return {
+                      //         'color': 'red',
+                      //         'font-weight': 'bold',
+                      //       };
+                      //     }
+                      //     if (element.toString().contains('rt')) {
+                      //       return {
+                      //         // 'color': 'red',
+                      //         'font-size': 'x-small',
+                      //         'font-weight': 'bold',
+                      //       };
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                     ),
                     Container(
                       color: Colors.transparent,

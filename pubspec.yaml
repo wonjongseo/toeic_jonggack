@@ -57,9 +57,10 @@ dependencies:
   # avatar_glow: ^3.0.1
   device_info_plus: ^9.1.2
   in_app_review: ^2.0.9
-  flutter_widget_from_html_core: ^0.15.1
+  # flutter_widget_from_html_core: ^0.15.1
   animated_text_kit: ^4.2.2
   confetti: ^0.7.0
+  flutter_html: ^3.0.0-beta.2
 
   # flutter_widget_from_html: ^0.9.1
   # flutter_html: ^2.2.1
@@ -162,3 +163,24 @@ flutter:
           weight: 500
         - asset: assets/fonts/GmarketSansTTFBold.ttf
           weight: 700
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-ThinItalic.ttf
+          weight: 100
+        - asset: assets/fonts/Roboto-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Roboto-Regular.ttf
+          weight: 300
+        - asset: assets/fonts/Roboto-MediumItalic.ttf
+          weight: 400
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-LightItalic.ttf
+          weight: 600
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Roboto-Black.ttf
+          weight: 900

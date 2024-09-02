@@ -84,29 +84,33 @@ class CommonDialog {
     return selectionDialog(
       title: RichText(
         text: TextSpan(
-          text: '다음 단계로 넘어가기 위해서 해당 챕터의\n퀴즈에서',
+          text: '次の段階に行くためにはここのテストから',
           children: [
             TextSpan(
-              text: ' 100점',
+              text: ' 100点',
               style: TextStyle(
                 color: Colors.redAccent,
                 fontSize: Responsive.width18,
               ),
             ),
             const TextSpan(
-              text: '을 맞으셔야 합니다!',
+              text: 'を受ける必要があります。',
             )
           ],
           style: TextStyle(
             color: Colors.black,
             fontSize: Responsive.width16,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
+            fontFamily: AppFonts.japaneseFont,
           ),
         ),
       ),
       connent: const Text(
-        '해당 챕터의 퀴즈를 보시겠습니까?',
-        style: TextStyle(color: AppColors.scaffoldBackground),
+        'テストを受けますか？',
+        style: TextStyle(
+          color: AppColors.scaffoldBackground,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
@@ -135,10 +139,12 @@ class CommonDialog {
 
   static Future<bool> askGoToMyVocaPageDialog(int savedCount) async {
     return selectionDialog(
-      title: Text('단어가 $savedCount개 이상이나 저장되었어요!'),
+      title: Text('自分の単語帳に$savedCount個以上の単語が保存されました！'),
       connent: const Text(
-        '나만의 단어장 페이지로 가서 저장했던 단어를 학습하시겠습니까?',
-        style: TextStyle(color: AppColors.scaffoldBackground),
+        '自分の単語帳に行って、保存した単語を学習しますか？',
+        style: TextStyle(
+          color: AppColors.scaffoldBackground,
+        ),
       ),
     );
   }
@@ -159,7 +165,7 @@ class CommonDialog {
               child: Padding(
                 padding: EdgeInsets.all(Responsive.width15),
                 child: Text(
-                  '네!',
+                  'はい',
                   style: TextStyle(
                     // fontSize: Responsive.height14,
                     fontWeight: FontWeight.w600,
@@ -179,7 +185,7 @@ class CommonDialog {
               child: Padding(
                 padding: EdgeInsets.all(Responsive.width15),
                 child: Text(
-                  '아뇨!',
+                  'いいえ',
                   style: TextStyle(
                     // fontSize: Responsive.height14,
                     fontWeight: FontWeight.w600,
@@ -206,9 +212,9 @@ class CommonDialog {
 
   static Future<bool> askStartToRemainQuestionsDialog() async {
     return selectionDialog(
-      title: const Text('과거의 테스트에서 틀린 문제들이 있습니다.'),
+      title: const Text('以前のテストに間違えった問題があります。'),
       connent: const Text(
-        '틀린 문제만으로 다시 테스트를 보시겠습니까?',
+        '間違えった問題だけでテストをやり直しますか？',
         style: TextStyle(color: AppColors.scaffoldBackground),
       ),
     );
@@ -280,7 +286,7 @@ class CommonDialog {
                     child: Padding(
                       padding: EdgeInsets.all(Responsive.width15),
                       child: Text(
-                        '네!',
+                        'はい',
                         style: TextStyle(
                           // fontSize: Responsive.height14,
                           fontWeight: FontWeight.w600,
@@ -300,7 +306,7 @@ class CommonDialog {
                     child: Padding(
                       padding: EdgeInsets.all(Responsive.width15),
                       child: Text(
-                        '아뇨!',
+                        'いいえ',
                         style: TextStyle(
                           // fontSize: Responsive.height14,
                           fontWeight: FontWeight.w600,
@@ -320,44 +326,6 @@ class CommonDialog {
 
     return result;
   }
-
-  // static Future<bool> alertPreviousTestRequired() async {
-  //   Get.dialog(AlertDialog(
-  //     shape: Border.all(),
-  //     content: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         SizedBox(height: Responsive.height10),
-  //         RichText(
-  //           text: TextSpan(
-  //             text: '다음 단계로 넘어가기 위해서 해당 챕터의\n퀴즈에서',
-  //             children: [
-  //               TextSpan(
-  //                 text: ' 100점',
-  //                 style: TextStyle(
-  //                   color: Colors.redAccent,
-  //                   fontSize: Responsive.width18,
-  //                 ),
-  //               ),
-  //               const TextSpan(
-  //                 text: '을 맞으셔야 합니다!',
-  //               )
-  //             ],
-  //             style: TextStyle(
-  //               color: Colors.black,
-  //               fontSize: Responsive.width16,
-  //               fontWeight: FontWeight.w500,
-  //             ),
-  //           ),
-  //         ),
-  //         SizedBox(height: Responsive.height20),
-  //         const JonggackAvator(),
-  //         SizedBox(height: Responsive.height20),
-  //       ],
-  //     ),
-  //   ));
-  //   return true;
-  // }
 
   static Future<void> appealDownLoadThePaidVersion() async {
     Get.dialog(AlertDialog(

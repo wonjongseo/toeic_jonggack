@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/features/home/widgets/learn_toeic_grammar_screen.dart';
 import 'package:jonggack_toeic_japanese/features/home/widgets/toeic_question_step_screen.dart';
-import 'package:jonggack_toeic_japanese/toeic_question_test_screen.dart';
+import 'package:jonggack_toeic_japanese/features/toeic_chap5/screen/toeic_question_test_screen.dart';
 import 'package:jonggack_toeic_japanese/common/widget/animated_circular_progressIndicator.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/config/theme.dart';
@@ -24,11 +24,11 @@ extension KindOfStudyExtension on KindOfStudy {
   String get value {
     switch (this) {
       case KindOfStudy.BASIC:
-        return '素人';
+        return '文法帳';
       case KindOfStudy.JLPT:
-        return '試験用';
+        return '単語帳';
       case KindOfStudy.MY:
-        return '自分の';
+        return '自分の単語帳';
     }
   }
 }
@@ -276,103 +276,104 @@ class _MyCardsState extends State<MyCards> {
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(builder: (userController) {
       return CarouselSlider(
-          carouselController: carouselController,
-          options: CarouselOptions(
-            disableCenter: true,
-            viewportFraction: userController.user.isPad ? 0.55 : 0.75,
-            enableInfiniteScroll: false,
-            initialPage: _currentIndex,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              _currentIndex = LocalReposotiry.putBasicOrJlptOrMyDetail(
-                  KindOfStudy.MY, index);
+        carouselController: carouselController,
+        options: CarouselOptions(
+          disableCenter: true,
+          viewportFraction: userController.user.isPad ? 0.55 : 0.75,
+          enableInfiniteScroll: false,
+          initialPage: _currentIndex,
+          enlargeCenterPage: true,
+          onPageChanged: (index, reason) {
+            _currentIndex =
+                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, index);
+          },
+          scrollDirection: Axis.horizontal,
+        ),
+        items: [
+          LevelCategoryCard(
+            onTap: () {
+              LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 0);
+              Get.toNamed(
+                MY_VOCA_PATH,
+                arguments: {
+                  MY_VOCA_TYPE: MyVocaEnum.YOKUMATIGAERU_WORD,
+                },
+              );
             },
-            scrollDirection: Axis.horizontal,
+            title: '自分の単語帳①',
+            extraInfo: RichText(
+              text: TextSpan(
+                text: '保存した単語：',
+                children: [
+                  TextSpan(
+                    text: "${userController.user.yokumatigaeruMyWords}",
+                    style: TextStyle(
+                      color: AppColors.mainBordColor,
+                    ),
+                  ),
+                  const TextSpan(text: "個")
+                ],
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: Responsive.width10 * 1.4,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppFonts.japaneseFont,
+                ),
+              ),
+            ),
+            titleSize: Responsive.width10 * 2.3,
+            foot: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '一番アプリに保存した単語を\n学習する単語帳',
+                style: TextStyle(
+                  fontSize: Responsive.height15,
+                ),
+              ),
+            ),
           ),
-          items: [
-            LevelCategoryCard(
-              onTap: () {
-                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 0);
-                Get.toNamed(
-                  MY_VOCA_PATH,
-                  arguments: {
-                    MY_VOCA_TYPE: MyVocaEnum.YOKUMATIGAERU_WORD,
-                  },
-                );
-              },
-              title: '自分の単語帳①',
-              extraInfo: RichText(
-                text: TextSpan(
-                  text: '保存した単語：',
-                  children: [
-                    TextSpan(
-                      text: "${userController.user.yokumatigaeruMyWords}",
-                      style: TextStyle(
-                        color: AppColors.mainBordColor,
-                      ),
+          LevelCategoryCard(
+            onTap: () {
+              LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 1);
+              Get.toNamed(
+                MY_VOCA_PATH,
+                arguments: {MY_VOCA_TYPE: MyVocaEnum.MANUAL_SAVED_WORD},
+              );
+            },
+            title: '自分の単語帳②',
+            titleSize: Responsive.width10 * 2.3,
+            extraInfo: RichText(
+              text: TextSpan(
+                text: '保存した単語：',
+                children: [
+                  TextSpan(
+                    text: "${userController.user.manualSavedMyWords}",
+                    style: TextStyle(
+                      color: AppColors.mainBordColor,
                     ),
-                    const TextSpan(text: "個")
-                  ],
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: Responsive.width10 * 1.4,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: AppFonts.japaneseFont,
                   ),
-                ),
-              ),
-              titleSize: Responsive.width10 * 2.3,
-              foot: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '一番アプリに保存した単語を\n学習する単語帳',
-                  style: TextStyle(
-                    fontSize: Responsive.height15,
-                  ),
+                  const TextSpan(text: "個")
+                ],
+                style: TextStyle(
+                  fontSize: Responsive.width10 * 1.4,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppFonts.japaneseFont,
                 ),
               ),
             ),
-            LevelCategoryCard(
-              onTap: () {
-                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.MY, 1);
-                Get.toNamed(
-                  MY_VOCA_PATH,
-                  arguments: {MY_VOCA_TYPE: MyVocaEnum.MANUAL_SAVED_WORD},
-                );
-              },
-              title: '自分の単語帳②',
-              titleSize: Responsive.width10 * 2.3,
-              extraInfo: RichText(
-                text: TextSpan(
-                  text: '保存した単語：',
-                  children: [
-                    TextSpan(
-                      text: "${userController.user.manualSavedMyWords}",
-                      style: TextStyle(
-                        color: AppColors.mainBordColor,
-                      ),
-                    ),
-                    const TextSpan(text: "個")
-                  ],
-                  style: TextStyle(
-                    fontSize: Responsive.width10 * 1.4,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: AppFonts.japaneseFont,
-                  ),
-                ),
-              ),
-              foot: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'ユーザーが保存して単語を\n学習する単語帳',
-                  style: TextStyle(
-                    fontSize: Responsive.height15,
-                  ),
+            foot: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'ユーザーが保存して単語を\n学習する単語帳',
+                style: TextStyle(
+                  fontSize: Responsive.height15,
                 ),
               ),
             ),
-          ]);
+          ),
+        ],
+      );
     });
   }
 
@@ -416,26 +417,26 @@ class _BasicCardState extends State<BasicCard> {
       onTap: () {
         LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 0);
 
-        // Get.to(() => const HiraganaScreen(category: 'hiragana'));
-        Get.to(() => LearnToeicGrammarScreen());
+        Get.to(() => const LearnToeicGrammarScreen());
       },
       title: '文法学習',
       titleSize: Responsive.width10 * 2.3,
       foot: Text(
-        '英語の文法',
-        style: TextStyle(fontSize: Responsive.height15),
+        'TOEICから高得点するために、知っておかないといけない文法５４個',
+        style: TextStyle(
+          fontSize: Responsive.width14,
+        ),
       ),
     ),
     LevelCategoryCard(
       onTap: () {
         LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 1);
-        Get.to(() =>
-            const ToeicQuestionStepScreen()); // Get.to(() => ToeicQuestionTestScreen());
+        Get.to(() => const ToeicQuestionStepScreen());
       },
       title: 'Chapter５問題帳',
       titleSize: Responsive.width10 * 2.3,
       foot: Text(
-        '왕초보를 위한 카타카나 단어장',
+        'Chapter５の練習問題帳',
         style: TextStyle(fontSize: Responsive.height15),
       ),
     )

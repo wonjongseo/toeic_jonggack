@@ -8,8 +8,6 @@ import 'package:jonggack_toeic_japanese/user/controller/user_controller.dart';
 
 const int maxFailedLoadAttempts = 3;
 
-enum KIND_OF_AD { JLPT, GRAMMAR, KANGI }
-
 class AdController extends GetxController {
   InterstitialAd? _interstitialAd;
   RewardedInterstitialAd? rewardedInterstitialAd;
@@ -17,6 +15,8 @@ class AdController extends GetxController {
   RewardedAd? rewardedAd;
   UserController userController = Get.find<UserController>();
   AdUnitId adUnitId = AdUnitId();
+
+  int _numRewardedLoadAttempts = 0;
 
   AppOpenAd? appOpenAd;
 
@@ -27,11 +27,11 @@ class AdController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // if (!userController.user.isPremieum) {
-    // createInterstitialAd();
-    createRewardedInterstitialAd();
-    // createRewardedAd();
-    // }
+    if (!userController.user.isPremieum) {
+      createInterstitialAd();
+      createRewardedInterstitialAd();
+      createRewardedAd();
+    }
   }
 
   Math.Random random = Math.Random();
@@ -42,27 +42,9 @@ class AdController extends GetxController {
     return randomNumber == 0;
   }
 
-  Future<void> createInterstitialAd(KIND_OF_AD kindOfAd) async {
-    String stringAdUnitId = '';
-
-    switch (kindOfAd) {
-      case KIND_OF_AD.JLPT:
-        stringAdUnitId =
-            adUnitId.jlptInterstitial[GetPlatform.isIOS ? 'ios' : 'android']!;
-        break;
-      case KIND_OF_AD.GRAMMAR:
-        stringAdUnitId = adUnitId
-            .grammarInterstitial[GetPlatform.isIOS ? 'ios' : 'android']!;
-        break;
-      case KIND_OF_AD.KANGI:
-        stringAdUnitId =
-            adUnitId.jlptInterstitial[GetPlatform.isIOS ? 'ios' : 'android']!;
-        break;
-    }
-
-    await InterstitialAd.load(
-      // adUnitId: adUnitId.interstitial[GetPlatform.isIOS ? 'ios' : 'android']!,
-      adUnitId: stringAdUnitId,
+  void createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: adUnitId.interstitial[GetPlatform.isIOS ? 'ios' : 'android']!,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
@@ -76,14 +58,11 @@ class AdController extends GetxController {
     );
   }
 
-  void showIntersistialAd(KIND_OF_AD kindOfAd) async {
-    // if (userController.isUserPremieum()) {
-    //   return;
-    // }
-
-    log('${kindOfAd.name} showIntersistialAd');
-
-    await createInterstitialAd(kindOfAd);
+  void showIntersistialAd() {
+    if (userController.user.isPremieum) {
+      return;
+    }
+    log('showIntersistialAd');
     if (_interstitialAd == null) return;
 
     _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
@@ -91,14 +70,14 @@ class AdController extends GetxController {
       onAdDismissedFullScreenContent: (ad) {
         log('onAdDismissedFullScreenContent');
         ad.dispose();
-        createInterstitialAd(kindOfAd);
+        createInterstitialAd();
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         log('onAdFailedToShowFullScreenContent');
 
         ad.dispose();
 
-        createInterstitialAd(kindOfAd);
+        createInterstitialAd();
       },
     );
 
@@ -107,9 +86,9 @@ class AdController extends GetxController {
   }
 
   void createRewardedInterstitialAd() {
-    // if (userController.user.isPremieum) {
-    //   return;
-    // }
+    if (userController.user.isPremieum) {
+      return;
+    }
     log('createRewardedInterstitialAd');
     RewardedInterstitialAd.load(
         adUnitId: adUnitId
@@ -163,61 +142,61 @@ class AdController extends GetxController {
     rewardedInterstitialAd = null;
   }
 
-  // void createRewardedAd() {
-  //   if (userController.user.isPremieum) {
-  //     return;
-  //   }
-  //   log('createRewardedAd');
-  //   RewardedAd.load(
-  //       adUnitId: adUnitId.rewarded[GetPlatform.isIOS ? 'ios' : 'android']!,
-  //       request: const AdRequest(),
-  //       rewardedAdLoadCallback: RewardedAdLoadCallback(
-  //         onAdLoaded: (RewardedAd ad) {
-  //           log('$ad loaded.');
-  //           rewardedAd = ad;
-  //           _numRewardedLoadAttempts = 0;
-  //         },
-  //         onAdFailedToLoad: (LoadAdError error) {
-  //           log('RewardedAd failed to load: $error');
-  //           rewardedAd = null;
-  //           _numRewardedLoadAttempts += 1;
-  //           if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
-  //             createRewardedAd();
-  //           }
-  //         },
-  //       ));
-  // }
+  void createRewardedAd() {
+    if (userController.user.isPremieum) {
+      return;
+    }
+    log('createRewardedAd');
+    RewardedAd.load(
+        adUnitId: adUnitId.rewarded[GetPlatform.isIOS ? 'ios' : 'android']!,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            log('$ad loaded.');
+            rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            log('RewardedAd failed to load: $error');
+            rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
+              createRewardedAd();
+            }
+          },
+        ));
+  }
 
-  // void showRewardedAd() {
-  //   if (userController.user.isPremieum) {
-  //     return;
-  //   }
-  //   log('showRewardedAd');
-  //   if (rewardedAd == null) {
-  //     log('Warning: attempt to show rewarded before loaded.');
-  //     return;
-  //   }
-  //   rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-  //     onAdShowedFullScreenContent: (RewardedAd ad) =>
-  //         log('ad onAdShowedFullScreenContent.'),
-  //     onAdDismissedFullScreenContent: (RewardedAd ad) {
-  //       log('$ad onAdDismissedFullScreenContent.');
-  //       ad.dispose();
-  //       createRewardedAd();
-  //     },
-  //     onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-  //       log('$ad onAdFailedToShowFullScreenContent: $error');
-  //       ad.dispose();
-  //       createRewardedAd();
-  //     },
-  //   );
+  void showRewardedAd() {
+    if (userController.user.isPremieum) {
+      return;
+    }
+    log('showRewardedAd');
+    if (rewardedAd == null) {
+      log('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          log('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        log('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        log('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createRewardedAd();
+      },
+    );
 
-  //   rewardedAd!.setImmersiveMode(true);
-  //   rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-  //     log('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-  //   });
-  //   rewardedAd = null;
-  // }
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      log('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+    });
+    rewardedAd = null;
+  }
 
   @override
   void onClose() {

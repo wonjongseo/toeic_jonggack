@@ -3,11 +3,11 @@ import 'package:jonggack_toeic_japanese/config/colors.dart';
 
 class AppFonts {
   // static const nanumGothic = 'NanumGothic';
-  static const nanumGothic = 'GMarket';
+  // static const nanumGothic = 'GMarket';
   static const japaneseFont = 'NotoSerifJP';
-  static const descriptionFont = japaneseFont;
+  // static const RobotoFont = 'Roboto';
   // static const gMaretFont = 'GMarket';
-  static const gMaretFont = 'GMarket';
+  // static const gMaretFont = 'GMarket';
 }
 
 class AppThemings {
@@ -21,7 +21,7 @@ class AppThemings {
     textTheme: ThemeData.dark()
         .textTheme
         .apply(
-          fontFamily: AppFonts.gMaretFont,
+          fontFamily: AppFonts.japaneseFont,
           bodyColor: Colors.white,
           displayColor: Colors.amber,
           decorationColor: Colors.white,
@@ -44,7 +44,7 @@ class AppThemings {
           labelSmall: darkTextStyle,
         ),
     primaryTextTheme:
-        ThemeData.dark().textTheme.apply(fontFamily: AppFonts.nanumGothic),
+        ThemeData.dark().textTheme.apply(fontFamily: AppFonts.japaneseFont),
     scaffoldBackgroundColor: AppColors.scaffoldBackground,
     appBarTheme: const AppBarTheme(
       color: Colors.transparent,
@@ -52,7 +52,7 @@ class AppThemings {
         color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 18,
-        fontFamily: AppFonts.gMaretFont,
+        fontFamily: AppFonts.japaneseFont,
       ),
       iconTheme: IconThemeData(
         color: Colors.black,
@@ -79,7 +79,7 @@ class AppThemings {
     textTheme: ThemeData.light()
         .textTheme
         .apply(
-          fontFamily: AppFonts.gMaretFont,
+          fontFamily: AppFonts.japaneseFont,
           bodyColor: Colors.white,
           displayColor: Colors.amber,
           decorationColor: Colors.white,
@@ -102,7 +102,7 @@ class AppThemings {
           labelSmall: lightTextStyle,
         ),
     primaryTextTheme:
-        ThemeData.light().textTheme.apply(fontFamily: AppFonts.nanumGothic),
+        ThemeData.light().textTheme.apply(fontFamily: AppFonts.japaneseFont),
     scaffoldBackgroundColor: Colors.grey.shade200,
     appBarTheme: const AppBarTheme(
       color: Colors.transparent,
@@ -111,7 +111,7 @@ class AppThemings {
         color: Colors.black,
         fontWeight: FontWeight.bold,
         // fontSize: 18,
-        fontFamily: AppFonts.gMaretFont,
+        fontFamily: AppFonts.japaneseFont,
       ),
       iconTheme: IconThemeData(
         color: Colors.black,

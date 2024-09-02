@@ -26,7 +26,7 @@ class SettingScreen extends StatelessWidget {
         if (settingController.isInitial) {
           Get.dialog(const AlertDialog(
             content: Text(
-              '앱을 종료 후 다시 켜주세요.',
+              'アプリを終了して開き直してください。',
               style: TextStyle(
                 color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
@@ -50,21 +50,14 @@ class SettingScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (isSettingPage) ...[
-                    SettingSwitch(
-                      isOn: settingController.isTestKeyBoard,
-                      onChanged: (value) =>
-                          settingController.flipTestKeyBoard(),
-                      text: 'JLPT단어 테스트 키보드 활성화',
-                    ),
-                    const Divider(),
                     GetBuilder<UserController>(builder: (controller) {
                       return Column(
                         children: [
                           SoundSettingSlider(
                             activeColor: Colors.redAccent,
-                            option: '음량',
+                            option: '音量',
                             value: userController.volumn,
-                            label: '음량: ${userController.volumn}',
+                            label: '音量：${userController.volumn}',
                             onChangeEnd: (value) {
                               userController.updateSoundValues(
                                   SOUND_OPTIONS.VOLUMN, value);
@@ -76,9 +69,9 @@ class SettingScreen extends StatelessWidget {
                           ),
                           SoundSettingSlider(
                             activeColor: Colors.blueAccent,
-                            option: '음조',
+                            option: '音調',
                             value: userController.pitch,
-                            label: '음조: ${userController.pitch}',
+                            label: '音調：${userController.pitch}',
                             onChangeEnd: (value) {
                               userController.updateSoundValues(
                                   SOUND_OPTIONS.PITCH, value);
@@ -90,9 +83,9 @@ class SettingScreen extends StatelessWidget {
                           ),
                           SoundSettingSlider(
                             activeColor: Colors.deepPurpleAccent,
-                            option: '속도',
+                            option: '速さ',
                             value: userController.rate,
-                            label: '속도: ${userController.rate}',
+                            label: '速さ：${userController.rate}',
                             onChangeEnd: (value) {
                               userController.updateSoundValues(
                                   SOUND_OPTIONS.RATE, value);
@@ -134,7 +127,7 @@ class SettingScreen extends StatelessWidget {
                     ),
                   ],
                   SettingButton(
-                    text: '나만의 단어 초기화',
+                    text: '自分の単語帳を初期化',
                     onPressed: () async {
                       if (await settingController.initMyWords()) {
                         settingController.successDeleteAndQuitApp();
@@ -152,7 +145,7 @@ class SettingScreen extends StatelessWidget {
 
   AppBar _appBar(SettingController settingController, bool isSettingPage) {
     return AppBar(
-      title: Text(isSettingPage ? '설정' : '데이터 초기화'),
+      title: Text(isSettingPage ? '設定' : '데이터 초기화'),
     );
   }
 }

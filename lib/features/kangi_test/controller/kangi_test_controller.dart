@@ -73,17 +73,17 @@ class KangiTestController extends GetxController
 
   int step = 0;
   bool isAnswered1 = false;
-  bool isAnswered2 = false;
-  bool isAnswered3 = false;
+  // bool isAnswered2 = false;
+  // bool isAnswered3 = false;
 
   // 정답 인덱스 -> 인덱스 말고 문자열이 같은지 비교할 거임
   String correctAns = '';
-  String correctAns2 = '';
-  String correctAns3 = '';
+  // String correctAns2 = '';
+  // String correctAns3 = '';
   // 선택된 문제 인덱스 -> 인덱스 말고 문자열이 같은지 비교할 거임.
   late String selectedAns;
-  late String selectedAns2;
-  late String selectedAns3;
+  // late String selectedAns2;
+  // late String selectedAns3;
 
   // 현재 인덱스
   RxInt questionNumber = 1.obs;
@@ -180,18 +180,19 @@ class KangiTestController extends GetxController
       selectedAns = selectedIndex;
       isAnswered1 = true;
     }
-    if (type == 'undoc') {
-      correctAns2 = question.question.yomikata.split('@')[0];
-      selectedAns2 = selectedIndex;
-      isAnswered2 = true;
-    } else if (type == 'hundoc') {
-      correctAns3 = question.question.yomikata.split('@')[1];
-      selectedAns3 = selectedIndex;
-      isAnswered3 = true;
-    }
+    // if (type == 'undoc') {
+    //   correctAns2 = question.question.yomikata.split('@')[0];
+    //   selectedAns2 = selectedIndex;
+    //   isAnswered2 = true;
+    // } else if (type == 'hundoc') {
+    //   correctAns3 = question.question.yomikata.split('@')[1];
+    //   selectedAns3 = selectedIndex;
+    //   isAnswered3 = true;
+    // }
 
     // 운독, 훈독, 읽는 법 중 하나라도 채크가 안됬으면  리턴.
-    if (!(isAnswered1 && isAnswered2 && isAnswered3)) {
+    // if (!(isAnswered1 && isAnswered2 && isAnswered3)) {
+    if (!(isAnswered1)) {
       return;
     } else {
       isDisTouchable = true;
@@ -202,9 +203,8 @@ class KangiTestController extends GetxController
       if (isKangiSubject) {
         selectedAns = '';
       }
-      if (correctAns == selectedAns &&
-          correctAns2 == selectedAns2 &&
-          correctAns3 == selectedAns3) {
+      // if (correctAns == selectedAns && correctAns2 == selectedAns2 &&correctAns3 == selectedAns3)
+      if (correctAns == selectedAns) {
         text = 'skip';
         numOfCorrectAns++;
         color = Colors.blue;
@@ -233,8 +233,8 @@ class KangiTestController extends GetxController
   void skipQuestion() {
     isDisTouchable = false;
     isAnswered1 = true;
-    isAnswered2 = true;
-    isAnswered3 = true;
+    // isAnswered2 = true;
+    // isAnswered3 = true;
     animationController.stop();
     saveWrongQuestion();
     isWrong = true;
@@ -249,15 +249,16 @@ class KangiTestController extends GetxController
 
     // 테스트 문제가 남아 있으면.
     if (questionNumber.value != questions.length) {
-      if (!(isAnswered1 && isAnswered2 && isAnswered3)) {
+      //
+      if (!(isAnswered1)) {
         saveWrongQuestion();
       }
       isWrong = false;
       text = 'skip';
       color = Colors.black;
       isAnswered1 = false;
-      isAnswered2 = false;
-      isAnswered3 = false;
+      // isAnswered2 = false;
+      // isAnswered3 = false;
 
       pageController.nextPage(
           duration: const Duration(milliseconds: 250), curve: Curves.ease);
