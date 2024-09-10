@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future setting() async {
     await initNotification();
-    await settingFunctions();
 
     await setAppReviewRequest();
   }
@@ -58,56 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   SettingController settingController = Get.find<SettingController>();
-
-  Future settingFunctions() async {
-    bool isSeen = LocalReposotiry.isSeenHomeTutorial();
-
-    if (!isSeen) {
-      bool isKeyBoardActive =
-          await CommonDialog.askSetSubjectQuestionOfJlptTestDialog();
-
-      if (isKeyBoardActive) {
-        if (!settingController.isTestKeyBoard) {
-          settingController.flipTestKeyBoard();
-        }
-      } else {
-        if (settingController.isTestKeyBoard) {
-          settingController.flipTestKeyBoard();
-        }
-      }
-
-      Get.closeAllSnackbars();
-      Get.snackbar(
-        '초기 설정이 완료 되었습니다.',
-        '해당 설정들은 설정 페이지에서 재설정 할 수 있습니다.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.whiteGrey.withOpacity(0.5),
-        duration: const Duration(seconds: 4),
-        animationDuration: const Duration(seconds: 2),
-      );
-    }
-    // TODO 살리기
-    bool isNeedUpdateAllData = LocalReposotiry.getIsNeedUpdateAllData();
-
-    // await CommonDialog.askToDeleteAllDataForUpdateDatas();
-    if (isNeedUpdateAllData) {
-      bool a = await CommonDialog.askToDeleteAllDataForUpdateDatas();
-      if (a) {
-        // LocalReposotiry.putAllDataUpdate(true);
-        settingController.allDataDelete();
-      } else {
-        bool secondQuestion = await CommonDialog.askToDeleteAllDataOneMore();
-
-        if (secondQuestion) {
-          settingController.allDataDelete();
-        } else {
-          // LocalReposotiry.putAllDataUpdate(false);
-        }
-      }
-
-      LocalReposotiry.putIsNeedUpdateAllData(false);
-    }
-  }
 
   @override
   void initState() {

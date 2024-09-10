@@ -1,5 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/common/common.dart';
+import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
+import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
+import 'package:jonggack_toeic_japanese/config/colors.dart';
+import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/user/controller/user_controller.dart';
 import '../../../common/admob/banner_ad/global_banner_admob.dart';
 import '../services/setting_controller.dart';
@@ -40,105 +47,145 @@ class SettingScreen extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView _body(
-      UserController userController, bool isSettingPage) {
-    return SingleChildScrollView(
-      child: Center(
-        child: GetBuilder<SettingController>(
-          builder: (settingController) {
-            return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (isSettingPage) ...[
-                    GetBuilder<UserController>(builder: (controller) {
-                      return Column(
-                        children: [
-                          SoundSettingSlider(
-                            activeColor: Colors.redAccent,
-                            option: '音量',
-                            value: userController.volumn,
-                            label: '音量：${userController.volumn}',
-                            onChangeEnd: (value) {
-                              userController.updateSoundValues(
-                                  SOUND_OPTIONS.VOLUMN, value);
-                            },
-                            onChanged: (value) {
-                              userController.onChangedSoundValues(
-                                  SOUND_OPTIONS.VOLUMN, value);
-                            },
-                          ),
-                          SoundSettingSlider(
-                            activeColor: Colors.blueAccent,
-                            option: '音調',
-                            value: userController.pitch,
-                            label: '音調：${userController.pitch}',
-                            onChangeEnd: (value) {
-                              userController.updateSoundValues(
-                                  SOUND_OPTIONS.PITCH, value);
-                            },
-                            onChanged: (value) {
-                              userController.onChangedSoundValues(
-                                  SOUND_OPTIONS.PITCH, value);
-                            },
-                          ),
-                          SoundSettingSlider(
-                            activeColor: Colors.deepPurpleAccent,
-                            option: '速さ',
-                            value: userController.rate,
-                            label: '速さ：${userController.rate}',
-                            onChangeEnd: (value) {
-                              userController.updateSoundValues(
-                                  SOUND_OPTIONS.RATE, value);
-                            },
-                            onChanged: (value) {
-                              userController.onChangedSoundValues(
-                                  SOUND_OPTIONS.RATE, value);
-                            },
-                          ),
-                        ],
-                      );
-                    }),
-                  ] else ...[
-                    // if (!kReleaseMode) ...[
+  Widget _body(UserController userController, bool isSettingPage) {
+    return Center(
+      child: GetBuilder<SettingController>(
+        builder: (settingController) {
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GetBuilder<UserController>(builder: (controller) {
+                  return Column(
+                    children: [
+                      SoundSettingSlider(
+                        activeColor: Colors.redAccent,
+                        option: '音量',
+                        value: userController.volumn,
+                        label: '音量：${userController.volumn}',
+                        onChangeEnd: (value) {
+                          userController.updateSoundValues(
+                              SOUND_OPTIONS.VOLUMN, value);
+                        },
+                        onChanged: (value) {
+                          userController.onChangedSoundValues(
+                              SOUND_OPTIONS.VOLUMN, value);
+                        },
+                      ),
+                      SoundSettingSlider(
+                        activeColor: Colors.blueAccent,
+                        option: '音調',
+                        value: userController.pitch,
+                        label: '音調：${userController.pitch}',
+                        onChangeEnd: (value) {
+                          userController.updateSoundValues(
+                              SOUND_OPTIONS.PITCH, value);
+                        },
+                        onChanged: (value) {
+                          userController.onChangedSoundValues(
+                              SOUND_OPTIONS.PITCH, value);
+                        },
+                      ),
+                      SoundSettingSlider(
+                        activeColor: Colors.deepPurpleAccent,
+                        option: '速さ',
+                        value: userController.rate,
+                        label: '速さ：${userController.rate}',
+                        onChangeEnd: (value) {
+                          userController.updateSoundValues(
+                              SOUND_OPTIONS.RATE, value);
+                        },
+                        onChanged: (value) {
+                          userController.onChangedSoundValues(
+                              SOUND_OPTIONS.RATE, value);
+                        },
+                      ),
+                    ],
+                  );
+                }),
+                SettingButton(
+                  text: '自分の単語帳を初期化',
+                  onPressed: () async {
+                    if (await settingController.initMyWords()) {
+                      settingController.successDeleteAndQuitApp();
+                    }
+                  },
+                ),
+                const Spacer(),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.mail),
+                        TextButton(
+                          onPressed: () async {
+                            // Get.back();
 
-                    SettingButton(
-                      onPressed: () async {
-                        if (await settingController.initJlptWord()) {
-                          settingController.successDeleteAndQuitApp();
-                        }
-                      },
-                      text: '일본어 단어 초기화',
+                            String body = """
+    
+    ⭐️ 【希望の機能を提供する】
+    
+    
+    ==========================
+    
+    ⭐️ [バグ・エラーの提供]
+    
+    🔸 バグ・エラーの提供が発生したページ：　  
+       例) Chapter５問題長のページ
+    
+    🔸 バグ・エラーの内容
+       例) 次の問題に移動できない
+    
+    
+    ==========================
+    
+    ▪️イメージを添付して頂ければ、バグ・エラーを修正するのに大きな助けになります！！▪️
+                """;
+
+                            final Email email = Email(
+                              body: body,
+                              subject: '【一番TOEIC】希望の機能を提供',
+                              recipients: ['visionwill3322@gmail.com'],
+                              isHTML: false,
+                            );
+                            try {
+                              await FlutterEmailSender.send(email);
+                            } catch (e) {
+                              bool result =
+                                  await CommonDialog.errorNoEnrolledEmail();
+                              if (result) {
+                                copyWord('visionwill3322@gmail.com');
+                              }
+                            }
+                          },
+                          child: Text(
+                            '希望の機能又はバグ・エラーの提供',
+                            style: TextStyle(
+                              fontFamily: AppFonts.japaneseFont,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Responsive.width14,
+                              color: AppColors.scaffoldBackground,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SettingButton(
-                      onPressed: () async {
-                        if (await settingController.initkangi()) {
-                          settingController.successDeleteAndQuitApp();
-                        }
-                      },
-                      text: '한자 초기화',
-                    ),
-                    SettingButton(
-                      onPressed: () async {
-                        if (await settingController.initGrammar()) {
-                          settingController.successDeleteAndQuitApp();
-                        }
-                      },
-                      text: '문법 초기화',
+                    AutoSizeText(
+                      '提供は開発者に大きな助けになります！',
+                      style: TextStyle(
+                        fontFamily: AppFonts.japaneseFont,
+                        fontSize: Responsive.width14,
+                        color: AppColors.scaffoldBackground,
+                      ),
+                      maxLines: 1,
                     ),
                   ],
-                  SettingButton(
-                    text: '自分の単語帳を初期化',
-                    onPressed: () async {
-                      if (await settingController.initMyWords()) {
-                        settingController.successDeleteAndQuitApp();
-                      }
-                    },
-                  ),
-                ]
-                // ],
-                );
-          },
-        ),
+                ),
+                const Spacer(),
+              ]
+              // ],
+              );
+        },
       ),
     );
   }

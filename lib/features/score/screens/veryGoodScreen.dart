@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jonggack_toeic_japanese/common/admob/banner_ad/global_banner_admob.dart';
 import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
+import 'package:jonggack_toeic_japanese/config/theme.dart';
 
 class VeryGoodScreen extends StatelessWidget {
   const VeryGoodScreen({super.key});
@@ -66,20 +67,20 @@ class _CelebrationScreenState extends State<CelebrationScreen> {
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: '축하합니다!\n',
+                text: 'おめでとうございます！!\n',
                 children: [
                   TextSpan(
-                    text: '100점',
+                    text: '100点',
                     style: TextStyle(
                       fontSize: Responsive.height30 * 1.5,
                       color: Colors.redAccent,
                     ),
                   ),
                   const TextSpan(
-                    text: '입니다!!\n\n',
+                    text: 'です！！\n\n',
                   ),
                   TextSpan(
-                    text: 'JLPT합격까지 한 발자국 나아가셨습니다.\n조금만 더 화이팅합시다~',
+                    text: 'TOEICの満点まで、一歩前進しました！\nもっと頑張りましょう！',
                     style: TextStyle(
                       fontSize: Responsive.height18,
                       fontWeight: FontWeight.bold,
@@ -91,6 +92,7 @@ class _CelebrationScreenState extends State<CelebrationScreen> {
                   fontSize: Responsive.height30,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
+                  fontFamily: AppFonts.japaneseFont,
                 ),
               ),
             ),

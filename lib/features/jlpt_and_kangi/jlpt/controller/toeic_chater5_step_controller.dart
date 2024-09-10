@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
-import 'package:jonggack_toeic_japanese/features/jlpt_study/screens/jlpt_study_sceen.dart';
 import 'package:jonggack_toeic_japanese/model/toeic_question.dart';
 import 'package:jonggack_toeic_japanese/model/toeic_question_step.dart';
 import 'package:jonggack_toeic_japanese/repository/local_repository.dart';
@@ -16,9 +15,7 @@ import '../../../../model/Question.dart';
 import '../../../../user/controller/user_controller.dart';
 
 class ToeicQuestionStepController extends GetxController {
-  int currChapNumber = 0;
-
-  String getTestProgress(int indexOfStep) {
+  String getTestProgressText(int indexOfStep) {
     if (jlptSteps[indexOfStep].isFinished == null) {
       return 'テスト前';
     } else {
@@ -71,23 +68,30 @@ class ToeicQuestionStepController extends GetxController {
 
   int inStep = 0;
   void getToTestScreen(int newInStep) async {
+    LocalReposotiry.putCurrentProgressing(
+        'Chapter5-OutStep-Index-$outStep', newInStep);
+
     // outStep = indexOfStep;
     inStep = newInStep;
 
     changeIsFinishedState();
 
-    if (getJlptStep().wrongToeicQuestions.isNotEmpty) {
-      isOnlyWrongQuestion = await CommonDialog.alertPreviousTestRequired();
+    if (getJlptStep().wrongToeicQuestions.isNotEmpty &&
+        getJlptStep().wrongToeicQuestions.length !=
+            getJlptStep().toeicQuestions.length) {
+      isOnlyWrongQuestion =
+          await CommonDialog.askStartToRemainQuestionsDialog();
+    } else {
+      isOnlyWrongQuestion = false;
     }
     if (isOnlyWrongQuestion) {
-      jlptSteps[inStep].toeicQuestions =
-          jlptSteps[inStep].toeicQuestions.where((e) {
-        if (e.wasCorrected == true) {
-          return false;
-        }
-        return true;
-      }).toList();
+      questions = getJlptStep().wrongToeicQuestions;
+
+      ToeicQuestionStepRepositroy.updateToeicQuestionStep('1', getJlptStep());
+    } else {
+      questions = getJlptStep().toeicQuestions;
     }
+    getJlptStep().wrongToeicQuestions = [];
 
     // questions;
     update();
@@ -116,7 +120,11 @@ class ToeicQuestionStepController extends GetxController {
     totalStepCount = jlptStepRepositroy.getStepTotalCount(level);
     //TODO
     // get last Step Index
-    outStep = 0;
+    outStep = LocalReposotiry.getCurrentProgressing('Chapter5-OutStep-Index');
+
+    inStep = LocalReposotiry.getCurrentProgressing(
+        'Chapter5-OutStep-Index-${outStep}');
+
     setOutStep(outStep.toString());
   }
 
@@ -135,7 +143,8 @@ class ToeicQuestionStepController extends GetxController {
     update();
     ToeicQuestionStepRepositroy.updateToeicQuestionStep(
         level, jlptSteps[outStep]);
-    userController.updateCurrentProgress(TotalProgressType.JLPT, level, -score);
+    userController.updateCurrentProgress(
+        TotalProgressType.GRAMMAR, level, -score);
   }
 
   void updateScore(int score) {
@@ -144,7 +153,7 @@ class ToeicQuestionStepController extends GetxController {
 
     if (previousScore != 0) {
       userController.updateCurrentProgress(
-          TotalProgressType.JLPT, level, -previousScore);
+          TotalProgressType.GRAMMAR, level, -previousScore);
     }
 
     score = score + previousScore;
@@ -161,14 +170,14 @@ class ToeicQuestionStepController extends GetxController {
     // jlptSteps[step].wrongQestion = wrongQestion;
     jlptSteps[inStep].scores = score;
 
-    update();
-
     ToeicQuestionStepRepositroy.updateToeicQuestionStep(
       level,
       jlptSteps[inStep],
     );
-    userController.updateCurrentProgress(TotalProgressType.JLPT, level, score);
+    userController.updateCurrentProgress(
+        TotalProgressType.GRAMMAR, level, score);
 
+    update();
     // 처음 보던가
   }
 
@@ -177,20 +186,20 @@ class ToeicQuestionStepController extends GetxController {
   }
 
   ToeicQuestion getToeicQuestion(int indexOfQuestion) {
-    return jlptSteps[inStep].toeicQuestions[indexOfQuestion];
+    return questions[indexOfQuestion];
   }
 
-  void setOutStep(String headTitle) {
+  void setOutStep(String outStep) {
     //TODO
-    inStep = 0;
-    this.headTitle = headTitle;
 
-    jlptSteps = jlptStepRepositroy.getJlptStepByHeadTitle(level, headTitle);
+    this.headTitle = outStep;
 
-    currChapNumber =
-        LocalReposotiry.getCurrentProgressing('Japaneses-$level-$headTitle');
+    jlptSteps = jlptStepRepositroy.getJlptStepByHeadTitle(level, outStep);
 
-    setStep(int.parse(headTitle));
+    LocalReposotiry.putCurrentProgressing(
+        'Chapter5-OutStep-Index', int.parse(outStep));
+
+    setStep(int.parse(outStep));
     update();
   }
 
@@ -224,143 +233,20 @@ class ToeicQuestionStepController extends GetxController {
     );
   }
 
-  void sss() {
-    currChapNumber = 3;
-    update();
-  }
-
   //  ABOUT TEST
   int currentPageIndex = 0;
-  late PageController pageController =
-      PageController(initialPage: currentPageIndex);
-}
 
-class ToeicQuestionTestController extends GetxController {
-  late AnimationController anmationController;
-  bool isFlipped = false;
-  int indexOfQuestion = 0;
-  int currentPageIndex = 0;
-  late PageController pageController =
-      PageController(initialPage: currentPageIndex);
-
-  int selectedIndex2 = -1;
-  bool isSubmitted = false;
-  int isProgrssing = 0;
-  bool isCorrect = false;
-  String selectedAnswer = '';
-
-  int countOfCorrectQuestion = 10;
-  bool isOpenDescription = false;
-
-  ToeicQuestionStepController toeicQuestionStepController =
-      Get.find<ToeicQuestionStepController>();
-
-  String actionString() {
-    return isLastQuestion() ? '提出' : '次へ';
+  @override
+  void onInit() {
+    super.onInit();
+    pageController = PageController(initialPage: currentPageIndex);
   }
 
-  void flipCard() {
-    if (isFlipped) {
-      anmationController.reverse();
-    } else {
-      anmationController.forward();
-    }
-    isFlipped = !isFlipped;
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
   }
 
-  void onPageChanged(value) {
-    isSubmitted = false;
-    isCorrect = false;
-    selectedAnswer = '';
-    currentPageIndex = value;
-    isOpenDescription = false;
-
-    if (isFlipped) {
-      anmationController.reverse();
-    }
-
-    indexOfQuestion = indexOfQuestion + 1;
-    update();
-  }
-
-  // bool isFlipped = false;
-
-  void clickOneOfTheAnswers(int clickedIndex) {
-    if (isSubmitted == false) {
-      isSubmitted = true;
-      selectedIndex2 = clickedIndex;
-
-      update();
-      ToeicQuestion toeicQuestion =
-          toeicQuestionStepController.getToeicQuestion(indexOfQuestion);
-      selectedAnswer = toeicQuestion.answers[clickedIndex];
-
-      if (selectedAnswer.contains(toeicQuestion.answer)) {
-        isCorrect = true;
-      } else {
-        isCorrect = false;
-      }
-
-      toeicQuestion.wasCorrected = isCorrect;
-
-      if (toeicQuestion.wasCorrected == false) {
-        toeicQuestionStepController
-            .getJlptStep()
-            .wrongToeicQuestions
-            .add(toeicQuestion);
-      }
-
-      if (isLastQuestion()) {
-        toeicQuestionStepController.updateScore(countOfCorrectQuestion);
-        // ToeicQuestionStepRepositroy.updateToeicQuestionStep(
-        //     '1', toeicQuestionStepController.getJlptStep());
-        // updateToeicQuestionStep
-        return;
-      }
-
-      update();
-      // isSubmitted = false;
-    }
-  }
-
-  void submit() {
-    toeicQuestionStepController.changeIsFinishedState();
-
-    Get.off(
-      () => ToeicScoreScreen(
-        wrongToeicQuestions:
-            toeicQuestionStepController.getJlptStep().wrongToeicQuestions,
-      ),
-    );
-  }
-
-  bool isLastQuestion() {
-    return indexOfQuestion + 1 >=
-        toeicQuestionStepController.getJlptStep().toeicQuestions.length;
-  }
-
-  FontWeight? getFontWeight(ToeicQuestion tChapter, int index2) {
-    Color? color = getColor(index2);
-    if (color == null || color! == Colors.black) {
-      return null;
-    } else {
-      return FontWeight.bold;
-    }
-  }
-
-  Color? getColor(int index2) {
-    if (selectedAnswer == '') {
-      return null;
-    } else {
-      ToeicQuestion toeicQuestion =
-          toeicQuestionStepController.getToeicQuestion(indexOfQuestion);
-      selectedAnswer = toeicQuestion.answers[index2];
-      if (selectedAnswer.contains(toeicQuestion.answer)) {
-        return AppColors.mainBordColor;
-      } else if (index2 == selectedIndex2) {
-        return Colors.red;
-      }
-    }
-    return Colors.black;
-  }
+  late PageController pageController;
 }

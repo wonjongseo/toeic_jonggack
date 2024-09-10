@@ -25,6 +25,9 @@ class ToeicQuestion {
   @HiveField(7) // null = 안품 , false = unCorrect  , true == correct
   bool? wasCorrected;
 
+  @HiveField(8)
+  DateTime? lateUpdate;
+
   ToeicQuestion({
     required this.id,
     required this.question,

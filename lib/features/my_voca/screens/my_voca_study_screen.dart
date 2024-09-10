@@ -70,7 +70,7 @@ class _MyVocaStduySCreenState extends State<MyVocaStduySCreen> {
                       child: Card(
                         child: Center(
                           child: Text(
-                            '퀴즈 풀러 가기!',
+                            'テストに挑戦！',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.cyan.shade600,

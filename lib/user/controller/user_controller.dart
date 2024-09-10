@@ -26,7 +26,6 @@ enum SOUND_OPTIONS { VOLUMN, PITCH, RATE }
 
 class UserController extends GetxController {
   late TextEditingController textEditingController;
-  String selectedDropDownItem = 'japanese';
   List<Word>? searchedWords;
   List<Kangi>? searchedKangis;
   List<Grammar>? searchedGrammar;
@@ -58,7 +57,12 @@ class UserController extends GetxController {
   Future<void> sendQuery() async {
     query = textEditingController.text;
     query = query.trim();
+    print('query : ${query}');
+    print('query.length : ${query.length}');
+
     if (query.isEmpty || query == '') {
+      return;
+    } else if (query.length < 2) {
       return;
     }
 
@@ -91,11 +95,6 @@ class UserController extends GetxController {
   void changeuserTric(bool premieum) {
     user.isTrik = premieum;
     userRepository.updateUser(user);
-    update();
-  }
-
-  void changeDropDownButtonItme(String? v) {
-    selectedDropDownItem = v!;
     update();
   }
 

@@ -22,7 +22,7 @@ class ToeicQuestionStepRepositroy {
   }
 
   static Future<int> init(String nLevel) async {
-    log('JlptStepRepositroy ${nLevel}N init');
+    log('ToeicQuestionStepRepositroy ${nLevel}N init');
 
     final box = Hive.box(ToeicQuestionStep.boxKey);
 
@@ -65,7 +65,6 @@ class ToeicQuestionStepRepositroy {
 
         String boxKey = '$nLevel-$day-$stepCount';
         await box.put(boxKey, tempJlptStep);
-        print('boxKey : ${boxKey}');
         stepCount++;
       }
       String stepCountKey = '$nLevel-$day';
@@ -108,7 +107,6 @@ class ToeicQuestionStepRepositroy {
 
     String key =
         '$nLevel-${updateToeciQuestion.headTitle}-${updateToeciQuestion.step}';
-    print('key : ${key}');
 
     box.put(key, updateToeciQuestion);
   }

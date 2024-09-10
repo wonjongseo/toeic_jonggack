@@ -31,7 +31,7 @@ class LocalReposotiry {
     }
 
     if (!Hive.isAdapterRegistered(toeicChater5StepTypeId)) {
-      Hive.registerAdapter(ToeicChapter5StepAdapter());
+      Hive.registerAdapter(ToeicQuestionStepAdapter());
     }
 //
     if (!Hive.isAdapterRegistered(UserTypeId)) {
@@ -144,10 +144,6 @@ class LocalReposotiry {
       log("await Hive.openBox('basicOrJlptOrMy')");
       await Hive.openBox('basicOrJlptOrMy');
     }
-    if (!Hive.isBoxOpen('isNeedUpdatedAllData2.3.3')) {
-      log("await Hive.openBox('isNeedUpdatedAllData2.3.3')");
-      await Hive.openBox('isNeedUpdatedAllData2.3.3');
-    }
 
     if (!Hive.isBoxOpen('jlptOrKangiOrGrarmmar')) {
       log("await Hive.openBox('jlptOrKangiOrGrarmmar')");
@@ -157,11 +153,6 @@ class LocalReposotiry {
     if (!Hive.isBoxOpen('allDataUpdate2.3.3')) {
       log("await Hive.openBox('allDataUpdate2.3.3')");
       await Hive.openBox('allDataUpdate2.3.3');
-    }
-
-    if (!Hive.isBoxOpen('isAskUpdatedAllData2.3.3')) {
-      log("await Hive.openBox('isAskUpdatedAllData2.3.3')");
-      await Hive.openBox('isAskUpdatedAllData2.3.3');
     }
 
     if (!Hive.isBoxOpen(User.boxKey)) {
@@ -299,7 +290,7 @@ class LocalReposotiry {
   static bool getTestKeyBoard() {
     final list = Hive.box('textKeyBoardKey');
     String key = 'textKeyBoard';
-    return list.get(key, defaultValue: true);
+    return list.get(key, defaultValue: false);
   }
 
   static int getBasicOrJlptOrMy() {
@@ -420,32 +411,6 @@ class LocalReposotiry {
   static void putAllDataUpdate(bool value) {
     final list = Hive.box('allDataUpdate2.3.3');
     list.put('allDataUpdate2.3.3Key', value);
-  }
-
-  //updatedAllData 2.3버전에서 데이터 변경/수정에 의해 초기화 할 것인지를 묻기 위해
-  static putIsNeedUpdateAllData(bool isNeed) {
-    final list = Hive.box('isNeedUpdatedAllData2.3.3');
-    list.put('isNeedUpdatedAllData2.3.3Key', isNeed);
-  }
-
-  static getIsNeedUpdateAllData() {
-    final list = Hive.box('isNeedUpdatedAllData2.3.3');
-    return list.get('isNeedUpdatedAllData2.3.3Key', defaultValue: null);
-  }
-
-  static void deleteIsUpdateAllData() {
-    final list = Hive.box('isNeedUpdatedAllData2.3.3');
-    list.deleteFromDisk();
-  }
-
-  static bool isAskUpdateAllDataFor2_3_3() {
-    final list = Hive.box('isAskUpdatedAllData2.3.3');
-    return list.get('isAskUpdatedAllData2.3.3', defaultValue: false);
-  }
-
-  static void askedUpdateAllDataFor2_3_3(bool isAsked) {
-    final list = Hive.box('isAskUpdatedAllData2.3.3');
-    list.put('isAskUpdatedAllData2.3.3', isAsked);
   }
 
   static int aaa() {

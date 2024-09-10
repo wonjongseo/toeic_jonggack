@@ -136,7 +136,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                           }
                           // For Development
                           if (!kReleaseMode) {
-                            // isEnabled = true;
+                            isEnabled = true;
                           }
                           return Padding(
                             key: gKeys[index],
@@ -613,64 +613,89 @@ class _BBBBState extends State<BBBB> {
         child: Container(
           decoration: BoxDecoration(border: Border.all(width: 0.3)),
           child: ListTile(
-            isThreeLine: true,
+            // isThreeLine: true,
             minLeadingWidth: Responsive.height10 * 8,
-            subtitle: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: SizedBox(
-                height: Responsive.height10 * 3,
-                child: isWantToSeeYomikata || controller.isSeeYomikata
-                    ? Text(
-                        widget.word.yomikata,
-                        style: TextStyle(
-                          fontSize: Responsive.height16,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: AppFonts.japaneseFont,
-                        ),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          isWantToSeeYomikata = true;
-                          setState(() {});
-                        },
-                        child: Container(
-                          height: 20,
-                          decoration:
-                              BoxDecoration(color: Colors.grey.shade400),
-                        ),
-                      ),
-              ),
-            ),
-            title: SizedBox(
-              height: Responsive.height10 * 3,
-              child: isWantToSeeMean || controller.isSeeMean
-                  ? Text(
-                      mean,
-                      style: TextStyle(
-                        fontSize: Responsive.height16,
-                        fontFamily: AppFonts.japaneseFont,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
-                  : InkWell(
-                      onTap: () {
-                        isWantToSeeMean = true;
-                        setState(() {});
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(color: Colors.grey.shade400),
-                      ),
+            // subtitle:
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    changedWord,
+                    style: TextStyle(
+                      fontSize: Responsive.height10 * 2,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: AppFonts.japaneseFont,
+                      overflow: TextOverflow.ellipsis,
                     ),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: Responsive.height10 * 3,
+                        child: isWantToSeeMean || controller.isSeeMean
+                            ? Text(
+                                mean,
+                                style: TextStyle(
+                                  fontSize: Responsive.height16,
+                                  fontFamily: AppFonts.japaneseFont,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  isWantToSeeMean = true;
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade400),
+                                ),
+                              ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: SizedBox(
+                          height: Responsive.height10 * 3,
+                          child: isWantToSeeYomikata || controller.isSeeYomikata
+                              ? Text(
+                                  widget.word.yomikata,
+                                  style: TextStyle(
+                                    fontSize: Responsive.height16,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: AppFonts.japaneseFont,
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () {
+                                    isWantToSeeYomikata = true;
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade400),
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            leading: Text(
-              changedWord,
-              style: TextStyle(
-                fontSize: Responsive.height10 * 2,
-                fontWeight: FontWeight.w700,
-                fontFamily: AppFonts.japaneseFont,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+            // leading: Text(
+            //   changedWord,
+            //   style: TextStyle(
+            //     fontSize: Responsive.height10 * 2,
+            //     fontWeight: FontWeight.w700,
+            //     fontFamily: AppFonts.japaneseFont,
+            //     overflow: TextOverflow.ellipsis,
+            //   ),
+            // ),
             trailing: IconButton(
               style: IconButton.styleFrom(
                 padding: const EdgeInsets.all(2),

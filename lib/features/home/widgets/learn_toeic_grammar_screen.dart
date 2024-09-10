@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/common/admob/banner_ad/global_banner_admob.dart';
 import 'package:jonggack_toeic_japanese/common/widget/custom_appbar.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
@@ -37,7 +38,7 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
-        child: AppBar(title: Text('文法')),
+        child: AppBar(title: const Text('文法')),
       ),
       body: SafeArea(
         child: Padding(
@@ -50,6 +51,7 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
               CarouselSlider(
                 carouselController: carouselController,
                 options: CarouselOptions(
+                  // scrollDirection: Axis.vertical,
                   enableInfiniteScroll: false,
                   initialPage: currentPageIndex,
                   onPageChanged: (index, reason) {
@@ -62,7 +64,8 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
                     onTap: () {
                       Get.to(
                         () => LearnToeicGrammarDetailScreen(
-                          toeicGrammarText: toeciGrammarTexts[index],
+                          selectedIndex: index,
+                          toeicGrammarTexts: toeciGrammarTexts,
                         ),
                       );
                     },
@@ -105,34 +108,70 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: const GlobalBannerAdmob(),
     );
   }
 }
 
-class LearnToeicGrammarDetailScreen extends StatelessWidget {
+class LearnToeicGrammarDetailScreen extends StatefulWidget {
   const LearnToeicGrammarDetailScreen({
     super.key,
-    required this.toeicGrammarText,
+    required this.toeicGrammarTexts,
+    required this.selectedIndex,
   });
-  final Map<String, dynamic> toeicGrammarText;
+  final List<Map<String, dynamic>> toeicGrammarTexts;
+  final int selectedIndex;
+
+  @override
+  State<LearnToeicGrammarDetailScreen> createState() =>
+      _LearnToeicGrammarDetailScreenState();
+}
+
+class _LearnToeicGrammarDetailScreenState
+    extends State<LearnToeicGrammarDetailScreen> {
+  late PageController pageController;
+  int currentPageIndex = 0;
+  initState() {
+    currentPageIndex = widget.selectedIndex;
+    pageController = PageController(initialPage: currentPageIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
-        child: AppBar(title: const Text('')),
+        child: AppBar(
+            title: Text(
+          '文法${currentPageIndex + 1}',
+          style: TextStyle(
+            fontSize: Responsive.height22,
+            color: AppColors.mainBordColor,
+            fontWeight: FontWeight.bold,
+          ),
+        )),
       ),
       body: SafeArea(
         child: Center(
-          child: ToeicGrammarText(
-            title: toeicGrammarText['title'],
-            cosi: toeicGrammarText['cosi'],
-            accentContent: toeicGrammarText['accentContent'],
-            content: toeicGrammarText['content'],
-          ),
-        ),
+            child: PageView.builder(
+          itemCount: widget.toeicGrammarTexts.length,
+          onPageChanged: onPageChanged,
+          itemBuilder: (context, index) {
+            return ToeicGrammarText(
+              title: widget.toeicGrammarTexts[index]['title'],
+              cosi: widget.toeicGrammarTexts[index]['cosi'],
+              accentContent: widget.toeicGrammarTexts[index]['accentContent'],
+              content: widget.toeicGrammarTexts[index]['content'],
+            );
+          },
+        )),
       ),
+      bottomNavigationBar: const GlobalBannerAdmob(),
     );
+  }
+
+  void onPageChanged(value) {
+    currentPageIndex = value;
+    setState(() {});
   }
 }

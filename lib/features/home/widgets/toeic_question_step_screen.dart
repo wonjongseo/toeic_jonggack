@@ -25,10 +25,6 @@ class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
 
   @override
   void initState() {
-    //TODO
-    // get last Step Index
-    // toeicQSController.setSteps(stepIndex.toString());
-
     pageController = PageController(initialPage: toeicQSController.outStep);
     super.initState();
   }
@@ -45,7 +41,13 @@ class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
         child: AppBar(
-          title: const Text('Chapter5問題帳'),
+          title: Text(
+            'Chapter5問題帳',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: Responsive.width20,
+            ),
+          ),
         ),
       ),
       body: GetBuilder<ToeicQuestionStepController>(builder: (controller) {
@@ -136,9 +138,10 @@ class _ToeicQuestionStepScreenState extends State<ToeicQuestionStepScreen> {
                                         alignment: Alignment.bottomRight,
                                         child: Padding(
                                           padding: EdgeInsets.all(
-                                              Responsive.height10),
+                                            Responsive.height10,
+                                          ),
                                           child: Text(
-                                            '${controller.getJlptStep().scores} / ${controller.getJlptStep().toeicQuestions.length}\n${controller.getTestProgress(inStep)}',
+                                            '${controller.getJlptStep().scores} / ${controller.getJlptStep().toeicQuestions.length}\n${controller.getTestProgressText(inStep)}',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: Responsive.width18,

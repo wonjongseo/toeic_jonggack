@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
-import 'package:jonggack_toeic_japanese/features/jlpt_and_kangi/jlpt/controller/toeic_chater5_step_controller.dart';
+import 'package:jonggack_toeic_japanese/features/jlpt_and_kangi/jlpt/controller/toeic_question_test_controller.dart';
 import 'package:jonggack_toeic_japanese/features/toeic_chap5/components/chapter5_description.dart';
 import 'package:jonggack_toeic_japanese/model/toeic_question.dart';
 

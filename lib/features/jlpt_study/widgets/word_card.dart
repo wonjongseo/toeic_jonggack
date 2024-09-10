@@ -21,9 +21,7 @@ class WordCard extends StatelessWidget {
   final Word word;
   @override
   Widget build(BuildContext context) {
-    List<String> temp = [];
     String japanese = word.word;
-    KangiStepRepositroy kangiStepRepositroy = KangiStepRepositroy();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Responsive.width10),

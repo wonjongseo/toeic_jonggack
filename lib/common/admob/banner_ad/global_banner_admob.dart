@@ -24,9 +24,7 @@ class _GlobalBannerAdmobState extends State<GlobalBannerAdmob> {
   void initState() {
     super.initState();
 
-    if (!userController.user.isPremieum) {
-      initAdMob();
-    }
+    initAdMob();
   }
 
   void initAdMob() {
@@ -59,7 +57,7 @@ class _GlobalBannerAdmobState extends State<GlobalBannerAdmob> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(height: 0);
+    return Container(height: 0);
     if (_bannerAd == null) {
       return Container(height: 0);
     }

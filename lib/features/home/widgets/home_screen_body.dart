@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,7 +79,6 @@ class _JLPTCardsState extends State<JLPTCards> {
   void initState() {
     super.initState();
     _currentIndex = LocalReposotiry.getBasicOrJlptOrMyDetail(KindOfStudy.JLPT);
-    print('_currentIndex : ${_currentIndex}');
   }
 
   @override
@@ -91,148 +91,109 @@ class _JLPTCardsState extends State<JLPTCards> {
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(builder: (userController) {
       return CarouselSlider(
-          carouselController: carouselController,
-          options: CarouselOptions(
-            disableCenter: true,
-            viewportFraction: userController.user.isPad ? 0.55 : 0.75,
-            enableInfiniteScroll: false,
-            initialPage: _currentIndex,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              _currentIndex = index;
+        carouselController: carouselController,
+        options: CarouselOptions(
+          disableCenter: true,
+          viewportFraction: userController.user.isPad ? 0.55 : 0.75,
+          enableInfiniteScroll: false,
+          initialPage: _currentIndex,
+          enlargeCenterPage: true,
+          onPageChanged: (index, reason) {
+            _currentIndex = index;
+          },
+          scrollDirection: Axis.horizontal,
+        ),
+        items: [
+          LevelCategoryCard(
+            titleSize: Responsive.width10 * 3,
+            title: '500点向け',
+            onTap: () {
+              Get.to(
+                () => JlptHomeScreen(title: '500点向け', index: 0, level: '500'),
+              );
             },
-            scrollDirection: Axis.horizontal,
+            body: Column(
+              children: [
+                StudyCategoryAndProgress(
+                  caregory: '単語',
+                  curCnt: userController.user.currentJlptWordScroes[0],
+                  totalCnt: userController.user.jlptWordScroes[0],
+                ),
+                StudyCategoryAndProgress(
+                  caregory: '慣用句',
+                  curCnt: userController.user.currentKangiScores[0],
+                  totalCnt: userController.user.kangiScores[0],
+                )
+              ],
+            ),
+            foot: const Text(
+              '500点を目指している方向けのTOEIC単語帳',
+            ),
           ),
-          items: [
-            LevelCategoryCard(
-              titleSize: Responsive.width10 * 3,
-              title: '500点向け',
-              onTap: () {
-                Get.to(
-                  () => JlptHomeScreen(title: '500点向け', index: 0, level: '500'),
-                );
-              },
-              body: Column(
-                children: [
-                  StudyCategoryAndProgress(
-                    caregory: '単語',
-                    curCnt: userController.user.currentJlptWordScroes[0],
-                    totalCnt: userController.user.jlptWordScroes[0],
-                  ),
-                  StudyCategoryAndProgress(
-                    caregory: '慣用句',
-                    curCnt: userController.user.currentKangiScores[0],
-                    totalCnt: userController.user.kangiScores[0],
-                  )
-                ],
-              ),
-              foot: const Text('500点を目指している方向けの単語帳'),
+          LevelCategoryCard(
+            titleSize: Responsive.width10 * 3,
+            title: '700点向け',
+            onTap: () {
+              Get.to(() =>
+                  JlptHomeScreen(title: '700点向け', index: 1, level: '700'));
+            },
+            body: Column(
+              children: [
+                StudyCategoryAndProgress(
+                  caregory: '単語',
+                  curCnt: userController.user.currentJlptWordScroes[1],
+                  totalCnt: userController.user.jlptWordScroes[1],
+                ),
+                StudyCategoryAndProgress(
+                  caregory: '慣用句',
+                  curCnt: userController.user.currentKangiScores[1],
+                  totalCnt: userController.user.kangiScores[1],
+                ),
+              ],
             ),
-            LevelCategoryCard(
-              titleSize: Responsive.width10 * 3,
-              title: '700点向け',
-              onTap: () {
-                Get.to(() =>
-                    JlptHomeScreen(title: '700点向け', index: 1, level: '700'));
-              },
-              body: Column(
-                children: [
-                  StudyCategoryAndProgress(
-                    caregory: '単語',
-                    curCnt: userController.user.currentJlptWordScroes[1],
-                    totalCnt: userController.user.jlptWordScroes[1],
-                  ),
-                  StudyCategoryAndProgress(
-                    caregory: '慣用句',
-                    curCnt: userController.user.currentKangiScores[1],
-                    totalCnt: userController.user.kangiScores[1],
-                  ),
-                ],
-              ),
-              foot: const Text('700点を目指している方向けの単語帳'),
+            foot: const Text(
+              '700点を目指している方向けのTOEIC単語帳',
             ),
-            LevelCategoryCard(
-              titleSize: Responsive.width10 * 3,
-              title: '900点向け',
-              onTap: () {
-                Get.to(() =>
-                    JlptHomeScreen(title: '900点向け', index: 2, level: '900'));
-              },
-              body: Column(
-                children: [
-                  StudyCategoryAndProgress(
-                    caregory: '進捗',
-                    curCnt: userController.user.currentJlptWordScroes[2],
-                    totalCnt: userController.user.jlptWordScroes[2],
-                  ),
-                  StudyCategoryAndProgress(
-                    caregory: '慣用句',
-                    curCnt: userController.user.currentKangiScores[2],
-                    totalCnt: userController.user.kangiScores[2],
-                  ),
-                ],
-              ),
-              foot: const Text('900点を目指している方向けの単語帳'),
+          ),
+          LevelCategoryCard(
+            titleSize: Responsive.width10 * 3,
+            title: '900点向け',
+            onTap: () {
+              Get.to(() =>
+                  JlptHomeScreen(title: '900点向け', index: 2, level: '900'));
+            },
+            body: Column(
+              children: [
+                StudyCategoryAndProgress(
+                  caregory: '進捗',
+                  curCnt: userController.user.currentJlptWordScroes[2],
+                  totalCnt: userController.user.jlptWordScroes[2],
+                ),
+                StudyCategoryAndProgress(
+                  caregory: '慣用句',
+                  curCnt: userController.user.currentKangiScores[2],
+                  totalCnt: userController.user.kangiScores[2],
+                ),
+              ],
             ),
-            LevelCategoryCard(
-              titleSize: Responsive.width10 * 3,
-              title: '単語3000個',
-              onTap: () {
-                Get.to(() =>
-                    JlptHomeScreen(title: '単語3000個', index: 3, level: '1~300'));
-              },
-              body: StudyCategoryAndProgress(
-                caregory: '進捗',
-                curCnt: userController.user.currentJlptWordScroes[3],
-                totalCnt: userController.user.jlptWordScroes[3],
-              ),
+            foot: const Text('900点を目指している方向けのTOEIC単語帳'),
+          ),
+          LevelCategoryCard(
+            titleSize: Responsive.width10 * 3,
+            title: '単語3000個',
+            onTap: () {
+              Get.to(() =>
+                  JlptHomeScreen(title: '単語3000個', index: 3, level: '1~300'));
+            },
+            body: StudyCategoryAndProgress(
+              caregory: '単語',
+              curCnt: userController.user.currentJlptWordScroes[3],
+              totalCnt: userController.user.jlptWordScroes[3],
             ),
-          ]
-          //  List.generate(1, (index) {
-          //   return LevelCategoryCard(
-          //     titleSize: Responsive.width10 * 3,
-          //     title: 'Ithem',
-          //     onTap: () {},
-          //     body: Text('aa'),
-          //   );
-          //   return LevelCategoryCard(
-          //     titleSize: Responsive.width10 * 3,
-          //     title: 'N${index + 1}',
-          //     onTap: () {
-          //       Get.to(() => JlptHomeScreen(index: index));
-          //       return;
-          //     },
-          //     body: Column(
-          //       mainAxisAlignment: MainAxisAlignment.start,
-          //       children: [
-          //         StudyCategoryAndProgress(
-          //           caregory: '進捗',
-          //           curCnt: userController.user.currentJlptWordScroes[index],
-          //           totalCnt: userController.user.jlptWordScroes[index],
-          //         ),
-          //         StudyCategoryAndProgress(
-          //           caregory: '문법',
-          //           curCnt: userController.user.currentGrammarScores[index],
-          //           totalCnt: userController.user.grammarScores[index],
-          //         ),
-          //         StudyCategoryAndProgress(
-          //           caregory: '한자',
-          //           curCnt: userController.user.currentKangiScores[index],
-          //           totalCnt: userController.user.kangiScores[index],
-          //         ),
-          //       ],
-          //     ),
-          //     foot: Text(
-          //       'JLPT N${index + 1} 종합 단어장',
-          //       style: TextStyle(
-          //         fontFamily: AppFonts.gMaretFont,
-          //         fontWeight: FontWeight.w500,
-          //         fontSize: Responsive.height16,
-          //       ),
-          //     ),
-          //   );
-          // }),
-          );
+            foot: const Text('以前TOEIC試験から出題された\nTOEIC単語3000選'),
+          ),
+        ],
+      );
     });
   }
 
@@ -325,9 +286,9 @@ class _MyCardsState extends State<MyCards> {
             foot: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                '一番アプリに保存した単語を\n学習する単語帳',
+                '一番TOEICアプリから保存した\n単語を学習する単語帳',
                 style: TextStyle(
-                  fontSize: Responsive.height15,
+                  fontSize: Responsive.width15,
                 ),
               ),
             ),
@@ -365,7 +326,7 @@ class _MyCardsState extends State<MyCards> {
             foot: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'ユーザーが保存して単語を\n学習する単語帳',
+                'ユーザーが直接に保存した\n単語を学習する単語帳',
                 style: TextStyle(
                   fontSize: Responsive.height15,
                 ),
@@ -393,7 +354,6 @@ class BasicCard extends StatefulWidget {
 class _BasicCardState extends State<BasicCard> {
   CarouselController carouselController = CarouselController();
   int _currentIndex = 0;
-  UserController userController = Get.find<UserController>();
   @override
   void initState() {
     super.initState();
@@ -412,54 +372,61 @@ class _BasicCardState extends State<BasicCard> {
     setState(() {});
   }
 
-  List<Widget> bodys = [
-    LevelCategoryCard(
-      onTap: () {
-        LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 0);
-
-        Get.to(() => const LearnToeicGrammarScreen());
-      },
-      title: '文法学習',
-      titleSize: Responsive.width10 * 2.3,
-      foot: Text(
-        'TOEICから高得点するために、知っておかないといけない文法５４個',
-        style: TextStyle(
-          fontSize: Responsive.width14,
-        ),
-      ),
-    ),
-    LevelCategoryCard(
-      onTap: () {
-        LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 1);
-        Get.to(() => const ToeicQuestionStepScreen());
-      },
-      title: 'Chapter５問題帳',
-      titleSize: Responsive.width10 * 2.3,
-      foot: Text(
-        'Chapter５の練習問題帳',
-        style: TextStyle(fontSize: Responsive.height15),
-      ),
-    )
-  ];
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      carouselController: carouselController,
-      options: CarouselOptions(
-        disableCenter: true,
-        viewportFraction: userController.user.isPad ? 0.55 : 0.75,
-        enableInfiniteScroll: false,
-        initialPage: _currentIndex,
-        enlargeCenterPage: true,
-        onPageChanged: (index, reason) {
-          _currentIndex = LocalReposotiry.putBasicOrJlptOrMyDetail(
-              KindOfStudy.BASIC, index);
-        },
-        scrollDirection: Axis.horizontal,
-      ),
-      items: List.generate(bodys.length, (index) {
-        return bodys[index];
-      }),
-    );
+    return GetBuilder<UserController>(builder: (userController) {
+      return CarouselSlider(
+          carouselController: carouselController,
+          options: CarouselOptions(
+            disableCenter: true,
+            viewportFraction: userController.user.isPad ? 0.55 : 0.75,
+            enableInfiniteScroll: false,
+            initialPage: _currentIndex,
+            enlargeCenterPage: true,
+            onPageChanged: (index, reason) {
+              _currentIndex = LocalReposotiry.putBasicOrJlptOrMyDetail(
+                  KindOfStudy.BASIC, index);
+            },
+            scrollDirection: Axis.horizontal,
+          ),
+          items: [
+            LevelCategoryCard(
+              onTap: () {
+                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 0);
+
+                Get.to(() => const LearnToeicGrammarScreen());
+              },
+              title: '文法学習',
+              titleSize: Responsive.width10 * 2.3,
+              foot: Text(
+                'TOEICから高得点するために、知っておかないといけない文法事項54選',
+                style: TextStyle(
+                  fontSize: Responsive.width14,
+                ),
+              ),
+            ),
+            LevelCategoryCard(
+              onTap: () {
+                LocalReposotiry.putBasicOrJlptOrMyDetail(KindOfStudy.BASIC, 1);
+                Get.to(() => const ToeicQuestionStepScreen());
+              },
+              title: 'Chapter５問題帳',
+              body: Column(
+                children: [
+                  StudyCategoryAndProgress(
+                    caregory: '単語',
+                    curCnt: userController.user.currentGrammarScores[0],
+                    totalCnt: userController.user.grammarScores[0],
+                  ),
+                ],
+              ),
+              titleSize: Responsive.width10 * 2.3,
+              foot: Text(
+                'Chapter5の練習問題1195選',
+                style: TextStyle(fontSize: Responsive.height15),
+              ),
+            )
+          ]);
+    });
   }
 }

@@ -7,36 +7,6 @@ import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommonDialog {
-  static Future<bool> askToDeleteAllDataOneMore() async {
-    return selectionDialog(
-      title: Text(
-        '정말 초기화를 안하시나요?',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-          fontSize: Responsive.height20,
-          fontFamily: AppFonts.japaneseFont,
-        ),
-      ),
-      connent: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text:
-                  '수정된 데이터로 종각앱을 학습하면 더 정확하고 많은 예제로 학습할 수 있습니다.\n 문법 예시의 읽는 법도 추가 되었습니다.\n\n초기화 하시겠습니까??',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: AppFonts.japaneseFont,
-                fontWeight: FontWeight.w100,
-                fontSize: Responsive.height16,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   static Future<bool> askToDeleteAllDataForUpdateDatas() async {
     return selectionDialog(
       title: Text(
@@ -80,6 +50,20 @@ class CommonDialog {
     );
   }
 
+  static Future<bool> errorNoEnrolledEmail() async {
+    return selectionDialog(
+      title: const Text(
+        '一番TOEICアプリからメールを作成することが失敗しました。',
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent),
+      ),
+      connent: const Text(
+        '携帯にメールが登録されていないと、一番TOEICからはメールを作成しかねません。\n別のメールアプリから問い合わせして頂ければ幸いで存じております。\n\n宛先visionwill3322@gmail.comを貼り付けしますか？',
+        // '핸드폰에 이메일 등록이 되어 있지 않으면 종각 앱에서 이메일을 작성하는데 어려움이 있습니다.\n별도의 이메일 앱에서 문의 해주시면 감사하겠습니다.\n\n이메일 visionwill3322@gmail.com을 복사하시겠습니까?',
+        style: TextStyle(color: AppColors.scaffoldBackground),
+      ),
+    );
+  }
+
   static Future<bool> alertPreviousTestRequired() async {
     return selectionDialog(
       title: RichText(
@@ -112,28 +96,6 @@ class CommonDialog {
           fontWeight: FontWeight.w500,
         ),
       ),
-    );
-  }
-
-  static Future<bool> askSetSubjectQuestionOfJlptTestDialog() async {
-    return selectionDialog(
-      title: Text(
-        '주관식 문제를 활성화 하시겠습니까?',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: Responsive.height16,
-        ),
-      ),
-      connent: const Text(
-        '일본어 단어 퀴즈에 읽는 법을 직접 입력하는 기능이 있습니다.\n해당 기능을 활성화하면 일본어 학습하는데 도움이 됩니다.',
-        style: TextStyle(color: AppColors.scaffoldBackground),
-      ),
-    );
-  }
-
-  static Future<bool> askSaveExcelDatasDialog() async {
-    return selectionDialog(
-      title: const Text('광고를 시청하고 엑셀에 있는 데이터를\n나만의 단어장에 저장하시겠습니까?'),
     );
   }
 

@@ -130,8 +130,16 @@ class _MyVocaPageState extends State<MyVocaPage> {
                                 ),
                                 onPressed: () {
                                   Get.dialog(
-                                    const AlertDialog(
-                                      content: MyWordInputField(),
+                                    AlertDialog(
+                                      shape: LinearBorder.none,
+                                      contentPadding: EdgeInsets.zero,
+                                      titlePadding: EdgeInsets.zero,
+                                      buttonPadding: EdgeInsets.zero,
+                                      iconPadding: EdgeInsets.zero,
+                                      actionsPadding: EdgeInsets.zero,
+                                      insetPadding: EdgeInsets.symmetric(
+                                          horizontal: Responsive.width10),
+                                      content: const MyWordInputField(),
                                     ),
                                   );
                                 },

@@ -283,14 +283,6 @@ class MyVocaController extends GetxController {
   Future<int> postExcelData() async {
     UserController userController = Get.find<UserController>();
 
-    bool result2 = true;
-    if (!userController.user.isPremieum) {
-      result2 = await CommonDialog.askSaveExcelDatasDialog();
-    }
-
-    if (!result2) {
-      return 0;
-    }
     FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['xlsx'],

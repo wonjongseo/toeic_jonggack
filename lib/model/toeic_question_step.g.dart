@@ -6,7 +6,7 @@ part of 'toeic_question_step.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ToeicChapter5StepAdapter extends TypeAdapter<ToeicQuestionStep> {
+class ToeicQuestionStepAdapter extends TypeAdapter<ToeicQuestionStep> {
   @override
   final int typeId = 26;
 
@@ -50,7 +50,7 @@ class ToeicChapter5StepAdapter extends TypeAdapter<ToeicQuestionStep> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ToeicChapter5StepAdapter &&
+      other is ToeicQuestionStepAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

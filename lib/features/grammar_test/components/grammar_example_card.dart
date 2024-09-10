@@ -36,6 +36,7 @@ class _GrammarExampleCardState extends State<GrammarExampleCard> {
     } else {
       grammarWrod = widget.examples[widget.index].yomikata!;
     }
+
     return Padding(
       padding: EdgeInsets.only(bottom: Responsive.height16),
       child: Row(
@@ -66,38 +67,13 @@ class _GrammarExampleCardState extends State<GrammarExampleCard> {
                           )
                         },
                       ),
-                      // child: HtmlWidget(
-                      //   '${widget.index + 1}. $grammarWrod',
-                      //   textStyle: TextStyle(
-                      //     fontFamily: AppFonts.japaneseFont,
-                      //     fontSize: Responsive.height17,
-                      //     color: Colors.black,
-                      //     fontWeight: FontWeight.w600,
-                      //   ),
-                      //   customStylesBuilder: (element) {
-                      //     if (element.classes.contains('bold')) {
-                      //       return {
-                      //         'color': 'red',
-                      //         'font-weight': 'bold',
-                      //       };
-                      //     }
-                      //     if (element.toString().contains('rt')) {
-                      //       return {
-                      //         // 'color': 'red',
-                      //         'font-size': 'x-small',
-                      //         'font-weight': 'bold',
-                      //       };
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
                     ),
                     Container(
                       color: Colors.transparent,
                       child: Text(
                         widget.examples[widget.index].mean,
                         style: TextStyle(
-                          color: Colors.grey,
+                          // color: Colors.grey,
                           fontSize: Responsive.height16,
                         ),
                       ),

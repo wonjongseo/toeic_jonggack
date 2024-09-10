@@ -22,8 +22,7 @@ class HomeTutorialService {
   List<TargetFocus> targets = [];
 
   Future settingFunctions() async {
-    bool isKeyBoardActive =
-        await CommonDialog.askSetSubjectQuestionOfJlptTestDialog();
+    bool isKeyBoardActive = true;
     if (isKeyBoardActive) {
       if (!settingController.isTestKeyBoard) {
         settingController.flipTestKeyBoard();

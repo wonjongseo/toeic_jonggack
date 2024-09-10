@@ -23,13 +23,15 @@ class ToeicQuestionAdapter extends TypeAdapter<ToeicQuestion> {
       description: fields[4] as String,
       answer: fields[5] as String,
       mean: fields[6] as String,
-    )..wasCorrected = fields[7] as bool?;
+    )
+      ..wasCorrected = fields[7] as bool?
+      ..lateUpdate = fields[8] as DateTime?;
   }
 
   @override
   void write(BinaryWriter writer, ToeicQuestion obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -43,7 +45,9 @@ class ToeicQuestionAdapter extends TypeAdapter<ToeicQuestion> {
       ..writeByte(6)
       ..write(obj.mean)
       ..writeByte(7)
-      ..write(obj.wasCorrected);
+      ..write(obj.wasCorrected)
+      ..writeByte(8)
+      ..write(obj.lateUpdate);
   }
 
   @override

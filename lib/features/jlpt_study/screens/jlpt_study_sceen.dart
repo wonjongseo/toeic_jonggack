@@ -92,7 +92,7 @@ class _JlptStudyScreenState extends State<JlptStudyScreen> {
               child: Card(
                 child: Center(
                   child: Text(
-                    '퀴즈 풀러 가기!',
+                    'テストに挑戦！',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.cyan.shade600,

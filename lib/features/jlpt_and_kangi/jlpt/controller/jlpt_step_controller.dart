@@ -244,11 +244,6 @@ class JlptStepController extends GetxController {
     print('headTitle : ${headTitle}');
 
     jlptSteps = jlptStepRepositroy.getJlptStepByHeadTitle(level, headTitle);
-    // for (int i = 0; i < headTitleCount; i++) {
-    //   String a = '$i';
-
-    //   // allJlptSteps.add(jlptSteps);
-    // }
 
     currChapNumber =
         LocalReposotiry.getCurrentProgressing('Japaneses-$level-$headTitle');

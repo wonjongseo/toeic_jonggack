@@ -5,6 +5,7 @@ import 'package:jonggack_toeic_japanese/repository/toeic_question_step_repositor
 
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/admob/controller/ad_controller.dart';
@@ -92,7 +93,7 @@ class _AppState extends State<App> {
 
   Future<bool> loadData() async {
     List<int> jlptWordScroes = [];
-    List<int> grammarScores = [1, 1, 1, 1, 1];
+    List<int> grammarScores = [];
     List<int> kangiScores = [];
     try {
       await LocalReposotiry.init();
@@ -109,7 +110,7 @@ class _AppState extends State<App> {
         kangiScores.add(await KangiStepRepositroy.init('700'));
         kangiScores.add(await KangiStepRepositroy.init('900'));
 
-        ToeicQuestionStepRepositroy.init('1');
+        grammarScores.add(await ToeicQuestionStepRepositroy.init('1'));
 
         //
       } else {
@@ -147,15 +148,6 @@ class _AppState extends State<App> {
         );
 
         user = await UserRepository.init(user);
-        if (!LocalReposotiry.isAskUpdateAllDataFor2_3_3()) {
-          LocalReposotiry.putIsNeedUpdateAllData(false);
-          LocalReposotiry.askedUpdateAllDataFor2_3_3(true);
-        }
-      } else {
-        if (!LocalReposotiry.isAskUpdateAllDataFor2_3_3()) {
-          LocalReposotiry.putIsNeedUpdateAllData(true);
-          LocalReposotiry.askedUpdateAllDataFor2_3_3(true);
-        }
       }
 
       UserController userController = Get.put(UserController());
