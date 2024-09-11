@@ -1,10 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/admob/banner_ad/global_banner_admob.dart';
 
-import 'package:jonggack_toeic_japanese/common/common.dart';
 import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
@@ -58,7 +58,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
 
     switch (widget.categoryEnum) {
       case CategoryEnum.Japaneses:
-        category = '일본어';
+        category = '単語';
         jlptWordController = Get.find<JlptStepController>();
 
         level = jlptWordController.level;
@@ -82,7 +82,7 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
         break;
 
       case CategoryEnum.Kangis:
-        category = '한자';
+        category = '慣用句';
         kangiController = Get.find<KangiStepController>();
         level = kangiController.level;
 
@@ -104,11 +104,12 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
         );
         break;
       case CategoryEnum.Grammars:
-        category = '문법';
+        category = '文法';
         grammarController = Get.find<GrammarController>();
         level = grammarController.level;
         break;
     }
+    print('category : ${category}');
   }
 
   Widget getBody(CategoryEnum categoryEnum) {
@@ -135,9 +136,9 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                     false);
                           }
                           // For Development
-                          if (!kReleaseMode) {
-                            isEnabled = true;
-                          }
+                          // if (!kReleaseMode) {
+                          //   isEnabled = true;
+                          // }
                           return Padding(
                             key: gKeys[index],
                             padding: EdgeInsets.only(
@@ -205,7 +206,6 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                           const SizedBox(width: 20),
                           if (controller.getJlptStep().words.length >= 4)
                             Card(
-                              shape: const CircleBorder(),
                               child: InkWell(
                                 onTap: () => jlptWordController.goToTest(),
                                 child: Padding(
@@ -213,8 +213,8 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                                   child: Text(
                                     'テスト',
                                     style: TextStyle(
-                                      fontSize: Responsive.width12,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: Responsive.width14,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.cyan.shade600,
                                     ),
                                   ),
@@ -258,18 +258,18 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                         controller: jlptWordController.pageController,
                         itemCount: controller.jlptSteps.length,
                         itemBuilder: (context, subStep) {
-                          JlptStep jlptStep =
+                          JlptStep toeicWordStep =
                               controller.jlptSteps[controller.step];
 
                           return SingleChildScrollView(
                             child: Column(
                               children: List.generate(
-                                jlptStep.words.length,
+                                toeicWordStep.words.length,
                                 (index) {
-                                  bool isSaved = controller
-                                      .isSavedInLocal(jlptStep.words[index]);
+                                  bool isSaved = controller.isSavedInLocal(
+                                      toeicWordStep.words[index]);
                                   return BBBB(
-                                    word: jlptStep.words[index],
+                                    word: toeicWordStep.words[index],
                                     index: index,
                                     isSaved: isSaved,
                                   );
@@ -309,9 +309,9 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
                         }
 
                         // For Development
-                        if (!kReleaseMode) {
-                          isEnabled = true;
-                        }
+                        // if (!kReleaseMode) {
+                        //   isEnabled = true;
+                        // }
 
                         return Padding(
                           padding: EdgeInsets.only(
@@ -555,16 +555,18 @@ class _CalendarStepSceenState extends State<CalendarStepSceen> {
 
   @override
   Widget build(BuildContext context) {
+    print('widget.categoryEnum : ${widget.categoryEnum}');
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
         child: AppBar(
           scrolledUnderElevation: 0.0,
           title: Text(
-            '$level点 - Chapter${int.parse(chapter) + 1}',
+            '$level点ー$categoryーChapter${int.parse(chapter) + 1}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Responsive.height16,
+              fontSize: appBarTextSize,
             ),
           ),
         ),
@@ -594,19 +596,11 @@ class _BBBBState extends State<BBBB> {
   UserController userController = Get.find<UserController>();
   JlptStepController controller = Get.find<JlptStepController>();
   bool isWantToSeeMean = false;
-  bool isWantToSeeYomikata = false;
 
   @override
   Widget build(BuildContext context) {
     String mean = widget.word.mean;
     String changedWord = widget.word.word;
-
-    if (widget.word.mean.contains('1. ')) {
-      mean = '${(widget.word.mean.split('\n')[0]).split('1. ')[1]}...';
-    }
-    if (widget.word.word.contains('·')) {
-      changedWord = widget.word.word.split('·')[0];
-    }
 
     return InkWell(
         onTap: () => Get.to(() => JlptStudyScreen(currentIndex: widget.index)),
@@ -620,14 +614,15 @@ class _BBBBState extends State<BBBB> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
+                  child: AutoSizeText(
                     changedWord,
                     style: TextStyle(
-                      fontSize: Responsive.height10 * 2,
+                      fontSize: Responsive.height10 * 1.8,
                       fontWeight: FontWeight.w700,
                       fontFamily: AppFonts.japaneseFont,
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                     ),
+                    maxLines: 1,
                   ),
                 ),
                 Expanded(
@@ -640,7 +635,7 @@ class _BBBBState extends State<BBBB> {
                             ? Text(
                                 mean,
                                 style: TextStyle(
-                                  fontSize: Responsive.height16,
+                                  fontSize: Responsive.width18,
                                   fontFamily: AppFonts.japaneseFont,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -657,45 +652,26 @@ class _BBBBState extends State<BBBB> {
                               ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: SizedBox(
-                          height: Responsive.height10 * 3,
-                          child: isWantToSeeYomikata || controller.isSeeYomikata
-                              ? Text(
-                                  widget.word.yomikata,
-                                  style: TextStyle(
-                                    fontSize: Responsive.height16,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: AppFonts.japaneseFont,
-                                  ),
-                                )
-                              : InkWell(
-                                  onTap: () {
-                                    isWantToSeeYomikata = true;
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade400),
-                                  ),
-                                ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: Responsive.height16 / 2,
                         ),
+                        child: SizedBox(
+                            height: Responsive.height10 * 3,
+                            child: AutoSizeText(
+                              widget.word.yomikata,
+                              style: TextStyle(
+                                fontSize: Responsive.width15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              // maxFontSize: 1,
+                            )),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            // leading: Text(
-            //   changedWord,
-            //   style: TextStyle(
-            //     fontSize: Responsive.height10 * 2,
-            //     fontWeight: FontWeight.w700,
-            //     fontFamily: AppFonts.japaneseFont,
-            //     overflow: TextOverflow.ellipsis,
-            //   ),
-            // ),
+
             trailing: IconButton(
               style: IconButton.styleFrom(
                 padding: const EdgeInsets.all(2),
@@ -743,7 +719,7 @@ class _CCCCState extends State<CCCC> {
       child: Container(
         decoration: BoxDecoration(border: Border.all(width: 0.3)),
         child: ListTile(
-          subtitle: Text(''),
+          subtitle: const Text(''),
           dense: true,
           minLeadingWidth: Responsive.height10 * 15,
           isThreeLine: true,
@@ -755,7 +731,9 @@ class _CCCCState extends State<CCCC> {
                   ? Text(
                       widget.kangi.mean,
                       style: TextStyle(
-                        fontSize: Responsive.height16,
+                        fontSize: userController.user.isPad
+                            ? Responsive.height14
+                            : Responsive.width14,
                         fontWeight: FontWeight.w600,
                         fontFamily: AppFonts.japaneseFont,
                         overflow: TextOverflow.ellipsis,
@@ -774,13 +752,19 @@ class _CCCCState extends State<CCCC> {
                     ),
             ),
           ),
-          leading: Text(
-            widget.kangi.word,
-            style: TextStyle(
-              fontSize: Responsive.height10 * 2,
-              color: Colors.black,
-              fontFamily: AppFonts.japaneseFont,
-            ),
+          leading: Column(
+            children: [
+              Text(
+                widget.kangi.word,
+                style: TextStyle(
+                  fontSize: userController.user.isPad
+                      ? Responsive.height18
+                      : Responsive.width18,
+                  color: Colors.black,
+                  fontFamily: AppFonts.japaneseFont,
+                ),
+              ),
+            ],
           ),
           trailing: IconButton(
               style: IconButton.styleFrom(

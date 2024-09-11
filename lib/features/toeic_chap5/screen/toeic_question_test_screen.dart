@@ -45,37 +45,6 @@ class _ToeicQuestionTestScreenState extends State<ToeicQuestionTestScreen>
           controller.toeicQuestionStepController.questions;
 
       return Scaffold(
-        // appBar: PreferredSize(
-        //   preferredSize: const Size.fromHeight(appBarHeight),
-        //   child: AppBar(
-        //     title: CustomAppBarTitle(
-        //       curIndex: controller.currentPageIndex + 1,
-        //       totalIndex: questions.length,
-        //     ),
-        //     actions: [
-        //       if (controller.isSubmitted)
-        //         TextButton(
-        //           onPressed: () {
-        //             if (controller.isLastQuestion()) {
-        //               controller.submit();
-        //             } else {
-        //               controller.pageController.animateToPage(
-        //                   controller.currentPageIndex + 1,
-        //                   duration: const Duration(milliseconds: 500),
-        //                   curve: Curves.easeInOut);
-        //             }
-        //           },
-        //           child: Text(
-        //             controller.actionString(),
-        //             style: TextStyle(
-        //               fontWeight: FontWeight.bold,
-        //               color: AppColors.mainBordColor,
-        //             ),
-        //           ),
-        //         )
-        //     ],
-        //   ),
-        // ),
         body: SafeArea(
           child: Padding(
             padding:

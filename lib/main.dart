@@ -115,6 +115,7 @@ class _AppState extends State<App> {
         //
       } else {
         //　よく出る3000個単語
+
         List<int> words = [538, 935, 1648];
         jlptWordScroes.addAll(words);
 
@@ -206,7 +207,8 @@ class _AppState extends State<App> {
   MaterialApp errorMaterialApp(AsyncSnapshot<bool> snapshat) {
     String errorMsg = snapshat.error.toString();
     if (errorMsg.contains('Connection refused')) {
-      errorMsg = '서버와 연결이 불안정 합니다. 데이터 연결 혹은 Wifi 환경에서 다시 요청해주시기 바랍니다.';
+      // errorMsg = '서버와 연결이 불안정 합니다. 데이터 연결 혹은 Wifi 환경에서 다시 요청해주시기 바랍니다.';
+      errorMsg = 'サーバーとの接続が不安全です。電波を確認するかWIFI環境で要求し直してください。';
       return const MaterialApp(
         home: Scaffold(
           body: Center(
@@ -217,16 +219,16 @@ class _AppState extends State<App> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'JLPT종각 앱 이용 하기 앞서,',
+                    '一番TOEICアプリを利用する前に、',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                   ),
                   Text(
-                    '데이터를 저장하기 위해 1회 서버와 연결을 해야합니다.',
+                    'データを保存する為に、1回サーバーとの接続が必要です。',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   SizedBox(height: 20),
                   Text(
-                    '데이터 연결 혹은 와이파이 환경에서 다시 요청해주시기 바랍니다.',
+                    '電波を確認するかWIFI環境で要求し直してください。',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],

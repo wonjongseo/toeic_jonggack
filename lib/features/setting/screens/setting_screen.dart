@@ -6,6 +6,7 @@ import 'package:jonggack_toeic_japanese/common/common.dart';
 import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
+import 'package:jonggack_toeic_japanese/config/size.dart';
 import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/user/controller/user_controller.dart';
 import '../../../common/admob/banner_ad/global_banner_admob.dart';
@@ -21,12 +22,21 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingController settingController = Get.find<SettingController>();
-    bool isSettingPage = Get.arguments['isSettingPage'];
     // ignore: deprecated_member_use
     return WillPopScope(
       child: Scaffold(
-        appBar: _appBar(settingController, isSettingPage),
-        body: _body(settingController.userController, isSettingPage),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(appBarHeight),
+            child: AppBar(
+              title: Text(
+                '設定',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: appBarTextSize,
+                ),
+              ),
+            )),
+        body: _body(settingController.userController),
         bottomNavigationBar: const GlobalBannerAdmob(),
       ),
       onWillPop: () async {
@@ -47,7 +57,7 @@ class SettingScreen extends StatelessWidget {
     );
   }
 
-  Widget _body(UserController userController, bool isSettingPage) {
+  Widget _body(UserController userController) {
     return Center(
       child: GetBuilder<SettingController>(
         builder: (settingController) {
@@ -121,7 +131,8 @@ class SettingScreen extends StatelessWidget {
                           onPressed: () async {
                             // Get.back();
 
-                            String body = """
+                            String body =
+                                """
     
     ⭐️ 【希望の機能を提供する】
     
@@ -187,12 +198,6 @@ class SettingScreen extends StatelessWidget {
               );
         },
       ),
-    );
-  }
-
-  AppBar _appBar(SettingController settingController, bool isSettingPage) {
-    return AppBar(
-      title: Text(isSettingPage ? '設定' : '데이터 초기화'),
     );
   }
 }

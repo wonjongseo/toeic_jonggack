@@ -172,9 +172,7 @@ class KangiTestController extends GetxController
 
   void checkAns(Question question, String selectedIndex, String type) {
     // 운독, 훈독, 읽는 법을 다 채크 했니 ?
-    if (isKangiSubject) {
-      isAnswered1 = true;
-    }
+
     if (type == 'hangul') {
       correctAns = question.question.mean;
       selectedAns = selectedIndex;
@@ -200,9 +198,7 @@ class KangiTestController extends GetxController
       update();
 
       // 정답 이면
-      if (isKangiSubject) {
-        selectedAns = '';
-      }
+
       // if (correctAns == selectedAns && correctAns2 == selectedAns2 &&correctAns3 == selectedAns3)
       if (correctAns == selectedAns) {
         text = 'skip';
@@ -304,6 +300,4 @@ class KangiTestController extends GetxController
   String wrongWord(int index) {
     return wrongQuestions[index].question.word;
   }
-
-  bool isKangiSubject = false;
 }

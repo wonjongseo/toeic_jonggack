@@ -43,11 +43,11 @@ class _ToeicScoreScreenState extends State<ToeicScoreScreen> {
               curIndex: currentIndex + 1,
               totalIndex: widget.wrongToeicQuestions.length,
             ),
-            const Text(
+            Text(
               '誤答ノート',
               style: TextStyle(
-                fontFamily: AppFonts.japaneseFont,
                 fontWeight: FontWeight.bold,
+                fontSize: appBarTextSize,
               ),
             ),
           ],

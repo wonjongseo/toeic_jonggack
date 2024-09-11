@@ -45,6 +45,15 @@ class WelcomeWidget extends StatelessWidget {
                   color: AppColors.mainBordColor,
                 ),
               ),
+              if (userController.user.isPremieum)
+                Text(
+                  '+',
+                  style: TextStyle(
+                    fontSize: Responsive.height25,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.redAccent,
+                  ),
+                ),
               Text(
                 'へようこそ',
                 style: TextStyle(

@@ -58,12 +58,6 @@ class KangiTestScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // IconButton(
-                    //     onPressed: () {
-                    //       kangiQuestionController.isKangiSubject =
-                    //           !kangiQuestionController.isKangiSubject;
-                    //     },
-                    //     icon: Icon(Icons.ad_units))
                   ],
                 ),
               ),

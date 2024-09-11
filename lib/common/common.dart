@@ -66,7 +66,7 @@ void copyWord(String text) {
       // '$text가 복사(Ctrl + C) 되었습니다.',
       '',
       messageText: Text(
-        '$text가 복사(Ctrl + C) 되었습니다.',
+        '$textが貼り付け（Ctrl + C）されました。',
         style: const TextStyle(
             fontFamily: AppFonts.japaneseFont,
             fontWeight: FontWeight.w500,

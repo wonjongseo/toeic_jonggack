@@ -66,19 +66,7 @@ class KangiStepController extends GetxController {
     update();
   }
 
-  void toggleSeeUndoc(bool? v) {
-    isHidenUndoc = v!;
-    update();
-  }
-
-  void toggleSeeHundoc(bool? v) {
-    isHidenHundoc = v!;
-    update();
-  }
-
   bool isHidenMean = false;
-  bool isHidenUndoc = false;
-  bool isHidenHundoc = false;
 
   void onPageChanged(int page) {
     currentIndex = page;

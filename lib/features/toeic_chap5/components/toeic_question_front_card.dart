@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,13 +45,15 @@ class ToeicQuestionFrontCard extends StatelessWidget {
                       //TODO FIX
                       // Text(question.id),
                       SizedBox(height: Responsive.height10),
-                      Text(
+                      AutoSizeText(
                         '${index + 1}. ${question.question.replaceAll('——–', '_______')}',
                         style: TextStyle(
                           fontSize: Responsive.width18,
                           fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 4,
                       ),
+
                       SizedBox(height: Responsive.height8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +84,7 @@ class ToeicQuestionFrontCard extends StatelessWidget {
                         ),
                       ),
                       //TODO FIX
-                      // if (tQTestcontroller.isSubmitted || !kReleaseMode ) ...[
+                      // if (tQTestcontroller.isSubmitted || !kReleaseMode) ...[
                       if (tQTestcontroller.isSubmitted) ...[
                         Divider(height: Responsive.height25),
                         Text(

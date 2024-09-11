@@ -174,32 +174,10 @@ class _HomeTutorialScreenState extends State<HomeTutorialScreen> {
               title: TextButton(
                 onPressed: () {
                   Get.back();
-                  Get.toNamed(SETTING_PATH, arguments: {
-                    'isSettingPage': true,
-                  });
+                  Get.toNamed(SETTING_PATH);
                 },
                 child: Text(
                   '설정 페이지',
-                  style: TextStyle(
-                    fontFamily: AppFonts.japaneseFont,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Responsive.width14,
-                    color: AppColors.scaffoldBackground,
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.remove),
-              title: TextButton(
-                onPressed: () {
-                  Get.back();
-                  Get.toNamed(SETTING_PATH, arguments: {
-                    'isSettingPage': false,
-                  });
-                },
-                child: Text(
-                  '데이터 초기화',
                   style: TextStyle(
                     fontFamily: AppFonts.japaneseFont,
                     fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/config/size.dart';
 import 'package:jonggack_toeic_japanese/config/theme.dart';
 import 'package:jonggack_toeic_japanese/features/home/widgets/home_screen_body.dart';
 import 'package:jonggack_toeic_japanese/features/search/widgets/search_widget.dart';
@@ -90,14 +91,17 @@ class _JlptHomeScreenState extends State<JlptHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0.0,
-        title: Text(
-          '${widget.title}',
-          style: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontSize: Responsive.height10 * 2,
-            fontFamily: AppFonts.japaneseFont,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(appBarHeight),
+        child: AppBar(
+          scrolledUnderElevation: 0.0,
+          title: Text(
+            widget.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: appBarTextSize,
+              // fontFamily: AppFonts.japaneseFont,
+            ),
           ),
         ),
       ),

@@ -53,11 +53,11 @@ class MyVocaController extends GetxController {
 
   late TextEditingController wordController;
   late TextEditingController yomikataController;
-  late TextEditingController meanController;
+  // late TextEditingController meanController;
 
   late FocusNode wordFocusNode;
   late FocusNode yomikataFocusNode;
-  late FocusNode meanFocusNode;
+  // late FocusNode meanFocusNode;
 
   AdController? adController;
 
@@ -101,20 +101,20 @@ class MyVocaController extends GetxController {
     adController = Get.find<AdController>();
     wordController = TextEditingController();
     yomikataController = TextEditingController();
-    meanController = TextEditingController();
+    // meanController = TextEditingController();
     wordFocusNode = FocusNode();
     yomikataFocusNode = FocusNode();
-    meanFocusNode = FocusNode();
+    // meanFocusNode = FocusNode();
   }
 
   @override
   void onClose() {
     wordController.dispose();
     yomikataController.dispose();
-    meanController.dispose();
+    // meanController.dispose();
     wordFocusNode.dispose();
     yomikataFocusNode.dispose();
-    meanFocusNode.dispose();
+    // meanFocusNode.dispose();
     super.onClose();
   }
 
@@ -122,7 +122,7 @@ class MyVocaController extends GetxController {
   void manualSaveMyWord() async {
     String word = wordController.text;
     String yomikata = yomikataController.text;
-    String mean = meanController.text;
+    // String mean = meanController.text;
 
     if (word.isEmpty) {
       wordFocusNode.requestFocus();
@@ -134,15 +134,15 @@ class MyVocaController extends GetxController {
       return;
     }
 
-    if (mean.isEmpty) {
-      meanFocusNode.requestFocus();
-      return;
-    }
+    // if (mean.isEmpty) {
+    //   meanFocusNode.requestFocus();
+    //   return;
+    // }
 
     MyWord newWord = MyWord(
       word: word,
-      mean: mean,
-      yomikata: yomikata,
+      mean: yomikata,
+      yomikata: '',
       isManuelSave: true,
     );
 
@@ -158,7 +158,7 @@ class MyVocaController extends GetxController {
     update();
 
     wordController.clear();
-    meanController.clear();
+    // meanController.clear();
     yomikataController.clear();
     wordFocusNode.requestFocus();
     saveWordCount++;

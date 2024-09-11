@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jonggack_toeic_japanese/common/widget/dimentions.dart';
@@ -29,7 +30,7 @@ class KangiQuestionCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
+          AutoSizeText(
             question.question.word,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: const Color(0xFF101010),
@@ -37,49 +38,10 @@ class KangiQuestionCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontFamily: AppFonts.japaneseFont,
                 ),
+            maxLines: 1,
           ),
           SizedBox(height: Responsive.height10),
-          if (controller.isKangiSubject)
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.height8,
-                    ),
-                    child: Tooltip(
-                      message:
-                          '1. 읽는 법을 입력하면 사지선다가 표시됩니다.\n2. 장음 (-, ー) 은 생략해도 됩니다.',
-                      child: Icon(
-                        Icons.tips_and_updates,
-                        size: Responsive.height16,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                    ),
-                  ),
-                  hintText: '읽는 법을 먼저 입력해주세요.',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  ),
-                  label: Text(
-                    ' 읽는 법',
-                    style: TextStyle(
-                      color: AppColors.scaffoldBackground.withOpacity(0.5),
-                      fontSize: Responsive.height16,
-                    ),
-                  ),
-                ),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: AppFonts.japaneseFont,
-                ),
-              ),
-            ),
+
           Column(
               children: List.generate(
             question.options.length,

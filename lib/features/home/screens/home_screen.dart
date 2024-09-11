@@ -133,9 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: TextButton(
                 onPressed: () {
                   Get.back();
-                  Get.toNamed(SETTING_PATH, arguments: {
-                    'isSettingPage': true,
-                  });
+                  Get.toNamed(SETTING_PATH);
                 },
                 child: Text(
                   '設定',
@@ -148,27 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // // if (!kReleaseMode)
-            // ListTile(
-            //   leading: const Icon(Icons.remove),
-            //   title: TextButton(
-            //     onPressed: () {
-            //       Get.back();
-            //       Get.toNamed(SETTING_PATH, arguments: {
-            //         'isSettingPage': false,
-            //       });
-            //     },
-            //     child: Text(
-            //       '데이터 초기화',
-            //       style: TextStyle(
-            //         fontFamily: AppFonts.japaneseFont,
-            //         fontWeight: FontWeight.bold,
-            //         fontSize: Responsive.width14,
-            //         color: AppColors.scaffoldBackground,
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -188,9 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.centerRight,
           child: IconButton(
             onPressed: () {
-              Get.toNamed(SETTING_PATH, arguments: {
-                'isSettingPage': true,
-              });
+              Get.toNamed(SETTING_PATH);
             },
             icon: Icon(Icons.settings, size: Responsive.height10 * 2.2),
           ),

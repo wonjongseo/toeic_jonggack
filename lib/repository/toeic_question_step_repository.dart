@@ -88,8 +88,6 @@ class ToeicQuestionStepRepositroy {
       jlptStepList.add(jlptStep);
     }
 
-    print('jlptStepList[0]. : ${jlptStepList[0].toeicQuestions[0].id}');
-
     return jlptStepList;
   }
 

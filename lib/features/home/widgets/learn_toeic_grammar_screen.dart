@@ -38,7 +38,14 @@ class _LearnToeicGrammarScreenState extends State<LearnToeicGrammarScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(appBarHeight),
-        child: AppBar(title: const Text('文法')),
+        child: AppBar(
+            title: Text(
+          '文法学習',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: appBarTextSize,
+          ),
+        )),
       ),
       body: SafeArea(
         child: Padding(

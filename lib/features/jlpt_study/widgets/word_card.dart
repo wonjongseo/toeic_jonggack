@@ -124,7 +124,7 @@ class WordCard extends StatelessWidget {
                       '例文',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: Responsive.height10 * 1.8,
+                        fontSize: Responsive.width22,
                         color: AppColors.mainBordColor,
                       ),
                     ),
@@ -173,8 +173,9 @@ class WordCard extends StatelessWidget {
                                   child: Text(
                                     '例文をもっと見る...',
                                     style: TextStyle(
-                                      fontSize: Responsive.height15,
+                                      fontSize: Responsive.width18,
                                       color: AppColors.mainBordColor,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 )

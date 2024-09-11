@@ -2,6 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:jonggack_toeic_japanese/common/commonDialog.dart';
 import 'package:jonggack_toeic_japanese/config/colors.dart';
 import 'package:jonggack_toeic_japanese/features/jlpt_and_kangi/jlpt/controller/toeic_chater5_step_controller.dart';
 import 'package:jonggack_toeic_japanese/features/score/screens/veryGoodScreen.dart';
@@ -29,10 +30,14 @@ class ToeicQuestionTestController extends GetxController {
     });
   }
 
-  void exitText() {
-    toeicQuestionStepController.getJlptStep().wrongToeicQuestions = [];
+  void exitText() async {
+    bool result = await CommonDialog.beforeExitTestPageDialog();
 
-    Get.back();
+    if (result) {
+      toeicQuestionStepController.getJlptStep().wrongToeicQuestions = [];
+
+      Get.back();
+    }
   }
 
   int selectedIndex2 = -1;
@@ -127,17 +132,25 @@ class ToeicQuestionTestController extends GetxController {
     if (!isSubmitted) {
       ToeicQuestion toeicQuestion =
           toeicQuestionStepController.getToeicQuestion(indexOfQuestion);
-      toeicQuestionStepController
-          .getJlptStep()
-          .wrongToeicQuestions
-          .add(toeicQuestion);
+      // toeicQuestionStepController
+      //     .getJlptStep()
+      //     .wrongToeicQuestions
+      //     .add(toeicQuestion);
+
+      wrongToeicQuestions.add(toeicQuestion);
     }
     if (isLastQuestion()) {
-      if (toeicQuestionStepController
-          .getJlptStep()
-          .wrongToeicQuestions
-          .isEmpty) {
+      // if (toeicQuestionStepController
+      //     .getJlptStep()
+      //     .wrongToeicQuestions
+      //     .isEmpty) {
+      //   confettiController.play();
+      // }
+      if (wrongToeicQuestions.isEmpty) {
         confettiController.play();
+      } else {
+        toeicQuestionStepController.getJlptStep().wrongToeicQuestions =
+            wrongToeicQuestions;
       }
       toeicQuestionStepController.updateScore(countOfCorrectQuestion);
       toeicQuestionStepController.changeIsFinishedState();

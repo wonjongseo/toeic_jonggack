@@ -1,18 +1,45 @@
-# jonggack_toeic_japanese
+#アプリ紹介
 
-A new Flutter project.
+## 一番 TOEIC アプリは、【単語帳】・【文法帳】・【自分の単語帳】の 3 つの学習モードがあります。
 
-## Getting Started
+### 単語帳には
 
-This project is a starting point for a Flutter application.
+- 7000 語以上の単語が、「500 点向け」「700 点向け」「900 点向け」「3000 語」に分類されています。目標スコアに応じた単語や慣用句を効果的に学習できます。
 
-A few resources to get you started if this is your first Flutter project:
+### 文法帳には
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- TOEIC で高得点を狙うために必須の 54 の文法事項を学べます。また、1195 問の Chapter 5 の問題を解くことで、実力を向上させることができます。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# itibann_toeic
-# toeic_jonggack
+### 自分の単語帳には
+
+-　アプリ内の単語を【自分の単語帳】に保存したり、新しい単語を自分で入力して追加することが可能です。自分専用の単語帳を作成し、効率的に学習しましょう。
+
+さらに、各チャプターでテストを行い、長期的な単語記憶をサポートします。
+
+ーーーーいちばん TOEIC の主な機能ーーーー
+
+１. 単語帳
+　１）500 点・700 点・900 点向けの単語を分類して学習
+　２）目標スコアに合わせて慣用句を学習
+　３）学んだ単語や慣用句をテストで確認
+
+２. 文法帳
+　１）TOEIC に必要な文法事項 54 選
+　２）1195 問の Chapter 5 問題と解説
+
+３. 自分の単語帳
+　１）アプリ内の単語を保存して復習
+　２）自分で入力した単語をテスト機能で学習
+
+他.
+　１）Excel データをアプリにインポート
+　２）単語の発音再生機能
+　３）検索機能
+
+# パッチノート
+
+# 2024/09/11 (2.0.0)
+
+1. 大幅に UI/UX を変更
+2. 文法 54 選追加
+3. 1195 問の Chapter 5 問題と解説追加

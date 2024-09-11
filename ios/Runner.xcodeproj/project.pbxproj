@@ -490,9 +490,9 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 6B7JBM5DS9;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
+				FLUTTER_BUILD_NAME = 2.0.0;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "いちばんTOEIC";
+				INFOPLIST_KEY_CFBundleDisplayName = "一番TOEIC";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -674,9 +674,9 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 6B7JBM5DS9;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
+				FLUTTER_BUILD_NAME = 2.0.0;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "いちばんTOEIC";
+				INFOPLIST_KEY_CFBundleDisplayName = "一番TOEIC";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -702,9 +702,9 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 6B7JBM5DS9;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
+				FLUTTER_BUILD_NAME = 2.0.0;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "いちばんTOEIC";
+				INFOPLIST_KEY_CFBundleDisplayName = "一番TOEIC";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
